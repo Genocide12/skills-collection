@@ -1,6 +1,6 @@
 ---
 name: backend
-description: Бэкенд, API и базы данных: FastAPI/Django/Spring/NestJS/Laravel/Rails/.NET, проектирование API и MCP, MySQL/Postgres/ClickHouse, Redis, миграции, LLM-интеграции. Загружай при любой серверной задаче.
+description: "Бэкенд, API и базы данных: FastAPI/Django/Spring/NestJS/Laravel/Rails/.NET, проектирование API и MCP, MySQL/Postgres/ClickHouse, Redis, миграции, LLM-интеграции. Загружай при любой серверной задаче."
 ---
 # Бэкенд, API и базы данных
 
