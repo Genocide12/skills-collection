@@ -17,6 +17,8 @@ TARGET="./skills"
 ONLY=""
 LIST=0
 
+CALLER_DIR="$PWD"
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --claude) TARGET="./.claude/skills"; shift ;;
@@ -29,6 +31,11 @@ while [[ $# -gt 0 ]]; do
 done
 
 cd "$(dirname "$0")"
+
+case "$TARGET" in
+  /*) ;;                                       # абсолютный путь — как есть
+  *) TARGET="$CALLER_DIR/${TARGET#./}" ;;      # относительный — от каталога вызова
+esac
 
 if [[ $LIST -eq 1 ]]; then
   python3 - <<'PY'
