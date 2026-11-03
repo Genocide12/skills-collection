@@ -1,403 +1,611 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Арсенал агента — 12 мега-скиллов вместо 393</title>
+<title>СКИЛЛЫ/10 — десять файлов под любую задачу агента</title>
+<meta name="description" content="Библиотека из 393 скиллов, сведённая в 10 дистиллятов: фронтенд, документы и тексты, бэкенд, языки, качество, данные и медиа, исследования, devops, агентские процессы, отраслевые ниши.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23191408'/%3E%3Ctext x='32' y='44' font-family='monospace' font-size='30' font-weight='bold' fill='%23F4EFE5' text-anchor='middle'%3E10%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0c10;--panel:#12151c;--panel2:#171b24;--border:#202634;--text:#e7ecf3;--dim:#8b94a7;--accent:#5eead4;--accent2:#2dd4bf;--mono:ui-monospace,'JetBrains Mono','Fira Code',Consolas,monospace;--sans:-apple-system,'Segoe UI',Roboto,'Inter',Arial,sans-serif}
-*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#F4EFE5; --paper2:#EDE6D6; --ink:#191408; --ink2:#40382A;
+  --muted:#635A49; --line:#D8CDB8; --accent:#B4471C; --accent-dark:#8E3512;
+  --green:#2E6B4F; --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --disp:'Unbounded','Arial Black',sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
+body{background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);
+  -webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--paper)}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
 .mono{font-family:var(--mono)}
-.dim{color:var(--dim)}
-header{position:sticky;top:0;z-index:9;background:rgba(10,12,16,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
-.nav{display:flex;align-items:center;gap:22px;height:56px}
-.brand{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:.08em}
+
+/* ── шапка ── */
+.top{position:sticky;top:0;z-index:50;background:rgba(244,239,229,.92);backdrop-filter:blur(8px);
+  border-bottom:1.5px solid var(--ink)}
+.top .wrap{display:flex;align-items:center;gap:28px;height:62px}
+.brand{font-family:var(--mono);font-weight:600;font-size:17px;text-decoration:none;letter-spacing:.04em}
 .brand b{color:var(--accent)}
-.nav a.link{color:var(--dim);font-size:14px}
-.nav a.link:hover{color:var(--text);text-decoration:none}
-.nav .gh{margin-left:auto;font-size:13px}
-.hero{padding:72px 0 56px;border-bottom:1px solid var(--border)}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
-h1{font-size:clamp(30px,5vw,46px);line-height:1.15;letter-spacing:-.02em;max-width:820px}
-h1 .strike{color:var(--dim);text-decoration:line-through;text-decoration-color:#64748b;font-weight:600}
-.lead{color:var(--dim);max-width:760px;margin-top:18px;font-size:16.5px}
-.stats{display:flex;flex-wrap:wrap;gap:34px;margin-top:34px}
-.stat b{display:block;font-size:26px;font-family:var(--mono);color:var(--text)}
-.stat span{font-size:12.5px;color:var(--dim)}
-.install{display:inline-flex;gap:10px;align-items:center;margin-top:30px;padding:11px 16px;border:1px solid var(--border);border-radius:10px;background:var(--panel);font-size:14px;color:var(--dim)}
-.install code{font-family:var(--mono);color:var(--accent);font-size:13.5px}
-section{padding:60px 0}
-h2{font-size:26px;letter-spacing:-.01em;margin-bottom:8px}
-.sub{color:var(--dim);max-width:760px;margin-bottom:30px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:border-color .15s,transform .15s}
-.card:hover{border-color:var(--accent2);transform:translateY(-2px)}
-.card-top{display:flex;align-items:baseline;gap:12px}
-.num{font-family:var(--mono);font-size:13px;color:var(--accent);background:rgba(94,234,212,.08);border:1px solid rgba(94,234,212,.25);border-radius:6px;padding:2px 7px}
-.card h3{font-size:18px;letter-spacing:-.01em}
-.card-desc{font-size:13.5px;color:var(--dim);flex:1}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-size:11.5px;color:var(--dim);border:1px solid var(--border);border-radius:999px;padding:3px 9px;background:var(--panel2)}
-.card-meta{display:flex;gap:14px;font-family:var(--mono);font-size:11.5px;color:var(--dim);border-top:1px solid var(--border);padding-top:10px}
-.card-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.btn{font-size:13px;border:1px solid rgba(94,234,212,.4);border-radius:8px;padding:7px 13px;color:var(--accent)}
-.btn:hover{background:rgba(94,234,212,.1);text-decoration:none}
-details{font-size:13px}
-details summary{cursor:pointer;color:var(--dim);list-style:none}
-details summary::-webkit-details-marker{display:none}
-details summary:hover{color:var(--text)}
-details[open] summary{color:var(--accent)}
-.hint{font-size:11px;color:var(--dim);margin:8px 0 4px}
-.comp{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;margin-top:6px}
-.comp ul{list-style:none}
-.comp li{font-family:var(--mono);font-size:11.5px;color:var(--dim);padding:2px 0;border-bottom:1px dashed #1c212d}
-table{width:100%;border-collapse:collapse;font-size:14px}
-td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
-tr:first-child td{border-top:1px solid var(--border)}
-.route{color:var(--text)}
-.route:hover{color:var(--accent)}
-.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-input,select{background:var(--panel);border:1px solid var(--border);border-radius:9px;color:var(--text);padding:9px 13px;font-size:14px;font-family:var(--sans)}
-input{flex:1;min-width:220px}
-input:focus,select:focus{outline:none;border-color:var(--accent2)}
-.count{font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:10px}
-.row{background:var(--panel);border:1px solid var(--border);border-radius:11px;margin-bottom:8px;padding:12px 16px}
-.row-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-.row-name{font-family:var(--mono);font-size:13.5px;color:var(--text)}
-.badge{font-size:10.5px;font-family:var(--mono);border-radius:5px;padding:1px 7px;border:1px solid var(--border);color:var(--dim)}
-.badge.plat{color:#fbbf24;border-color:rgba(251,191,36,.35)}
-.badge.mega{color:var(--accent);border-color:rgba(94,234,212,.3);cursor:pointer}
-.row-desc{font-size:12.5px;color:var(--dim);margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.row-body{display:none;margin-top:10px}
-.row.open .row-desc{-webkit-line-clamp:unset}
-.row.open .row-body{display:block}
-.row-body pre{background:#0d1016;border:1px solid var(--border);border-radius:9px;padding:14px;font-family:var(--mono);font-size:11.5px;line-height:1.5;max-height:420px;overflow:auto;white-space:pre-wrap;word-break:break-word;color:#c3cbd9}
-.load-btn{font-size:12px;color:var(--dim);background:none;border:1px solid var(--border);border-radius:7px;padding:4px 10px;cursor:pointer;font-family:var(--mono)}
-.load-btn:hover{color:var(--accent);border-color:var(--accent2)}
-.hidden{display:none!important}
-footer{border-top:1px solid var(--border);padding:36px 0 60px;color:var(--dim);font-size:13.5px}
-footer .cols{display:grid;grid-template-columns:1.4fr 1fr;gap:36px}
-footer code{font-family:var(--mono);font-size:12.5px;color:var(--accent)}
-@media(max-width:720px){.comp{grid-template-columns:1fr}footer .cols{grid-template-columns:1fr}.stats{gap:20px}}
+.top nav{display:flex;gap:22px;margin-left:auto}
+.top nav a{font-size:14px;font-weight:500;text-decoration:none;color:var(--ink2)}
+.top nav a:hover{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+.gh{font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid var(--ink);
+  padding:7px 14px;border-radius:99px;transition:.2s}
+.gh:hover{background:var(--ink);color:var(--paper)}
+@media(max-width:720px){.top nav{display:none}}
+
+/* ── герой ── */
+.hero{padding:84px 0 64px;border-bottom:1.5px solid var(--ink)}
+.kicker{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:26px}
+.kicker s{color:var(--muted);text-decoration-thickness:2px;margin-right:10px}
+h1{font-family:var(--disp);font-weight:900;font-size:clamp(44px,7.2vw,96px);line-height:1.02;
+  letter-spacing:-.01em;text-transform:uppercase}
+h1 em{font-style:normal;color:var(--paper);-webkit-text-stroke:2px var(--ink)}
+.hero-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:48px;align-items:end}
+.lede{font-size:19px;color:var(--ink2);max-width:56ch;margin-top:28px}
+.lede b{color:var(--accent)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero{padding:56px 0 48px}}
+.term{background:var(--ink);color:var(--paper);border-radius:14px;padding:22px 22px 18px;
+  font-family:var(--mono);font-size:13.5px;line-height:1.7;position:relative;
+  box-shadow:6px 6px 0 var(--accent)}
+.term .t-dim{color:#9B9078}
+.term .t-acc{color:#F0A06B}
+.copy{margin-top:14px;display:inline-flex;align-items:center;gap:8px;background:transparent;
+  border:1px solid #4A4232;color:var(--paper);font:600 12px var(--mono);letter-spacing:.06em;
+  padding:8px 14px;border-radius:8px;cursor:pointer;transition:.15s}
+.copy:hover{border-color:var(--paper)}
+.copy.ok{border-color:#7FBF9E;color:#A8E0C4}
+.stats{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin-top:64px;
+  border:1.5px solid var(--ink);border-radius:14px;overflow:hidden}
+.stats li{padding:20px 22px;border-left:1.5px solid var(--ink)}
+.stats li:first-child{border-left:0}
+.stats b{display:block;font-family:var(--disp);font-weight:700;font-size:clamp(22px,2.6vw,34px)}
+.stats span{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.03em}
+@media(max-width:720px){.stats{grid-template-columns:1fr 1fr}.stats li:nth-child(3){border-left:0;border-top:1.5px solid var(--ink)}.stats li:nth-child(4){border-top:1.5px solid var(--ink)}}
+
+/* ── секции ── */
+section{padding:72px 0}
+.sec-label{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.sec-label::after{content:"";flex:1;height:1.5px;background:var(--line)}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.4vw,42px);line-height:1.15;
+  margin-bottom:12px}
+
+/* ── навигатор ── */
+#router{border-bottom:1.5px solid var(--ink);padding-bottom:84px}
+.router-box{border:1.5px solid var(--ink);border-radius:14px;background:#FBF8F1;overflow:hidden}
+.router-box .in{display:flex;align-items:center;gap:14px;padding:18px 22px}
+.router-box .in::before{content:"→";font-family:var(--mono);font-size:20px;color:var(--accent)}
+#q{flex:1;border:0;outline:0;background:transparent;font:500 18px var(--sans);color:var(--ink)}
+#q::placeholder{color:#B4AA93}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 22px 18px}
+.chip{font:500 13px var(--sans);border:1.5px solid var(--line);background:var(--paper);
+  color:var(--ink2);border-radius:99px;padding:6px 14px;cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.verdict{padding:16px 22px;border-top:1.5px dashed var(--line);font-size:15px;min-height:54px;
+  display:flex;align-items:center;gap:10px;color:var(--muted)}
+.verdict b{font-family:var(--mono);color:var(--accent)}
+.verdict .name{font-weight:600;color:var(--ink)}
+
+/* ── каталог ── */
+.rows{border-top:1.5px solid var(--ink)}
+.row{border-bottom:1.5px solid var(--ink);transition:opacity .25s}
+.row.dim{opacity:.28}
+.row.hit{background:#FBF3E4}
+.row summary{list-style:none;cursor:pointer;display:grid;gap:8px 20px;align-items:center;
+  grid-template-columns:88px 1fr auto 110px 32px;padding:22px 10px}
+.row summary::-webkit-details-marker{display:none}
+.row summary:hover .name{color:var(--accent)}
+.num{font-family:var(--disp);font-weight:900;font-size:40px;line-height:1;
+  color:transparent;-webkit-text-stroke:1.5px var(--ink);transition:.2s}
+.row[open] .num,.row summary:hover .num{color:var(--accent);-webkit-text-stroke:1.5px var(--accent)}
+.name{font-family:var(--mono);font-weight:600;font-size:19px;transition:.15s}
+.name small{display:block;font:400 13px var(--sans);color:var(--muted);margin-top:3px}
+.tsum{font-size:13.5px;color:var(--muted);max-width:44ch;text-align:right}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink2);white-space:nowrap}
+.arrow{font-family:var(--mono);font-size:22px;color:var(--muted);text-align:center;transition:.25s}
+.row[open] .arrow{transform:rotate(45deg);color:var(--accent)}
+@media(max-width:860px){
+  .row summary{grid-template-columns:56px 1fr 32px}
+  .num{font-size:28px}
+  .tsum,.meta{display:none}
+}
+.rbody{padding:6px 10px 30px 108px;max-width:900px}
+@media(max-width:860px){.rbody{padding-left:10px}}
+.rbody p.desc{color:var(--ink2);font-size:15.5px}
+.inside{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 22px}
+.inside li{font-family:var(--mono);font-size:12px;color:var(--ink2);border:1px solid var(--line);
+  background:var(--paper);padding:5px 11px;border-radius:8px}
+.inside li b{color:var(--accent);font-weight:600;margin-right:6px}
+.raw{font:600 14px var(--sans);color:var(--accent-dark);text-decoration:none;
+  border-bottom:1.5px solid var(--accent)}
+.raw:hover{background:var(--accent);color:var(--paper)}
+.src{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:10px}
+
+/* ── анатомия ── */
+#anatomy{border-bottom:1.5px solid var(--ink)}
+.anat{display:grid;grid-template-columns:repeat(6,1fr);border:1.5px solid var(--ink);border-radius:14px;
+  overflow:hidden;background:#FBF8F1}
+.anat div{padding:22px 18px 26px;border-left:1.5px solid var(--ink)}
+.anat div:first-child{border-left:0}
+.anat b{display:block;font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:10px}
+.anat h3{font-size:15.5px;font-weight:700;margin-bottom:6px}
+.anat p{font-size:12.5px;color:var(--muted);line-height:1.5}
+@media(max-width:960px){.anat{grid-template-columns:repeat(3,1fr)}.anat div:nth-child(4){border-left:0}.anat div{border-top:1.5px solid var(--ink)}.anat div:nth-child(-n+3){border-top:0}}
+@media(max-width:600px){.anat{grid-template-columns:1fr 1fr}.anat div{border-left:0}.anat div:nth-child(even){border-left:1.5px solid var(--ink)}.anat div:nth-child(n+3){border-top:1.5px solid var(--ink)}.anat div:nth-child(-n+2){border-top:0}}
+
+/* ── установка ── */
+#install .cards{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:860px){#install .cards{grid-template-columns:1fr}}
+.card{border:1.5px solid var(--ink);border-radius:14px;padding:28px;background:#FBF8F1}
+.card h3{font-family:var(--disp);font-weight:700;font-size:19px;margin-bottom:12px}
+.card p{font-size:15px;color:var(--ink2);margin-bottom:16px}
+.card code{display:block;font:400 13px/1.7 var(--mono);background:var(--ink);color:var(--paper);
+  border-radius:10px;padding:14px 16px;overflow-x:auto;white-space:pre}
+.card code .c{color:#F0A06B}
+.card code .cm{color:#8D8368}
+
+/* ── футер ── */
+footer{background:var(--ink);color:var(--paper);padding:64px 0 40px}
+.f-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;margin-bottom:48px}
+@media(max-width:860px){.f-grid{grid-template-columns:1fr}}
+footer h4{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:#9B9078;margin-bottom:18px}
+.srcs{display:flex;flex-wrap:wrap;gap:8px}
+.srcs span{font:400 12.5px var(--mono);border:1px solid #3D3524;border-radius:8px;padding:6px 11px;color:#D8CDB8}
+.srcs span b{color:var(--paper);font-weight:600}
+footer .f-brand{font-family:var(--disp);font-weight:900;font-size:34px;text-transform:uppercase;line-height:1.1}
+footer .f-brand em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--paper)}
+.colophon{border-top:1px solid #3D3524;padding-top:26px;font-size:13.5px;color:#9B9078;line-height:1.8}
+.colophon a{color:#D8CDB8}
+
+/* ── появление (только при включённом JS; без JS контент виден сразу) ── */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.on{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .js .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:4px}
 </style>
 </head>
 <body>
-<header><div class="wrap nav">
-  <span class="brand">SKILLS<b>//</b>12</span>
-  <a class="link" href="#mega">Мега-скиллы</a>
-  <a class="link" href="#router">Маршрутизатор</a>
-  <a class="link" href="#catalog">Каталог</a>
-  <a class="gh" href="https://github.com/Genocide12/skills-collection" target="_blank" rel="noopener">GitHub ↗</a>
-</div></header>
 
-<div class="wrap hero">
-  <div class="eyebrow">коллекция пересобрана · 2026-11-03</div>
-  <h1><span class="strike">393 отдельных скилла</span> → 12 мега-скиллов под все задачи</h1>
-  <p class="lead">Агенту больше не нужно листать сотни описаний. Каждая большая область работы — сайты, документы, тексты, бэкенд, тесты, данные — собрана в один файл-дистиллят: только железные правила, типовые ошибки, шаблоны и чек-листы из всех исходных скиллов. Исходники остались в репозитории для глубокого погружения.</p>
-  <div class="stats">
-    <div class="stat"><b>354</b><span>коллекционных скиллов</span></div>
-    <div class="stat"><b>39</b><span>платформенных инструментов</span></div>
-    <div class="stat"><b>12</b><span>мега-скиллов вместо 393</span></div>
-    <div class="stat"><b>3 964</b><span>строк суммарно · читается 1 файл по задаче</span></div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">СКИЛЛЫ<b>/10</b></a>
+    <nav>
+      <a href="#router">Навигатор</a>
+      <a href="#catalog">Каталог</a>
+      <a href="#anatomy">Устройство</a>
+      <a href="#install">Установка</a>
+    </nav>
+    <a class="gh" href="https://github.com/Genocide12/skills-collection">GitHub ↗</a>
   </div>
-  <div class="install">установить в чате: <code>Установи мега-скиллы из github.com/Genocide12/skills-collection</code></div>
-</div>
+</header>
 
-<section id="mega"><div class="wrap">
-  <h2>Мега-скиллы</h2>
-  <p class="sub">12 файлов. Каждый собран из 9–101 исходного скилла: «Когда применять» → правила по темам → чек-лист сдачи → карта источников. Ссылка ведёт на живой markdown в репозитории.</p>
-  <div class="grid">
-<article class="card" id="m-01-frontend">
-  <div class="card-top"><span class="num">01</span><h3>Сайты и интерфейсы</h3></div>
-  <p class="card-desc">Сайты, лендинги и веб-приложения: вёрстка, дизайн-система, React/Next/Vue/Angular/Vite, TypeScript, анимации, доступность, производительность фронтенда.</p>
-  <div class="chips"><span class="chip">сделать сайт / лендинг / дашборд</span><span class="chip">React, Next.js, Vue, Angular, Vite</span><span class="chip">дизайн, UI-кит, анимации</span><span class="chip">доступность (a11y)</span></div>
-  <div class="card-meta"><span>40 скиллов</span><span>300 строк</span><span>74 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/01-frontend/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 32+8</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>accessibility</li><li>angular-developer</li><li>click-path-audit</li><li>design-system</li><li>frontend-a11y</li><li>frontend-design-direction</li><li>frontend-patterns</li><li>liquid-glass-design</li><li>make-interfaces-feel-better</li><li>motion-advanced</li><li>motion-foundations</li><li>motion-patterns</li><li>nextjs-turbopack</li><li>nuxt4-patterns</li><li>react-native-patterns</li><li>react-patterns</li><li>react-performance</li><li>react-testing</li><li>swiftui-patterns</li><li>taste</li></ul><ul><li>taste-application</li><li>typescript-patterns</li><li>ui-demo</li><li>ui-to-vue</li><li>vite-patterns</li><li>vue-patterns</li><li>frontend-ui-engineering</li><li>design-is</li><li>hallmark</li><li>impeccable</li><li>prototype</li><li>taste-skill</li><li>agent-browser ●</li><li>browser-testing-with-devtools ●</li><li>web-design-guidelines ●</li><li>vercel-react-best-practices ●</li><li>vercel-optimize ●</li><li>vercel-react-view-transitions ●</li><li>vercel-composition-patterns ●</li><li>vercel-react-native-skills ●</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-02-documents">
-  <div class="card-top"><span class="num">02</span><h3>Документы и презентации</h3></div>
-  <p class="card-desc">Офисные форматы: Word (docx), PDF, PowerPoint (pptx), Excel (xlsx), подписи и поля e-sign, переводы документов, Google Workspace.</p>
-  <div class="chips"><span class="chip">отчёт / договор / письмо в Word</span><span class="chip">PDF: создать, разобрать, заполнить</span><span class="chip">презентация PPTX или слайды HTML</span><span class="chip">таблица Excel с формулами и графиками</span></div>
-  <div class="card-meta"><span>9 скиллов</span><span>309 строк</span><span>79 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/02-documents/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 4+5</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>esign-field-placement</li><li>frontend-slides</li><li>google-workspace-ops</li><li>visa-doc-translate</li><li>docx ●</li></ul><ul><li>pdf ●</li><li>pptx ●</li><li>xlsx ●</li><li>nutrient-document-processing ●</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-03-writing">
-  <div class="card-top"><span class="num">03</span><h3>Тексты и контент</h3></div>
-  <p class="card-desc">Статьи и посты, человеческий голос текста, бренд и войс, SEO, маркетинговые кампании, письма и сообщения, инвесторские материалы, обучение.</p>
-  <div class="chips"><span class="chip">статья / пост / рассылка</span><span class="chip">тон и бренд-войс</span><span class="chip">SEO и маркетинг</span><span class="chip">письма, сообщения, документы-тексты</span></div>
-  <div class="card-meta"><span>21 скиллов</span><span>306 строк</span><span>85 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/03-writing/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 20+1</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>article-writing</li><li>brand-discovery</li><li>brand-voice</li><li>content-engine</li><li>crosspost</li><li>email-ops</li><li>growth-log</li><li>investor-materials</li><li>investor-outreach</li><li>marketing-campaign</li><li>master-agreement-generator</li></ul><ul><li>messages-ops</li><li>seo</li><li>interview-me</li><li>teach</li><li>writing-beats</li><li>writing-fragments</li><li>writing-shape</li><li>writing-skills</li><li>human-voice</li><li>writing-guidelines ●</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-04-backend">
-  <div class="card-top"><span class="num">04</span><h3>Бэкенд, API и базы данных</h3></div>
-  <p class="card-desc">Серверная разработка: FastAPI/Django/Spring/Quarkus/NestJS/Laravel/Rails/.NET, проектирование API и MCP, SQL (MySQL/Postgres/ClickHouse), Redis, миграции, LLM-интеграции и кэширование промптов.</p>
-  <div class="chips"><span class="chip">сервер / API / микросервис</span><span class="chip">спроектировать API или контракт</span><span class="chip">база данных: схема, SQL, миграции</span><span class="chip">фоновые задачи, интеграции, LLM-приложения</span></div>
-  <div class="card-meta"><span>43 скиллов</span><span>455 строк</span><span>102 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/04-backend/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 42+1</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>api-connector-builder</li><li>api-design</li><li>backend-patterns</li><li>clickhouse-io</li><li>content-hash-cache-pattern</li><li>contract-first</li><li>cost-aware-llm-pipeline</li><li>database-migrations</li><li>django-celery</li><li>django-patterns</li><li>django-security</li><li>dotnet-patterns</li><li>fastapi-patterns</li><li>hermes-imports</li><li>hexagonal-architecture</li><li>i18n-sync</li><li>jpa-patterns</li><li>kotlin-exposed-patterns</li><li>kotlin-ktor-patterns</li><li>laravel-patterns</li><li>laravel-security</li><li>latency-critical-systems</li></ul><ul><li>mailtrap-email-integration</li><li>mcp-server-patterns</li><li>module-governance</li><li>mybatis-patterns</li><li>mysql-patterns</li><li>nestjs-patterns</li><li>postgres-patterns</li><li>prisma-patterns</li><li>prompt-caching-strategy</li><li>prompt-optimizer</li><li>quarkus-patterns</li><li>quarkus-security</li><li>rails-patterns</li><li>redis-patterns</li><li>springboot-patterns</li><li>springboot-security</li><li>tinystruct-patterns</li><li>api-and-interface-design</li><li>codebase-design</li><li>domain-modeling</li><li>LLM ●</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-05-languages">
-  <div class="card-top"><span class="num">05</span><h3>Языки и код-база</h3></div>
-  <p class="card-desc">Паттерны и стандарты языков: Python, Go, Rust, Kotlin, Java, C++, Perl, Swift, Dart/Flutter, Android; навигация по чужой код-базе, упрощение и подготовка к коммиту.</p>
-  <div class="chips"><span class="chip">паттерны/идиомы конкретного языка</span><span class="chip">разобраться в чужой код-базе</span><span class="chip">почистить и упростить код</span><span class="chip">мобильные приложения (Swift, Flutter, Android)</span></div>
-  <div class="card-meta"><span>29 скиллов</span><span>357 строк</span><span>44 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/05-languages/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 29+0</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>android-clean-architecture</li><li>bun-runtime</li><li>codebase-onboarding</li><li>coding-standards</li><li>compose-multiplatform-patterns</li><li>cpp-coding-standards</li><li>dart-flutter-patterns</li><li>error-handling</li><li>foundation-models-on-device</li><li>generating-python-installer</li><li>golang-patterns</li><li>inherit-legacy-style</li><li>java-coding-standards</li><li>kotlin-coroutines-flows</li><li>kotlin-patterns</li></ul><ul><li>perl-patterns</li><li>perl-security</li><li>python-patterns</li><li>rust-patterns</li><li>swift-actor-persistence</li><li>swift-concurrency-6-2</li><li>swift-protocol-di-testing</li><li>code-simplification</li><li>learn-codebase</li><li>smart-explore</li><li>improve-codebase-architecture</li><li>migrate-to-shoehorn</li><li>setup-pre-commit</li><li>setup-ts-deep-modules</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-06-quality">
-  <div class="card-top"><span class="num">06</span><h3>Тесты, отладка и надёжность</h3></div>
-  <p class="card-desc">TDD и все виды тестов (юнит/интеграционные/e2e), систематическая отладка, код-ревью, регрессия, аудиты безопасности, бенчмарки и производительность, вёрди-чеки перед сдачей.</p>
-  <div class="chips"><span class="chip">написать тесты / TDD</span><span class="chip">найти и починить баг</span><span class="chip">провести код-ревью</span><span class="chip">аудит безопасности</span></div>
-  <div class="card-meta"><span>50 скиллов</span><span>303 строк</span><span>62 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/06-quality/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 47+3</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>ai-regression-testing</li><li>benchmark</li><li>benchmark-methodology</li><li>benchmark-optimization-loop</li><li>change-impact</li><li>cpp-testing</li><li>csharp-testing</li><li>django-tdd</li><li>django-verification</li><li>e2e-testing</li><li>eval-harness</li><li>flutter-dart-code-review</li><li>fsharp-testing</li><li>golang-testing</li><li>issue-review</li><li>kotlin-testing</li><li>laravel-tdd</li><li>laravel-verification</li><li>module-regression</li><li>perl-testing</li><li>python-testing</li><li>quarkus-tdd</li><li>quarkus-verification</li><li>rust-testing</li><li>security-bounty-hunter</li></ul><ul><li>security-review</li><li>springboot-tdd</li><li>springboot-verification</li><li>tdd-workflow</li><li>test-collaboration</li><li>verification-loop</li><li>windows-desktop-e2e</li><li>code-review-and-quality</li><li>debugging-and-error-recovery</li><li>performance-optimization</li><li>security-and-hardening</li><li>test-driven-development--addyosmani</li><li>code-review</li><li>diagnosing-bugs</li><li>tdd</li><li>wait-what</li><li>security-audit</li><li>receiving-code-review</li><li>requesting-code-review</li><li>systematic-debugging</li><li>test-driven-development</li><li>verification-before-completion</li><li>delivery-gate ●</li><li>task-review ●</li><li>security-scan ●</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-07-data">
-  <div class="card-top"><span class="num">07</span><h3>Данные, ML и графики</h3></div>
-  <p class="card-desc">Обработка и скрейпинг данных, дашборды и графики (matplotlib и др.), ML-пайплайны (PyTorch, рекомендательные системы), структурный текст: regex против LLM.</p>
-  <div class="chips"><span class="chip">обработать данные / датасет</span><span class="chip">построить график или дашборд</span><span class="chip">ML-модель или пайплайн</span><span class="chip">спарсить данные</span></div>
-  <div class="card-meta"><span>14 скиллов</span><span>250 строк</span><span>50 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/07-data/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 12+2</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>bengali-nlp</li><li>connections-optimizer</li><li>dashboard-builder</li><li>data-scraper-agent</li><li>data-throughput-accelerator</li><li>gan-style-harness</li><li>ml-adoption-playbook</li></ul><ul><li>mle-workflow</li><li>pytorch-patterns</li><li>recsys-pipeline-architect</li><li>regex-vs-llm-structured-text</li><li>social-graph-ranker</li><li>charts ●</li><li>timeline-report ●</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-08-research">
-  <div class="card-top"><span class="num">08</span><h3>Исследования и поиск</h3></div>
-  <p class="card-desc">Глубокие веб-исследования, рынок и конкуренты, OSINT и лиды, продуктовый анализ, научные базы (PubMed, USPTO, gget), предикшн-маркеты.</p>
-  <div class="chips"><span class="chip">исследовать тему / рынок / конкурентов</span><span class="chip">поиск фактов и источников</span><span class="chip">OSINT / анализ компании</span><span class="chip">научная литература и патенты</span></div>
-  <div class="card-meta"><span>20 скиллов</span><span>306 строк</span><span>84 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/08-research/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 19+1</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>competitive-platform-analysis</li><li>competitive-report-structure</li><li>deep-research</li><li>iterative-retrieval</li><li>lead-intelligence</li><li>market-research</li><li>osint-investigation</li><li>prediction-market-oracle-research</li><li>prediction-market-risk-review</li><li>product-capability</li></ul><ul><li>product-lens</li><li>research-ops</li><li>scientific-db-pubmed-database</li><li>scientific-db-uspto-database</li><li>scientific-pkg-gget</li><li>scientific-thinking-literature-review</li><li>scientific-thinking-scholar-evaluation</li><li>search-first</li><li>research</li><li>documentation-lookup ●</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-09-media">
-  <div class="card-top"><span class="num">09</span><h3>Медиа и графика</h3></div>
-  <p class="card-desc">Генерация и редактирование изображений, поиск картинок, видео (монтаж, Manim, Remotion), анализ изображений и видео (VLM), распознавание и синтез речи (ASR/TTS).</p>
-  <div class="chips"><span class="chip">сгенерировать/отредактировать картинку</span><span class="chip">видео: монтаж, анимация, титры</span><span class="chip">текст → речь, речь → текст</span><span class="chip">что на картинке/видео</span></div>
-  <div class="card-meta"><span>13 скиллов</span><span>277 строк</span><span>31 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/09-media/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 6+7</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>blender-motion-state-inspection</li><li>ios-icon-gen</li><li>manim-video</li><li>remotion-video-creation</li><li>tasteforge-video</li><li>video-editing</li><li>ASR ●</li></ul><ul><li>TTS ●</li><li>VLM ●</li><li>image-generation ●</li><li>image-edit ●</li><li>image-search ●</li><li>video-understand ●</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-10-devops">
-  <div class="card-top"><span class="num">10</span><h3>Git, релиз и эксплуатация</h3></div>
-  <p class="card-desc">Git-процессы и ветки, PR и GitHub-операции, сборка и релизы, CI/CD, Docker и Kubernetes, деплой (Vercel, uncloud), сети и диагностика, наблюдаемость и прод-аудиты.</p>
-  <div class="chips"><span class="chip">закоммитить / PR / релиз</span><span class="chip">CI/CD и сборка</span><span class="chip">Docker, K8s, деплой</span><span class="chip">сеть, мониторинг, прод-инциденты</span></div>
-  <div class="card-meta"><span>30 скиллов</span><span>376 строк</span><span>57 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/10-devops/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 28+2</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>canary-watch</li><li>cisco-ios-patterns</li><li>conventional-commit-review</li><li>deployment-patterns</li><li>docker-patterns</li><li>git-workflow</li><li>github-ops</li><li>kubernetes-patterns</li><li>network-bgp-diagnostics</li><li>network-config-validation</li><li>network-interface-health</li><li>opensource-pipeline</li><li>production-audit</li><li>terminal-ops</li><li>uncloud</li></ul><ul><li>ci-cd-and-automation</li><li>deprecation-and-migration</li><li>git-workflow-and-versioning</li><li>observability-and-instrumentation</li><li>shipping-and-launch</li><li>build</li><li>build-and-release</li><li>oh-my-issues</li><li>release</li><li>version-bump</li><li>pr</li><li>finishing-a-development-branch</li><li>using-git-worktrees</li><li>deploy-to-vercel ●</li><li>vercel-cli-with-tokens ●</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-11-agent">
-  <div class="card-top"><span class="num">11</span><h3>Агентские процессы</h3></div>
-  <p class="card-desc">Работа самого агента: планирование и спеки, оркестрация субагентов, автономные циклы, память и контекст, handoff, документация и ADR, ретро и стендапы, управление скиллами и бюджетом токенов.</p>
-  <div class="chips"><span class="chip">спланировать сложную задачу</span><span class="chip">распределить работу по субагентам</span><span class="chip">долгий автономный прогон</span><span class="chip">ведение документов/ADR проекта</span></div>
-  <div class="card-meta"><span>101 скиллов</span><span>473 строк</span><span>76 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/11-agent/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 92+9</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>agent-architecture-audit</li><li>agent-harness-construction</li><li>agent-introspection-debugging</li><li>agent-runtime-gateway-smoke-test</li><li>agent-security-hardening</li><li>agent-self-evaluation</li><li>agentic-engineering</li><li>ai-first-engineering</li><li>architecture-decision-records</li><li>blueprint</li><li>brownfield-retrospective</li><li>code-tour</li><li>context-and-decisions</li><li>continuous-agent-loop</li><li>council</li><li>dev-team</li><li>docs-governance</li><li>dynamic-workflow-mode</li><li>enterprise-agent-ops</li><li>intent-driven-development</li><li>living-docs-governance</li><li>loop-design-check</li><li>nanoclaw-repl</li><li>nasiko-control-plane</li><li>openclaw-persona-forge</li><li>operator-approval-loop</li><li>orch-add-feature</li><li>orch-build-mvp</li><li>orch-change-feature</li><li>orch-fix-defect</li><li>orch-pipeline</li><li>orch-refine-code</li><li>parallel-execution-optimizer</li><li>plan-orchestrate</li><li>project-flow-ops</li><li>ralphinho-rfc-pipeline</li><li>recursive-decision-ledger</li><li>rules-distill</li><li>santa-method</li><li>skill-comply</li><li>skill-scout</li><li>skill-stocktake</li><li>story-lifecycle</li><li>taste-distillation</li><li>team-agent-orchestration</li><li>team-builder</li><li>token-budget-advisor</li><li>constraint-driven-development</li><li>documentation-and-adrs</li><li>doubt-driven-development</li><li>idea-refine</li></ul><ul><li>incremental-implementation</li><li>planning-and-task-breakdown</li><li>source-driven-development</li><li>spec-driven-development</li><li>using-agent-skills</li><li>babysit</li><li>childhood</li><li>do</li><li>handoff</li><li>make-plan</li><li>pathfinder</li><li>standup</li><li>what-the</li><li>ask-matt</li><li>chief-of-staff</li><li>claude-handoff</li><li>grill-me</li><li>grill-with-docs</li><li>grilling</li><li>handoff--mattpocock</li><li>implement</li><li>implement-spec</li><li>loop-me</li><li>retro</li><li>scaffold-exercises</li><li>setup-matt-pocock-skills</li><li>software-factory</li><li>to-questionnaire</li><li>to-spec</li><li>to-tickets</li><li>triage</li><li>wayfinder</li><li>wizard</li><li>writing-for-agents</li><li>brainstorming</li><li>diagnosing-superpowers</li><li>dispatching-parallel-agents</li><li>executing-plans</li><li>subagent-driven-development</li><li>using-superpowers</li><li>writing-plans</li><li>skill-creator ●</li><li>unified-memory ●</li><li>knowledge-agent ●</li><li>knowledge-ops ●</li><li>cost-tracking ●</li><li>agent-cost-report ●</li><li>agent-eval ●</li><li>autonomous-loops ●</li><li>autonomous-agent-harness ●</li></ul></div>
-    </details>
-  </div>
-</article>
-<article class="card" id="m-12-niches">
-  <div class="card-top"><span class="num">12</span><h3>Отраслевые ниши</h3></div>
-  <p class="card-desc">Доменно-специфичные процессы: логистика и таможня, производство и качество, биллинг, здравоохранение и HIPAA, энергетика, крипто/DeFi, валидация контрагентов.</p>
-  <div class="chips"><span class="chip">логистика, таможня, возвраты</span><span class="chip">производство и несоответствия</span><span class="chip">биллинг и взаиморасчёты</span><span class="chip">медицина, HIPAA</span></div>
-  <div class="card-meta"><span>23 скиллов</span><span>252 строк</span><span>50 КБ</span></div>
-  <div class="card-actions">
-    <a class="btn" href="https://raw.githubusercontent.com/Genocide12/skills-collection/main/mega/12-niches/SKILL.md" target="_blank" rel="noopener">Открыть SKILL.md</a>
-    <details><summary>Состав · 23+0</summary>
-      <p class="hint">● — платформенный скилл (живёт в самом агенте)</p><div class="comp"><ul><li>carrier-relationship-management</li><li>counterparty-channel-discipline</li><li>customer-billing-ops</li><li>customs-trade-compliance</li><li>defi-amm-security</li><li>ecc-tools-cost-audit</li><li>energy-procurement</li><li>evm-token-decimals</li><li>finance-billing-ops</li><li>healthcare-cdss-patterns</li><li>healthcare-emr-patterns</li><li>healthcare-eval-harness</li></ul><ul><li>healthcare-phi-compliance</li><li>hipaa-compliance</li><li>inventory-demand-planning</li><li>ito-baskets</li><li>ito-inference</li><li>llm-trading-agent-security</li><li>logistics-exception-management</li><li>nodejs-keccak256</li><li>production-scheduling</li><li>quality-nonconformance</li><li>returns-reverse-logistics</li></ul></div>
-    </details>
-  </div>
-</article>
-  </div>
-</div></section>
+<main id="top">
 
-<section id="router"><div class="wrap">
-  <h2>Какая задача — какой скилл</h2>
-  <p class="sub">Маршрутизация по формулировке задачи: агенту достаточно определить тип работы, чтобы выбрать один файл.</p>
-  <table>
-<tr><td>Сделать сайт, лендинг, веб-приложение, дашборд</td><td><a href="#m-01-frontend" class="route">Сайты и интерфейсы</a><span class="mono dim"> 01-frontend</span></td></tr>
-<tr><td>Дизайн, UI-кит, анимации, доступность интерфейса</td><td><a href="#m-01-frontend" class="route">Сайты и интерфейсы</a><span class="mono dim"> 01-frontend</span></td></tr>
-<tr><td>Отчёт, договор, письмо в Word</td><td><a href="#m-02-documents" class="route">Документы и презентации</a><span class="mono dim"> 02-documents</span></td></tr>
-<tr><td>Собрать или разобрать PDF</td><td><a href="#m-02-documents" class="route">Документы и презентации</a><span class="mono dim"> 02-documents</span></td></tr>
-<tr><td>Презентация PPTX или слайды HTML</td><td><a href="#m-02-documents" class="route">Документы и презентации</a><span class="mono dim"> 02-documents</span></td></tr>
-<tr><td>Таблица Excel: формулы, графики, сводные</td><td><a href="#m-02-documents" class="route">Документы и презентации</a><span class="mono dim"> 02-documents</span></td></tr>
-<tr><td>Статья, пост, рассылка, бренд-войс</td><td><a href="#m-03-writing" class="route">Тексты и контент</a><span class="mono dim"> 03-writing</span></td></tr>
-<tr><td>SEO, маркетинговая кампания, кросспостинг</td><td><a href="#m-03-writing" class="route">Тексты и контент</a><span class="mono dim"> 03-writing</span></td></tr>
-<tr><td>Сервер, API, микросервис, интеграция</td><td><a href="#m-04-backend" class="route">Бэкенд, API и базы данных</a><span class="mono dim"> 04-backend</span></td></tr>
-<tr><td>База данных: схема, SQL, миграции</td><td><a href="#m-04-backend" class="route">Бэкенд, API и базы данных</a><span class="mono dim"> 04-backend</span></td></tr>
-<tr><td>Код на Python / Go / Rust / Kotlin / Java / C++</td><td><a href="#m-05-languages" class="route">Языки и код-база</a><span class="mono dim"> 05-languages</span></td></tr>
-<tr><td>Мобильное приложение (Swift, Flutter, Android)</td><td><a href="#m-05-languages" class="route">Языки и код-база</a><span class="mono dim"> 05-languages</span></td></tr>
-<tr><td>Разобраться в чужой код-базе, почистить код</td><td><a href="#m-05-languages" class="route">Языки и код-база</a><span class="mono dim"> 05-languages</span></td></tr>
-<tr><td>Написать тесты, TDD, регрессия</td><td><a href="#m-06-quality" class="route">Тесты, отладка и надёжность</a><span class="mono dim"> 06-quality</span></td></tr>
-<tr><td>Найти и починить баг, отладка</td><td><a href="#m-06-quality" class="route">Тесты, отладка и надёжность</a><span class="mono dim"> 06-quality</span></td></tr>
-<tr><td>Код-ревью, аудит безопасности</td><td><a href="#m-06-quality" class="route">Тесты, отладка и надёжность</a><span class="mono dim"> 06-quality</span></td></tr>
-<tr><td>Обработать данные, датасет</td><td><a href="#m-07-data" class="route">Данные, ML и графики</a><span class="mono dim"> 07-data</span></td></tr>
-<tr><td>График, диаграмма, дашборд</td><td><a href="#m-07-data" class="route">Данные, ML и графики</a><span class="mono dim"> 07-data</span></td></tr>
-<tr><td>ML-модель, пайплайн, рекомендации</td><td><a href="#m-07-data" class="route">Данные, ML и графики</a><span class="mono dim"> 07-data</span></td></tr>
-<tr><td>Исследовать тему, рынок, конкурентов</td><td><a href="#m-08-research" class="route">Исследования и поиск</a><span class="mono dim"> 08-research</span></td></tr>
-<tr><td>Научная литература, патенты, факты</td><td><a href="#m-08-research" class="route">Исследования и поиск</a><span class="mono dim"> 08-research</span></td></tr>
-<tr><td>Сгенерировать или отредактировать картинку</td><td><a href="#m-09-media" class="route">Медиа и графика</a><span class="mono dim"> 09-media</span></td></tr>
-<tr><td>Видео: монтаж, анимация, титры</td><td><a href="#m-09-media" class="route">Медиа и графика</a><span class="mono dim"> 09-media</span></td></tr>
-<tr><td>Озвучка текста, расшифровка аудио</td><td><a href="#m-09-media" class="route">Медиа и графика</a><span class="mono dim"> 09-media</span></td></tr>
-<tr><td>Коммит, ветки, PR, релиз</td><td><a href="#m-10-devops" class="route">Git, релиз и эксплуатация</a><span class="mono dim"> 10-devops</span></td></tr>
-<tr><td>CI/CD, Docker, Kubernetes, деплой</td><td><a href="#m-10-devops" class="route">Git, релиз и эксплуатация</a><span class="mono dim"> 10-devops</span></td></tr>
-<tr><td>Прод-инцидент, мониторинг, сеть</td><td><a href="#m-10-devops" class="route">Git, релиз и эксплуатация</a><span class="mono dim"> 10-devops</span></td></tr>
-<tr><td>Спланировать сложную многошаговую задачу</td><td><a href="#m-11-agent" class="route">Агентские процессы</a><span class="mono dim"> 11-agent</span></td></tr>
-<tr><td>Распределить работу по субагентам</td><td><a href="#m-11-agent" class="route">Агентские процессы</a><span class="mono dim"> 11-agent</span></td></tr>
-<tr><td>Память проекта, хэндофф, документация</td><td><a href="#m-11-agent" class="route">Агентские процессы</a><span class="mono dim"> 11-agent</span></td></tr>
-<tr><td>Логистика, таможня, производство, биллинг</td><td><a href="#m-12-niches" class="route">Отраслевые ниши</a><span class="mono dim"> 12-niches</span></td></tr>
-<tr><td>Медицина, HIPAA, крипто, энергетика</td><td><a href="#m-12-niches" class="route">Отраслевые ниши</a><span class="mono dim"> 12-niches</span></td></tr>
-  </table>
-</div></section>
-
-<section id="catalog"><div class="wrap">
-  <h2>Полный каталог · 393</h2>
-  <p class="sub">Все исходные скиллы: коллекционные (из репозитория) и платформенные (помечены ●, живут в самом агенте). Поиск — по имени и описанию; «текст» подтягивает исходный SKILL.md прямо с GitHub.</p>
-  <div class="controls">
-    <input id="q" type="search" placeholder="Поиск: имя или описание — например, django, TDD, вёрстка…">
-    <select id="mf"><option value="">все мега-скиллы</option><option value="01-frontend">01-frontend · Сайты и интерфейсы</option>
-<option value="02-documents">02-documents · Документы и презентации</option>
-<option value="03-writing">03-writing · Тексты и контент</option>
-<option value="04-backend">04-backend · Бэкенд, API и базы данных</option>
-<option value="05-languages">05-languages · Языки и код-база</option>
-<option value="06-quality">06-quality · Тесты, отладка и надёжность</option>
-<option value="07-data">07-data · Данные, ML и графики</option>
-<option value="08-research">08-research · Исследования и поиск</option>
-<option value="09-media">09-media · Медиа и графика</option>
-<option value="10-devops">10-devops · Git, релиз и эксплуатация</option>
-<option value="11-agent">11-agent · Агентские процессы</option>
-<option value="12-niches">12-niches · Отраслевые ниши</option></select>
-  </div>
-  <div class="count" id="cnt"></div>
-  <div id="list"></div>
-</div></section>
-
-<footer><div class="wrap cols">
-  <div>
-    <p><b style="color:var(--text)">Установка</b></p>
-    <p style="margin:8px 0 14px">В чате: <code>Установи мега-скиллы из github.com/Genocide12/skills-collection</code> — агент скопирует 12 папок из <code>mega/</code> в <code>skills/</code>. Вручную: <code>git clone</code> → <code>./install.sh</code> (мега-скиллы, по умолчанию) или <code>./install.sh --full</code> (все 354 исходных).</p>
-    <p>Каталог исходников: <a href="INDEX.md">INDEX.md</a> · машиночитаемый список: <a href="https://github.com/Genocide12/skills-collection/blob/main/manifest.json" target="_blank" rel="noopener">manifest.json</a></p>
-  </div>
-  <div>
-    <p><b style="color:var(--text)">Источники</b></p>
-    <p style="margin:8px 0">ECC · mattpocock/skills · superpowers · agent-skills (Addy Osmani) · claude-mem · taste-skill · security-audit (Cloudflare) · hallmark · impeccable · human-voice (своя сборка) — плюс платформенные инструменты z.ai. Все тексты принадлежат авторам оригиналов.</p>
-  </div>
-</div></footer>
-
-<script id="data" type="application/json">{"megas": [{"id": "01-frontend", "name": "frontend", "title": "Сайты и интерфейсы", "desc": "Сайты, лендинги и веб-приложения: вёрстка, дизайн-система, React/Next/Vue/Angular/Vite, TypeScript, анимации, доступность, производительность фронтенда.", "tasks": ["сделать сайт / лендинг / дашборд", "React, Next.js, Vue, Angular, Vite", "дизайн, UI-кит, анимации", "доступность (a11y)", "тестирование и деплой фронтенда"], "lines": 300, "kb": 74, "n_coll": 32, "n_plat": 8}, {"id": "02-documents", "name": "documents", "title": "Документы и презентации", "desc": "Офисные форматы: Word (docx), PDF, PowerPoint (pptx), Excel (xlsx), подписи и поля e-sign, переводы документов, Google Workspace.", "tasks": ["отчёт / договор / письмо в Word", "PDF: создать, разобрать, заполнить", "презентация PPTX или слайды HTML", "таблица Excel с формулами и графиками"], "lines": 309, "kb": 79, "n_coll": 4, "n_plat": 5}, {"id": "03-writing", "name": "writing", "title": "Тексты и контент", "desc": "Статьи и посты, человеческий голос текста, бренд и войс, SEO, маркетинговые кампании, письма и сообщения, инвесторские материалы, обучение.", "tasks": ["статья / пост / рассылка", "тон и бренд-войс", "SEO и маркетинг", "письма, сообщения, документы-тексты"], "lines": 306, "kb": 85, "n_coll": 20, "n_plat": 1}, {"id": "04-backend", "name": "backend", "title": "Бэкенд, API и базы данных", "desc": "Серверная разработка: FastAPI/Django/Spring/Quarkus/NestJS/Laravel/Rails/.NET, проектирование API и MCP, SQL (MySQL/Postgres/ClickHouse), Redis, миграции, LLM-интеграции и кэширование промптов.", "tasks": ["сервер / API / микросервис", "спроектировать API или контракт", "база данных: схема, SQL, миграции", "фоновые задачи, интеграции, LLM-приложения"], "lines": 455, "kb": 102, "n_coll": 42, "n_plat": 1}, {"id": "05-languages", "name": "languages", "title": "Языки и код-база", "desc": "Паттерны и стандарты языков: Python, Go, Rust, Kotlin, Java, C++, Perl, Swift, Dart/Flutter, Android; навигация по чужой код-базе, упрощение и подготовка к коммиту.", "tasks": ["паттерны/идиомы конкретного языка", "разобраться в чужой код-базе", "почистить и упростить код", "мобильные приложения (Swift, Flutter, Android)"], "lines": 357, "kb": 44, "n_coll": 29, "n_plat": 0}, {"id": "06-quality", "name": "quality", "title": "Тесты, отладка и надёжность", "desc": "TDD и все виды тестов (юнит/интеграционные/e2e), систематическая отладка, код-ревью, регрессия, аудиты безопасности, бенчмарки и производительность, вёрди-чеки перед сдачей.", "tasks": ["написать тесты / TDD", "найти и починить баг", "провести код-ревью", "аудит безопасности", "проверить работу перед сдачей"], "lines": 303, "kb": 62, "n_coll": 47, "n_plat": 3}, {"id": "07-data", "name": "data", "title": "Данные, ML и графики", "desc": "Обработка и скрейпинг данных, дашборды и графики (matplotlib и др.), ML-пайплайны (PyTorch, рекомендательные системы), структурный текст: regex против LLM.", "tasks": ["обработать данные / датасет", "построить график или дашборд", "ML-модель или пайплайн", "спарсить данные"], "lines": 250, "kb": 50, "n_coll": 12, "n_plat": 2}, {"id": "08-research", "name": "research", "title": "Исследования и поиск", "desc": "Глубокие веб-исследования, рынок и конкуренты, OSINT и лиды, продуктовый анализ, научные базы (PubMed, USPTO, gget), предикшн-маркеты.", "tasks": ["исследовать тему / рынок / конкурентов", "поиск фактов и источников", "OSINT / анализ компании", "научная литература и патенты"], "lines": 306, "kb": 84, "n_coll": 19, "n_plat": 1}, {"id": "09-media", "name": "media", "title": "Медиа и графика", "desc": "Генерация и редактирование изображений, поиск картинок, видео (монтаж, Manim, Remotion), анализ изображений и видео (VLM), распознавание и синтез речи (ASR/TTS).", "tasks": ["сгенерировать/отредактировать картинку", "видео: монтаж, анимация, титры", "текст → речь, речь → текст", "что на картинке/видео"], "lines": 277, "kb": 31, "n_coll": 6, "n_plat": 7}, {"id": "10-devops", "name": "devops", "title": "Git, релиз и эксплуатация", "desc": "Git-процессы и ветки, PR и GitHub-операции, сборка и релизы, CI/CD, Docker и Kubernetes, деплой (Vercel, uncloud), сети и диагностика, наблюдаемость и прод-аудиты.", "tasks": ["закоммитить / PR / релиз", "CI/CD и сборка", "Docker, K8s, деплой", "сеть, мониторинг, прод-инциденты"], "lines": 376, "kb": 57, "n_coll": 28, "n_plat": 2}, {"id": "11-agent", "name": "agent", "title": "Агентские процессы", "desc": "Работа самого агента: планирование и спеки, оркестрация субагентов, автономные циклы, память и контекст, handoff, документация и ADR, ретро и стендапы, управление скиллами и бюджетом токенов.", "tasks": ["спланировать сложную задачу", "распределить работу по субагентам", "долгий автономный прогон", "ведение документов/ADR проекта", "оптимизация расхода токенов"], "lines": 473, "kb": 76, "n_coll": 92, "n_plat": 9}, {"id": "12-niches", "name": "niches", "title": "Отраслевые ниши", "desc": "Доменно-специфичные процессы: логистика и таможня, производство и качество, биллинг, здравоохранение и HIPAA, энергетика, крипто/DeFi, валидация контрагентов.", "tasks": ["логистика, таможня, возвраты", "производство и несоответствия", "биллинг и взаиморасчёты", "медицина, HIPAA", "крипто и DeFi"], "lines": 252, "kb": 50, "n_coll": 23, "n_plat": 0}], "skills": [{"n": "accessibility", "s": "ECC", "d": "Доступный UI по WCAG 2.2 AA для web, iOS и Android: семантические ARIA-роли, управление фокусом, контраст, размеры целей, скринридеры.", "m": "01-frontend", "p": false}, {"n": "angular-developer", "s": "ECC", "d": "Генерация Angular-кода и архитектурные советы: проекты, компоненты, сервисы, реактивность (signals, linkedSignal), практики.", "m": "01-frontend", "p": false}, {"n": "click-path-audit", "s": "ECC", "d": "Трассировка каждой кнопки по всей цепочке состояний: ловит баги, где функции по отдельности работают, а вместе отменяют друг друга.", "m": "01-frontend", "p": false}, {"n": "design-system", "s": "ECC", "d": "Дизайн-система из живого кода или аудит консистентности: извлечение токенов (цвета, типографика, отступы, тени) в файл токенов.", "m": "01-frontend", "p": false}, {"n": "frontend-a11y", "s": "ECC", "d": "Доступность в React и Next.js: семантический HTML, ARIA-атрибуты, подписи форм, клавиатура, фокус, скринридеры.", "m": "01-frontend", "p": false}, {"n": "frontend-design-direction", "s": "ECC", "d": "Дизайн-направление фронтенда ECC для продакшн-UI: сайты, дашборды, приложения, компоненты, лендинги.", "m": "01-frontend", "p": false}, {"n": "frontend-patterns", "s": "ECC", "d": "Фронтенд-паттерны React и Next.js: состояние, производительность, UI-практики. Для сборки и ревью.", "m": "01-frontend", "p": false}, {"n": "liquid-glass-design", "s": "ECC", "d": "Дизайн-система iOS 26 Liquid Glass: динамическое стекло с блюром, отражениями и морфингом для SwiftUI, UIKit и WidgetKit.", "m": "01-frontend", "p": false}, {"n": "make-interfaces-feel-better", "s": "ECC", "d": "Конкретные детали, делающие интерфейс дорогим: отступы, типографика, границы, тени, микроанимации. Ревью и улучшение UI.", "m": "01-frontend", "p": false}, {"n": "motion-advanced", "s": "ECC", "d": "Продвинутый моушен в React/Next.js: drag и drop, жесты, анимация текста, отрисовка SVG-путей, кастомные хуки, императивные секвенции.", "m": "01-frontend", "p": false}, {"n": "motion-foundations", "s": "ECC", "d": "Токены моушена, пружинные пресеты, правила производительности, адаптация под устройства, доступность, SSR-безопасность.", "m": "01-frontend", "p": false}, {"n": "motion-patterns", "s": "ECC", "d": "Боевые анимации React/Next.js: кнопка, модалка, тост, стаггер, переходы страниц, выходные анимации, скролл, раскладка.", "m": "01-frontend", "p": false}, {"n": "nextjs-turbopack", "s": "ECC", "d": "Next.js 16+ и Turbopack: инкрементальная сборка на Rust, кэш файловой системы, быстрый старт dev-сервера и HMR, сравнение с webpack.", "m": "01-frontend", "p": false}, {"n": "nuxt4-patterns", "s": "ECC", "d": "Nuxt 4: безопасность гидратации, производительность, route rules, ленивая загрузка, SSR-безопасный fetch через useFetch и useAsyncData.", "m": "01-frontend", "p": false}, {"n": "react-native-patterns", "s": "ECC", "d": "React Native и Expo: навигация Expo Router, разделение состояния (сервер/клиент/роут/форма), TanStack Query с Zod, производительность.", "m": "01-frontend", "p": false}, {"n": "react-patterns", "s": "ECC", "d": "React 18/19: дисциплина хуков, границы серверных и клиентских компонентов, Suspense и error boundaries, form actions, данные.", "m": "01-frontend", "p": false}, {"n": "react-performance", "s": "ECC", "d": "Оптимизация React и Next.js по практикам Vercel Engineering: лишние рендеры, бандл, загрузка.", "m": "01-frontend", "p": false}, {"n": "react-testing", "s": "ECC", "d": "Тесты React: Testing Library, Vitest/Jest, моки сети на MSW, проверки доступности через axe, граница с E2E.", "m": "01-frontend", "p": false}, {"n": "swiftui-patterns", "s": "ECC", "d": "SwiftUI: архитектура, состояние на @Observable, композиция вью, навигация, производительность, практики iOS и macOS.", "m": "01-frontend", "p": false}, {"n": "taste", "s": "ECC", "d": "Креатив-дирекшн клипов и шорт-форм в эстетике angelcore, cloud-trance, hyperpop: словарь жанра, палитра, монтаж.", "m": "01-frontend", "p": false}, {"n": "taste-application", "s": "ECC", "d": "Новое видео по style-паку и финальный монтаж: ритм нарезки от референса, генерация на fal, пост-обработка до готовой работы.", "m": "01-frontend", "p": false}, {"n": "typescript-patterns", "s": "ECC", "d": "TypeScript: строгая типизация и поддерживаемость, конфигурация компилятора, типы, практики современного JS.", "m": "01-frontend", "p": false}, {"n": "ui-demo", "s": "ECC", "d": "Видео-демо UI через Playwright: записывает отполированные walkthrough, туториалы и записи экрана веб-приложений.", "m": "01-frontend", "p": false}, {"n": "ui-to-vue", "s": "ECC", "d": "Скриншоты и экспорты дизайна в компоненты Vue 3 пакетно: особенно с Vant, Element Plus, Ant Design.", "m": "01-frontend", "p": false}, {"n": "vite-patterns", "s": "ECC", "d": "Vite: конфигурации, плагины, HMR, переменные окружения, прокси, SSR, library mode, пре-бандлинг зависимостей, оптимизация сборки.", "m": "01-frontend", "p": false}, {"n": "vue-patterns", "s": "ECC", "d": "Vue 3 Composition API: архитектура компонентов, реактивность, Pinia, навигация Vue Router, SSR-паттерны Nuxt.", "m": "01-frontend", "p": false}, {"n": "frontend-ui-engineering", "s": "agent-skills", "d": "Продакшн UI: доступность, адаптивность, компоненты, страницы. Для сборки и правки интерфейсов.", "m": "01-frontend", "p": false}, {"n": "design-is", "s": "claude-mem", "d": "Аудит дизайна по десяти принципам Рамса «хороший дизайн — это…», затем /make-plan под один из трёх исходов.", "m": "01-frontend", "p": false}, {"n": "hallmark", "s": "hallmark", "d": "Дизайн сайтов и новых страниц, которые выглядят сделанными, а не сгенерированными.", "m": "01-frontend", "p": false}, {"n": "impeccable", "s": "impeccable", "d": "Дизайн, редизайн, критика, аудит, полировка, упрощение и анимация фронтенда: веб-интерфейсы в целом.", "m": "01-frontend", "p": false}, {"n": "prototype", "s": "mattpocock/skills", "d": "Одноразовый прототип для ответа на дизайн-вопрос: проверка модели состояний или логики.", "m": "01-frontend", "p": false}, {"n": "taste-skill", "s": "taste-skill", "d": "tasteskill v2, the anti-slop frontend skill. Art direction for websites, distilled from a study of 247 curated gallery sites (One Page Love, Awwwards Sites of the Day). Deals researched directions (idea, composition, type, palette, photographs, section blueprints) from a library, enforces a strict no-slop house style with a real-browser inspector, and runs a look-and-fix loop on screenshots. Use this whenever you build, design, redesign, restyle, polish or review a landing page, marketing site, portfolio, product page, one-pager, hero or any public-facing web page, in any stack (HTML/CSS, React, Next.js, Vue, Svelte, Astro, Tailwind) — also when the user says a page looks generic, templated, \"AI-made\", sloppy, or asks to make it look designed, premium, award-level or less like every other site. Also for app screens: dashboards, admin and analytics views, settings, inboxes and other screens people work in, with their own run and rules.", "m": "01-frontend", "p": false}, {"n": "agent-browser", "s": "Z.AI", "d": "", "m": "01-frontend", "p": true}, {"n": "browser-testing-with-devtools", "s": "Z.AI", "d": "", "m": "01-frontend", "p": true}, {"n": "web-design-guidelines", "s": "Z.AI", "d": "", "m": "01-frontend", "p": true}, {"n": "vercel-react-best-practices", "s": "Z.AI", "d": "", "m": "01-frontend", "p": true}, {"n": "vercel-optimize", "s": "Z.AI", "d": "", "m": "01-frontend", "p": true}, {"n": "vercel-react-view-transitions", "s": "Z.AI", "d": "", "m": "01-frontend", "p": true}, {"n": "vercel-composition-patterns", "s": "Z.AI", "d": "", "m": "01-frontend", "p": true}, {"n": "vercel-react-native-skills", "s": "Z.AI", "d": "", "m": "01-frontend", "p": true}, {"n": "esign-field-placement", "s": "ECC", "d": "Детерминированная расстановка полей подписи, даты и текста в веб-композере e-подписи через браузерную автоматизацию.", "m": "02-documents", "p": false}, {"n": "frontend-slides", "s": "ECC", "d": "Эффектные HTML-презентации с анимацией: с нуля или конвертацией из PowerPoint. Когда нужен доклад.", "m": "02-documents", "p": false}, {"n": "google-workspace-ops", "s": "ECC", "d": "Drive, Docs, Sheets и Slides как единая поверхность: планы, трекеры, презентации, общие документы.", "m": "02-documents", "p": false}, {"n": "visa-doc-translate", "s": "ECC", "d": "Перевод сканов визовых документов (справки, депозиты, доходы) через OCR в аккуратный английский двуязычный формат.", "m": "02-documents", "p": false}, {"n": "docx", "s": "Z.AI", "d": "", "m": "02-documents", "p": true}, {"n": "pdf", "s": "Z.AI", "d": "", "m": "02-documents", "p": true}, {"n": "pptx", "s": "Z.AI", "d": "", "m": "02-documents", "p": true}, {"n": "xlsx", "s": "Z.AI", "d": "", "m": "02-documents", "p": true}, {"n": "nutrient-document-processing", "s": "Z.AI", "d": "", "m": "02-documents", "p": true}, {"n": "article-writing", "s": "ECC", "d": "Статьи, гайды, посты, туториалы и рассылки в узнаваемом голосе, выведенном из ваших примеров.", "m": "03-writing", "p": false}, {"n": "brand-discovery", "s": "ECC", "d": "Структурированное бренд-интервью на 8 модулей с возобновлением: цель, позиционирование, аудитория, характер, голос, фирстиль.", "m": "03-writing", "p": false}, {"n": "brand-voice", "s": "ECC", "d": "Профиль стиля письма из ваших постов, эссе, релизов и доков, затем переиспользование в контенте и аутриче.", "m": "03-writing", "p": false}, {"n": "content-engine", "s": "ECC", "d": "Контент-системы под платформу: X, LinkedIn, TikTok, YouTube, рассылки и перепаковка кампаний между площадками.", "m": "03-writing", "p": false}, {"n": "crosspost", "s": "ECC", "d": "Кросспостинг в X, LinkedIn, Threads и Bluesky с адаптацией под каждую платформу. Без публикации без подтверждения.", "m": "03-writing", "p": false}, {"n": "email-ops", "s": "ECC", "d": "Разбор почты по фактам: триаж, черновики, проверка перед отправкой, безопасные follow-up. Организация ящика.", "m": "03-writing", "p": false}, {"n": "growth-log", "s": "ECC", "d": "Записи growth-лога: из завершённой работы извлекаем первопричину, переносимое правило и узнаваемый сигнал.", "m": "03-writing", "p": false}, {"n": "investor-materials", "s": "ECC", "d": "Питч-деки, one-pager, мемо для инвесторов, заявки в акселераторы, финмодели и материалы для раунда.", "m": "03-writing", "p": false}, {"n": "investor-outreach", "s": "ECC", "d": "Холодные письма, тёплые представления, follow-up и апдейты для fundraising: аутрич к ангелам и фондам.", "m": "03-writing", "p": false}, {"n": "marketing-campaign", "s": "ECC", "d": "Маркетинговая кампания под ключ: исследование аудитории, позиционирование, угол подачи, лендинг, email-цепочки, метрики.", "m": "03-writing", "p": false}, {"n": "master-agreement-generator", "s": "ECC", "d": "Черновики мастер-соглашений с контрагентами из шаблона и JSON-спецификации: клаузулы по ролям, workflow Schedule A.", "m": "03-writing", "p": false}, {"n": "messages-ops", "s": "ECC", "d": "Живые мессенджеры по фактам: чтение SMS и DM, восстановление одноразового кода, осмотр треда перед ответом.", "m": "03-writing", "p": false}, {"n": "seo", "s": "ECC", "d": "SEO под ключ: технический аудит, on-page-оптимизация, структурированные данные, Core Web Vitals, контент-стратегия.", "m": "03-writing", "p": false}, {"n": "interview-me", "s": "agent-skills", "d": "Вытягивает, чего вы хотите на самом деле, интервью по одному вопросу до примерно 95% уверенности.", "m": "03-writing", "p": false}, {"n": "teach", "s": "mattpocock/skills", "d": "Обучает вас новому навыку или концепции в этом workspace.", "m": "03-writing", "p": false}, {"n": "writing-beats", "s": "mattpocock/skills", "d": "Письмо, эксплуатация: собирает сырьё в путешествие по битам, заземляя термины до опоры на них.", "m": "03-writing", "p": false}, {"n": "writing-fragments", "s": "mattpocock/skills", "d": "Письмо, добыча: сырые фрагменты, пока без структуры.", "m": "03-writing", "p": false}, {"n": "writing-shape", "s": "mattpocock/skills", "d": "Письмо, эксплуатация: форма из сырого материала, абзац за абзацем.", "m": "03-writing", "p": false}, {"n": "writing-skills", "s": "superpowers", "d": "Создание, правка и проверка скиллов перед деплоем.", "m": "03-writing", "p": false}, {"n": "human-voice", "s": "custom", "d": "Убирает ИИ-маркеры из текста на английском и русском и приводит пунктуацию к регистру: тире против дефиса, штампы, канцелярит.", "m": "03-writing", "p": false}, {"n": "writing-guidelines", "s": "Z.AI", "d": "", "m": "03-writing", "p": true}, {"n": "api-connector-builder", "s": "ECC", "d": "Новый API-коннектор точно по паттерну интеграций целевого репо. Когда нужно добавить ещё одну интеграцию без слома остальных.", "m": "04-backend", "p": false}, {"n": "api-design", "s": "ECC", "d": "Паттерны REST API: именование ресурсов, статус-коды, пагинация, фильтрация, ошибки, версионирование, rate limiting для прода.", "m": "04-backend", "p": false}, {"n": "backend-patterns", "s": "ECC", "d": "Бэкенд-архитектура, дизайн API, оптимизация БД и серверные практики для Node.js, Express и Next.js API-роутов.", "m": "04-backend", "p": false}, {"n": "clickhouse-io", "s": "ECC", "d": "ClickHouse: паттерны, оптимизация запросов, аналитика и data engineering для высоконагруженных аналитических нагрузок.", "m": "04-backend", "p": false}, {"n": "content-hash-cache-pattern", "s": "ECC", "d": "Кэш дорогой обработки файлов по SHA-256 хэшу содержимого: не зависит от пути, самоинвалидация, отдельный сервис-слой.", "m": "04-backend", "p": false}, {"n": "contract-first", "s": "ECC", "d": "Фронт и бэк (или сервисы между собой) координируются через один машинно-проверяемый контракт: OpenAPI, AsyncAPI, protobuf, JSON Schema.", "m": "04-backend", "p": false}, {"n": "cost-aware-llm-pipeline", "s": "ECC", "d": "Снижение расходов на LLM API: маршрутизация моделей по сложности задачи, бюджеты, ретраи, кэширование промптов.", "m": "04-backend", "p": false}, {"n": "database-migrations", "s": "ECC", "d": "Безопасные обратимые миграции БД: forward-only в проде, expand-contract без даунтайма, конкурентные индексы, батчевый бэкфилл.", "m": "04-backend", "p": false}, {"n": "django-celery", "s": "ECC", "d": "Django + Celery: конфигурация, дизайн задач, beat-расписание, ретраи, canvas-воркфлоу, мониторинг, тесты.", "m": "04-backend", "p": false}, {"n": "django-patterns", "s": "ECC", "d": "Архитектура Django: REST на DRF, практики ORM, кэширование, сигналы, middleware, прод-приложения.", "m": "04-backend", "p": false}, {"n": "django-security", "s": "ECC", "d": "Безопасность Django: аутентификация, авторизация, CSRF, SQL-инъекции, XSS, защищённые конфигурации деплоя.", "m": "04-backend", "p": false}, {"n": "dotnet-patterns", "s": "ECC", "d": "Идиоматичный C#/.NET: конвенции, внедрение зависимостей, async/await и практики надёжных поддерживаемых приложений.", "m": "04-backend", "p": false}, {"n": "fastapi-patterns", "s": "ECC", "d": "FastAPI: структура проекта, схемы Pydantic v2, DI, async-хендлеры, аутентификация, транзакции.", "m": "04-backend", "p": false}, {"n": "hermes-imports", "s": "ECC", "d": "Конвертация локальных workflow оператора Hermes в санитизированные скиллы ECC и release-pack артефакты.", "m": "04-backend", "p": false}, {"n": "hexagonal-architecture", "s": "ECC", "d": "Ports и Adapters: чистые границы домена, инверсия зависимостей, тестируемая оркестрация use-case.", "m": "04-backend", "p": false}, {"n": "i18n-sync", "s": "ECC", "d": "Перевод и синхронизация JSON-локалей по использованию ключей и терминологии проекта, с точечной валидацией.", "m": "04-backend", "p": false}, {"n": "jpa-patterns", "s": "ECC", "d": "JPA/Hibernate: дизайн сущностей, связи, оптимизация запросов, транзакции, аудит, индексы, пагинация, пулы.", "m": "04-backend", "p": false}, {"n": "kotlin-exposed-patterns", "s": "ECC", "d": "ORM Exposed от JetBrains: DSL-запросы, паттерн DAO, транзакции, пул HikariCP, миграции Flyway, репозитории.", "m": "04-backend", "p": false}, {"n": "kotlin-ktor-patterns", "s": "ECC", "d": "Сервер Ktor: DSL роутинга, плагины, аутентификация, Koin DI, kotlinx.serialization, WebSockets, testApplication.", "m": "04-backend", "p": false}, {"n": "laravel-patterns", "s": "ECC", "d": "Архитектура Laravel: роутинг и контроллеры, Eloquent ORM, сервисные слои, очереди, события, кэш, API-ресурсы.", "m": "04-backend", "p": false}, {"n": "laravel-security", "s": "ECC", "d": "Безопасность Laravel: аутентификация, авторизация, безопасность Eloquent, CSRF, XSS, API, защищённый деплой.", "m": "04-backend", "p": false}, {"n": "latency-critical-systems", "s": "ECC", "d": "Латентно-чувствительные системы: живые дашборды, маркет-дата, стриминговые агенты, execution-шлюзы, очереди, кэши.", "m": "04-backend", "p": false}, {"n": "mailtrap-email-integration", "s": "ECC", "d": "Интеграция транзакционной почты через Mailtrap Email API: песочница, верификация домена, аутентификация API.", "m": "04-backend", "p": false}, {"n": "mcp-server-patterns", "s": "ECC", "d": "Серверы MCP на Node/TypeScript SDK: инструменты, ресурсы, промпты, валидация Zod, stdio против Streamable HTTP.", "m": "04-backend", "p": false}, {"n": "module-governance", "s": "ECC", "d": "Локальные инструкции агентов модуля, связи доменного контекста и владение интерфейсами при создании или изменении модуля.", "m": "04-backend", "p": false}, {"n": "mybatis-patterns", "s": "ECC", "d": "MyBatis и MyBatis-Spring: дизайн мапперов, XML и аннотационный SQL, безопасный динамический SQL, транзакции, батчи.", "m": "04-backend", "p": false}, {"n": "mysql-patterns", "s": "ECC", "d": "MySQL и MariaDB: схема, запросы, индексы, транзакции, репликация, пулы соединений для прод-бэкендов.", "m": "04-backend", "p": false}, {"n": "nestjs-patterns", "s": "ECC", "d": "NestJS: модули, контроллеры, провайдеры, валидация DTO, гарды, интерсепторы, конфигурация, прод-ready TypeScript.", "m": "04-backend", "p": false}, {"n": "postgres-patterns", "s": "ECC", "d": "PostgreSQL: оптимизация запросов, схема, индексы, безопасность. По практикам Supabase. Для проектирования Postgres.", "m": "04-backend", "p": false}, {"n": "prisma-patterns", "s": "ECC", "d": "Prisma ORM для TypeScript: схема, оптимизация запросов, транзакции, пагинация, ловушки вроде возврата updateMany.", "m": "04-backend", "p": false}, {"n": "prompt-caching-strategy", "s": "ECC", "d": "Поднимает hit rate кэша промптов LLM: анализ структуры, отделение кэшируемого от некэшируемого, экономия денег и латентности.", "m": "04-backend", "p": false}, {"n": "prompt-optimizer", "s": "ECC", "d": "Разбор черновика промпта: интент и недостающий контекст, подбор команд, скиллов и агентов ECC, готовый оптимизированный промпт.", "m": "04-backend", "p": false}, {"n": "quarkus-patterns", "s": "ECC", "d": "Quarkus 3.x LTS: Camel для сообщений, дизайн REST API, CDI-сервисы, доступ к данным через Panache, асинхронность.", "m": "04-backend", "p": false}, {"n": "quarkus-security", "s": "ECC", "d": "Безопасность Quarkus: JWT и OIDC, RBAC через @RolesAllowed и SecurityIdentity, Bean Validation и кастомные проверки.", "m": "04-backend", "p": false}, {"n": "rails-patterns", "s": "ECC", "d": "Паттерны Rails 7.1+ и 8.x: контракт директорий, тонкие контроллеры с сервис-объектами, form objects, запросы.", "m": "04-backend", "p": false}, {"n": "redis-patterns", "s": "ECC", "d": "Redis: структуры данных, стратегии кэша, распределённые локи, rate limiting, pub/sub, управление соединениями.", "m": "04-backend", "p": false}, {"n": "springboot-patterns", "s": "ECC", "d": "Spring Boot: архитектура, дизайн REST API, слоистые сервисы, доступ к данным, кэш, асинхронность, логирование.", "m": "04-backend", "p": false}, {"n": "springboot-security", "s": "ECC", "d": "Spring Security: аутентификация и авторизация, валидация, CSRF, секреты, заголовки, rate limiting, безопасность зависимостей.", "m": "04-backend", "p": false}, {"n": "tinystruct-patterns", "s": "ECC", "d": "Эксперт по Java-фреймворку tinystruct: работа с кодовой базой tinystruct и проектами на нём.", "m": "04-backend", "p": false}, {"n": "api-and-interface-design", "s": "agent-skills", "d": "Стабильные API и интерфейсы: границы модулей, REST и GraphQL эндпоинты, эволюция контрактов.", "m": "04-backend", "p": false}, {"n": "codebase-design", "s": "mattpocock/skills", "d": "Общий словарь для проектирования глубоких модулей: интерфейсы, возможности углубления, границы.", "m": "04-backend", "p": false}, {"n": "domain-modeling", "s": "mattpocock/skills", "d": "Доменная модель проекта: глоссарий GLOSSARY.md, ADR, терминология кодовой базы.", "m": "04-backend", "p": false}, {"n": "LLM", "s": "Z.AI", "d": "", "m": "04-backend", "p": true}, {"n": "android-clean-architecture", "s": "ECC", "d": "Clean Architecture для Android и KMP: структура модулей, правила зависимостей, UseCase, Repository, слой данных.", "m": "05-languages", "p": false}, {"n": "bun-runtime", "s": "ECC", "d": "Bun как рантайм, пакетный менеджер, бандлер и тест-раннер: когда Bun вместо Node, заметки по миграции, поддержка Vercel.", "m": "05-languages", "p": false}, {"n": "codebase-onboarding", "s": "ECC", "d": "Разбор незнакомой кодовой базы и структурированный онбординг-гайд: карта архитектуры, точки входа, конвенции, стартовый CLAUDE.md.", "m": "05-languages", "p": false}, {"n": "coding-standards", "s": "ECC", "d": "Базовые конвенции кода между проектами: именование, читаемость, иммутабельность, ревью качества. Детали в фронт/бэк скиллах.", "m": "05-languages", "p": false}, {"n": "compose-multiplatform-patterns", "s": "ECC", "d": "Compose Multiplatform и Jetpack Compose для KMP: состояние, навигация, темы, производительность, платформенный UI.", "m": "05-languages", "p": false}, {"n": "cpp-coding-standards", "s": "ECC", "d": "Стандарты C++ по Core Guidelines: современный, безопасный и поддерживаемый код при написании и ревью.", "m": "05-languages", "p": false}, {"n": "dart-flutter-patterns", "s": "ECC", "d": "Боевые паттерны Dart и Flutter: null safety, иммутабельное состояние с Freezed, async-композиция, архитектура виджетов.", "m": "05-languages", "p": false}, {"n": "error-handling", "s": "ECC", "d": "Надёжная обработка ошибок в TypeScript, Python и Go: типизированные ошибки, границы, ретраи, circuit breaker, тексты для пользователя.", "m": "05-languages", "p": false}, {"n": "foundation-models-on-device", "s": "ECC", "d": "Apple FoundationModels: LLM на устройстве, guided generation с @Generable, вызов инструментов, стриминг в iOS 26.", "m": "05-languages", "p": false}, {"n": "generating-python-installer", "s": "ECC", "d": "Коммерческие установщики Python для Windows: экстремальная компиляция Nuitka, утончение дистрибутива, анализ DLL, упаковка Inno Setup.", "m": "05-languages", "p": false}, {"n": "golang-patterns", "s": "ECC", "d": "Идиоматичный Go: практики и конвенции надёжного, эффективного и поддерживаемого кода.", "m": "05-languages", "p": false}, {"n": "inherit-legacy-style", "s": "ECC", "d": "Против стилевого дрейфа ИИ на легаси: скан неявных конвенций кодовой базы, согласование конфликтов с оператором, строгий стиль.", "m": "05-languages", "p": false}, {"n": "java-coding-standards", "s": "ECC", "d": "Стандарты Java для Spring Boot и Quarkus: именование, иммутабельность, Optional, стримы, исключения, дженерики, CDI.", "m": "05-languages", "p": false}, {"n": "kotlin-coroutines-flows", "s": "ECC", "d": "Корутины и Flow в Kotlin: структурная конкурентность, операторы Flow, StateFlow, обработка ошибок, тесты. Для Android и KMP.", "m": "05-languages", "p": false}, {"n": "kotlin-patterns", "s": "ECC", "d": "Идиоматичный Kotlin: корутины, null safety, практики надёжного, эффективного и поддерживаемого кода.", "m": "05-languages", "p": false}, {"n": "perl-patterns", "s": "ECC", "d": "Современный Perl 5.36+: идиомы, практики и конвенции надёжных и поддерживаемых приложений.", "m": "05-languages", "p": false}, {"n": "perl-security", "s": "ECC", "d": "Безопасность Perl: taint mode, валидация входа, безопасный запуск процессов, параметризованные DBI-запросы, XSS/SQLi/CSRF.", "m": "05-languages", "p": false}, {"n": "python-patterns", "s": "ECC", "d": "Питонический код: идиомы, PEP 8, тайп-хинты, практики надёжных, эффективных и поддерживаемых приложений.", "m": "05-languages", "p": false}, {"n": "rust-patterns", "s": "ECC", "d": "Идиоматичный Rust: владение, ошибки, трейты, конкурентность и практики безопасного быстрого кода.", "m": "05-languages", "p": false}, {"n": "swift-actor-persistence", "s": "ECC", "d": "Потокобезопасное хранение в Swift на акторах: кэш в памяти с файловым бэкендом, гонки данных исключены самим дизайном.", "m": "05-languages", "p": false}, {"n": "swift-concurrency-6-2", "s": "ECC", "d": "Swift 6.2 Approachable Concurrency: однопоточность по умолчанию, @concurrent для явного фона, изолированные конформансы.", "m": "05-languages", "p": false}, {"n": "swift-protocol-di-testing", "s": "ECC", "d": "DI на протоколах для тестируемого Swift: моки файловой системы, сети и внешних API, фреймворк Swift Testing.", "m": "05-languages", "p": false}, {"n": "code-simplification", "s": "agent-skills", "d": "Упрощение кода без смены поведения: когда работает, но тяжело читать, поддерживать или расширять.", "m": "05-languages", "p": false}, {"n": "learn-codebase", "s": "claude-mem", "d": "Прогрев кодовой базы полным чтением всех исходников. Перед стартом в новом или незнакомом проекте.", "m": "05-languages", "p": false}, {"n": "smart-explore", "s": "claude-mem", "d": "Структурный поиск кода с экономией токенов на tree-sitter AST. Вместо чтения целых файлов, когда нужна структура.", "m": "05-languages", "p": false}, {"n": "improve-codebase-architecture", "s": "mattpocock/skills", "d": "Ищет возможности углубления модулей, показывает визуальный HTML-отчёт, допрашивает по выбранному.", "m": "05-languages", "p": false}, {"n": "migrate-to-shoehorn", "s": "mattpocock/skills", "d": "Миграция тестов с `as` на @total-typescript/shoehorn. Когда упоминается shoehorn или надо заменить `as` в тестах.", "m": "05-languages", "p": false}, {"n": "setup-pre-commit", "s": "mattpocock/skills", "d": "Husky pre-commit с lint-staged (Prettier), проверкой типов и тестами в текущем репо.", "m": "05-languages", "p": false}, {"n": "setup-ts-deep-modules", "s": "mattpocock/skills", "d": "dependency-cruiser в TypeScript-репо: каждый пакет как глубокий модуль со скрытой реализацией и интерфейсом.", "m": "05-languages", "p": false}, {"n": "ai-regression-testing", "s": "ECC", "d": "Регрессионное тестирование ИИ-разработки: API-тесты в песочнице без БД, автоматические проверки багов, защита от регрессий.", "m": "06-quality", "p": false}, {"n": "benchmark", "s": "ECC", "d": "Базовые замеры и поиск регрессий: Core Web Vitals (LCP, INP, CLS, вес страницы), перцентили латентности API-эндпоинтов.", "m": "06-quality", "p": false}, {"n": "benchmark-methodology", "s": "ECC", "d": "Скоринг конкурентов в сопоставимые карточки: 9 взвешенных измерений (позиционирование, голос, ремесло, оффер, доказательства).", "m": "06-quality", "p": false}, {"n": "benchmark-optimization-loop", "s": "ECC", "d": "Запрос «сделай быстрее» превращает в замкнутый цикл: сначала базовый замер, затем по одной гипотезе с бенчмарком против базы.", "m": "06-quality", "p": false}, {"n": "change-impact", "s": "ECC", "d": "Анализ последствий изменений кода, данных и интерфейсов по доказательствам, затем сверка ожиданий с фактом.", "m": "06-quality", "p": false}, {"n": "cpp-testing", "s": "ECC", "d": "Только для C++-тестов: написание и правка, настройка GoogleTest/CTest, разбор падений и флака, покрытие и санитайзеры.", "m": "06-quality", "p": false}, {"n": "csharp-testing", "s": "ECC", "d": "Тесты на C#/.NET: xUnit, FluentAssertions, моки, интеграционные тесты и организация тестового проекта.", "m": "06-quality", "p": false}, {"n": "django-tdd", "s": "ECC", "d": "Тестовые стратегии Django: pytest-django, TDD, factory_boy, моки, покрытие, тесты API на DRF.", "m": "06-quality", "p": false}, {"n": "django-verification", "s": "ECC", "d": "Полный цикл проверки Django: окружение, mypy/ruff/black, безопасность миграций, pytest с целями покрытия, pip-audit и bandit.", "m": "06-quality", "p": false}, {"n": "e2e-testing", "s": "ECC", "d": "E2E на Playwright: Page Object Model, конфигурация, интеграция с CI/CD, артефакты, борьба с флаком.", "m": "06-quality", "p": false}, {"n": "eval-harness", "s": "ECC", "d": "Eval-driven development: определяйте eval-ы способностей и регрессий до кода, оценивайте кодом и моделью-судьёй.", "m": "06-quality", "p": false}, {"n": "flutter-dart-code-review", "s": "ECC", "d": "Чек-лист ревью Flutter/Dart без привязки к библиотеке: виджеты, паттерны состояния (BLoC, Riverpod, Provider, GetX, MobX).", "m": "06-quality", "p": false}, {"n": "fsharp-testing", "s": "ECC", "d": "Тесты на F#: xUnit, FsUnit, Unquote, property-based через FsCheck, интеграционные тесты, организация тестов.", "m": "06-quality", "p": false}, {"n": "golang-testing", "s": "ECC", "d": "Тесты в Go: табличные тесты, сабтесты, бенчмарки, фаззинг, покрытие; TDD с идиоматичными практиками.", "m": "06-quality", "p": false}, {"n": "issue-review", "s": "ECC", "d": "Ревью GitHub issue как /code-review ревьюит PR: gh CLI, сверка с кодовой базой, поиск по истории.", "m": "06-quality", "p": false}, {"n": "kotlin-testing", "s": "ECC", "d": "Тесты Kotlin: Kotest, MockK, тесты корутин, property-based, покрытие Kover; TDD с идиоматикой.", "m": "06-quality", "p": false}, {"n": "laravel-tdd", "s": "ECC", "d": "Тесты Laravel: PHPUnit, Pest, фабрики моделей, HTTP-тесты, тесты Sanctum, моки, покрытие.", "m": "06-quality", "p": false}, {"n": "laravel-verification", "s": "ECC", "d": "Цикл проверки Laravel: env, линтеры, статанализ, тесты с покрытием, сканы безопасности, готовность к деплою.", "m": "06-quality", "p": false}, {"n": "module-regression", "s": "ECC", "d": "Кросс-модульные регрессии в больших репо: реестр REGRESSION.md с потребителями каждого модуля и исполняемыми критериями.", "m": "06-quality", "p": false}, {"n": "perl-testing", "s": "ECC", "d": "Тесты Perl: Test2::V0, Test::More, раннер prove, моки, покрытие Devel::Cover, методология TDD.", "m": "06-quality", "p": false}, {"n": "python-testing", "s": "ECC", "d": "Тесты Python: pytest, TDD, фикстуры, моки, параметризация, требования к покрытию.", "m": "06-quality", "p": false}, {"n": "quarkus-tdd", "s": "ECC", "d": "TDD для Quarkus 3.x LTS: JUnit 5, Mockito, REST Assured, тесты Camel, JaCoCo. Для фич, багфиксов, рефакторинга.", "m": "06-quality", "p": false}, {"n": "quarkus-verification", "s": "ECC", "d": "Цикл проверки Quarkus: сборка, статанализ (Checkstyle, PMD, SpotBugs), тесты с JaCoCo, OWASP-сканы зависимостей и контейнеров.", "m": "06-quality", "p": false}, {"n": "rust-testing", "s": "ECC", "d": "Тесты Rust: юнит и интеграционные, async, property-based, моки, покрытие. По методологии TDD.", "m": "06-quality", "p": false}, {"n": "security-bounty-hunter", "s": "ECC", "d": "Охота за эксплуатируемыми уязвимостями, стоящими багаунти: фокус на удалённо достижимых дырах, достойных реального отчёта.", "m": "06-quality", "p": false}, {"n": "security-review", "s": "ECC", "d": "При добавлении аутентификации, обработке ввода, секретах, API-эндпоинтах и платёжных фичах: ревью безопасности.", "m": "06-quality", "p": false}, {"n": "springboot-tdd", "s": "ECC", "d": "TDD для Spring Boot: JUnit 5, Mockito, MockMvc, Testcontainers. Фичи, багфиксы, рефакторинг.", "m": "06-quality", "p": false}, {"n": "springboot-verification", "s": "ECC", "d": "Полный цикл проверки Spring Boot: Maven/Gradle, статанализ SpotBugs, PMD, Checkstyle, юнит и Testcontainers-интеграционные тесты.", "m": "06-quality", "p": false}, {"n": "tdd-workflow", "s": "ECC", "d": "TDD-цикл: сначала падающий тест, минимальная реализация до зелёного, затем рефакторинг с покрытием 80%+.", "m": "06-quality", "p": false}, {"n": "test-collaboration", "s": "ECC", "d": "Инвентарь и управление тестовыми активами проекта: требования, бизнес-правила, риски, баги и контракты к стабильным TEST-ID.", "m": "06-quality", "p": false}, {"n": "verification-loop", "s": "ECC", "d": "Шестиэтапная проверка работы сессии: сборка, проверка типов, линт, тесты с покрытием, security-grep, ревью диффа, с отчётом.", "m": "06-quality", "p": false}, {"n": "windows-desktop-e2e", "s": "ECC", "d": "E2E для нативных приложений Windows (WPF, WinForms, Win32/MFC, Qt) на pywinauto и Windows UI Automation.", "m": "06-quality", "p": false}, {"n": "code-review-and-quality", "s": "agent-skills", "d": "Мультиосевое ревью кода перед мерджем: своё, чужое, агентское. Стандарты, корректность, качество.", "m": "06-quality", "p": false}, {"n": "debugging-and-error-recovery", "s": "agent-skills", "d": "Систематический поиск первопричин: падают тесты, ломается сборка, вчера работало, поведение не сходится с ожиданиями.", "m": "06-quality", "p": false}, {"n": "performance-optimization", "s": "agent-skills", "d": "Производительность: фронт, бэк, запросы, базы. Когда есть требования или подозрения на деградацию.", "m": "06-quality", "p": false}, {"n": "security-and-hardening", "s": "agent-skills", "d": "Укрепление кода: аудит обработчиков ввода, аутентификация, хранение данных, секреты.", "m": "06-quality", "p": false}, {"n": "test-driven-development--addyosmani", "s": "agent-skills", "d": "Drives development with tests using the red-green-refactor loop. Use when implementing any logic, fixing any bug, or changing any behavior. Use when you need to prove that code works, when a bug report arrives, or when you're about to modify existing functionality. Use when asked to add tests to a function, fix a bug in it or change its behavior, even when the code is pasted inline and the request does not mention tests.", "m": "06-quality", "p": false}, {"n": "code-review", "s": "mattpocock/skills", "d": "Ревью изменений с фиксированной точки по двум осям: стандарты репо и корректность изменений.", "m": "06-quality", "p": false}, {"n": "diagnosing-bugs", "s": "mattpocock/skills", "d": "Цикл диагноза трудных багов и перф-регрессий. Когда просят «диагностируй» или что-то сломалось.", "m": "06-quality", "p": false}, {"n": "tdd", "s": "mattpocock/skills", "d": "TDD: когда фичи или баги строятся тест-первым, упоминается «красный-зелёный-рефактор» или нужны интеграционные тесты.", "m": "06-quality", "p": false}, {"n": "wait-what", "s": "mattpocock/skills", "d": "Стоп: последнее сообщение не сработало, подать его заново.", "m": "06-quality", "p": false}, {"n": "security-audit", "s": "security-audit-skill", "d": "Гайд по безопасности и ревью уязвимостей: код, API, сервисы, CLI-утилиты, библиотеки, демоны.", "m": "06-quality", "p": false}, {"n": "receiving-code-review", "s": "superpowers", "d": "Получение фидбека ревью до внедрения советов, особенно если он мутный или технически сомнительный.", "m": "06-quality", "p": false}, {"n": "requesting-code-review", "s": "superpowers", "d": "Запрос ревью: после задач, крупных фич и перед мерджем, чтобы проверить соответствие требованиям.", "m": "06-quality", "p": false}, {"n": "systematic-debugging", "s": "superpowers", "d": "Любой баг, падение теста или неожиданное поведение: сначала систематическая диагностика, потом фиксы.", "m": "06-quality", "p": false}, {"n": "test-driven-development", "s": "superpowers", "d": "TDD для любой фичи или багфикса, до написания кода реализации.", "m": "06-quality", "p": false}, {"n": "verification-before-completion", "s": "superpowers", "d": "Перед заявлением «готово, починено, зелёное»: прогнать проверяющие команды и убедиться.", "m": "06-quality", "p": false}, {"n": "delivery-gate", "s": "Z.AI", "d": "", "m": "06-quality", "p": true}, {"n": "task-review", "s": "Z.AI", "d": "", "m": "06-quality", "p": true}, {"n": "security-scan", "s": "Z.AI", "d": "", "m": "06-quality", "p": true}, {"n": "bengali-nlp", "s": "ECC", "d": "Обработка бенгальского текста: нормализация Unicode, детект письма, токенизация, лигатуры, специфика NLP для Bangla.", "m": "07-data", "p": false}, {"n": "connections-optimizer", "s": "ECC", "d": "Наводит порядок в сети X и LinkedIn: ревью и чистка, кому добавить или на кого подписаться, тёплые касания под каждый канал.", "m": "07-data", "p": false}, {"n": "dashboard-builder", "s": "ECC", "d": "Дашборды, отвечающие на реальные вопросы оператора, для Grafana, SigNoz и подобных платформ. От метрик к работающему щиту.", "m": "07-data", "p": false}, {"n": "data-scraper-agent", "s": "ECC", "d": "Полностью автономный сборщик данных из любого публичного источника: джобы, цены, новости, GitHub, спорт. По расписанию.", "m": "07-data", "p": false}, {"n": "data-throughput-accelerator", "s": "ECC", "d": "Диагностика и ускорение больших перемещений данных: приёмка, бэкфилл, выгрузка, ETL, загрузка хранилища, синхронизация таблиц.", "m": "07-data", "p": false}, {"n": "gan-style-harness", "s": "ECC", "d": "Генератор-оценщик в духе GAN для автономной сборки качественных приложений. По хартнейсу Anthropic от марта 2026.", "m": "07-data", "p": false}, {"n": "ml-adoption-playbook", "s": "ECC", "d": "Как добавить ML в кодовую базу без ML-команды: фрейминг проблемы, данные, выбор модели, интеграция, оценка.", "m": "07-data", "p": false}, {"n": "mle-workflow", "s": "ECC", "d": "Промышленный ML-цикл: контракты данных, воспроизводимое обучение, оценка модели, деплой, мониторинг, откат.", "m": "07-data", "p": false}, {"n": "pytorch-patterns", "s": "ECC", "d": "PyTorch: паттерны глубокого обучения для надёжных, эффективных и воспроизводимых пайплайнов обучения, архитектур и данных.", "m": "07-data", "p": false}, {"n": "recsys-pipeline-architect", "s": "ECC", "d": "Композируемые пайплайны рекомендаций и лент по шести стадиям Source-Hydrator-Filter-Scorer-Selector-SideEffect.", "m": "07-data", "p": false}, {"n": "regex-vs-llm-structured-text", "s": "ECC", "d": "Парсинг структурированного текста (квизы, формы, счета, чеки, таблицы): гибридный пайплайн regex-first с LLM на сложных местах.", "m": "07-data", "p": false}, {"n": "social-graph-ranker", "s": "ECC", "d": "Взвешенный ранжинг соцграфа: тёплые знакомства, bridge-скоринг, анализ дыр в сети по X и LinkedIn.", "m": "07-data", "p": false}, {"n": "charts", "s": "Z.AI", "d": "", "m": "07-data", "p": true}, {"n": "timeline-report", "s": "Z.AI", "d": "", "m": "07-data", "p": true}, {"n": "competitive-platform-analysis", "s": "ECC", "d": "Разведка конкурентного поля: выявление, категоризация и фильтрация набора конкурентов до начала бенчмаркинга.", "m": "08-research", "p": false}, {"n": "competitive-report-structure", "s": "ECC", "d": "Собирает скоринговые карточки конкурентов в отчёт уровня решений: карта ландшафта, тиры, выводы.", "m": "08-research", "p": false}, {"n": "deep-research", "s": "ECC", "d": "Цитируемые исследовательские отчёты из веба через firecrawl и exa MCP: подвопросы, глубокое чтение источников, синтез со ссылками.", "m": "08-research", "p": false}, {"n": "iterative-retrieval", "s": "ECC", "d": "Пошаговое уточнение выборки контекста для сабагентов: когда контекста не хватает и повторная выдача не помогает.", "m": "08-research", "p": false}, {"n": "lead-intelligence", "s": "ECC", "d": "ИИ-пайплайн лид-интеллекта и аутрича: замена Apollo, Clay и ZoomInfo на скоринг сигналов и тёплые пути к людям.", "m": "08-research", "p": false}, {"n": "market-research", "s": "ECC", "d": "Исследование рынка, конкурентный анализ, due diligence инвестора и отраслевая разведка с указанием источников.", "m": "08-research", "p": false}, {"n": "osint-investigation", "s": "ECC", "d": "OSINT по скудным зацепкам: неочевидные лиды, связывание разрозненных улик, проверка объяснений по источникам.", "m": "08-research", "p": false}, {"n": "prediction-market-oracle-research", "s": "ECC", "d": "Предикт-маркеты как источник данных и оракульных сигналов: для продуктов, агентов, дашбордов и корпоративной разведки.", "m": "08-research", "p": false}, {"n": "prediction-market-risk-review", "s": "ECC", "d": "Ревью workflow предикт-маркетов, корзин, оракулов и торговых агентов на комплаенс, безопасность, качество данных, риски исполнения.", "m": "08-research", "p": false}, {"n": "product-capability", "s": "ECC", "d": "Замысел PRD и запросы роадмапа превращает в план фичи, готовый к реализации: ограничения, инварианты, интерфейсы.", "m": "08-research", "p": false}, {"n": "product-lens", "s": "ECC", "d": "Проверка «зачем» до разработки: продуктовая диагностика в стиле YC с PRODUCT-BRIEF.md и рекомендацией go/no-go.", "m": "08-research", "p": false}, {"n": "research-ops", "s": "ECC", "d": "Актуальные факты, сравнения, обогащение и рекомендации строго из текущих источников: research-workflow ECC.", "m": "08-research", "p": false}, {"n": "scientific-db-pubmed-database", "s": "ECC", "d": "Прямые запросы к PubMed и NCBI E-utilities: биомедицинская литература, MeSH-запросы, PMID, цитаты, поиск через API.", "m": "08-research", "p": false}, {"n": "scientific-db-uspto-database", "s": "ECC", "d": "Патенты и товарные знаки USPTO: официальный поиск, запросы PatentSearch, проверки TSDR, данные об уступках, воспроизводимое IP-исследование.", "m": "08-research", "p": false}, {"n": "scientific-pkg-gget", "s": "ECC", "d": "gget CLI и Python: быстрые запросы к геномным базам, поиск последовательностей, BLAST-поиски, enrichment-проверки, биоинформатика.", "m": "08-research", "p": false}, {"n": "scientific-thinking-literature-review", "s": "ECC", "d": "Систематический обзор литературы: план поиска, скрининг источников, синтез. Для академических, биомед и технических тем.", "m": "08-research", "p": false}, {"n": "scientific-thinking-scholar-evaluation", "s": "ECC", "d": "Структурированная оценка научных работ: статьи, заявки, обзоры, разделы методов, качество доказательств, поддержка цитированием.", "m": "08-research", "p": false}, {"n": "search-first", "s": "ECC", "d": "Сначала поиск, потом код: npm/PyPI, MCP-серверы, скиллы и GitHub на готовые инструменты, затем взять, расширить или обернуть.", "m": "08-research", "p": false}, {"n": "research", "s": "mattpocock/skills", "d": "Разбор вопроса по первоисточникам с фиксацией находок в Markdown-файл в репо.", "m": "08-research", "p": false}, {"n": "documentation-lookup", "s": "Z.AI", "d": "", "m": "08-research", "p": true}, {"n": "blender-motion-state-inspection", "s": "ECC", "d": "Осмотр Blender-персонажей, ригов, поз и ретаргетинга анимаций: контакт с землёй, направление взгляда, модель против движения.", "m": "09-media", "p": false}, {"n": "ios-icon-gen", "s": "ECC", "d": "Иконки iOS в PNG-сеты для каталогов Xcode из SF Symbols (5000+) или Iconify API (275k+ открытых иконок).", "m": "09-media", "p": false}, {"n": "manim-video", "s": "ECC", "d": "Переиспользуемые объяснялки Manim для технических тем, графов, диаграмм и продуктовых прогулок; передача в видео-стек ECC.", "m": "09-media", "p": false}, {"n": "remotion-video-creation", "s": "ECC", "d": "Видео на React в Remotion: 29 предметных правил про 3D, анимации, звук, титры, графики, переходы.", "m": "09-media", "p": false}, {"n": "tasteforge-video", "s": "ECC", "d": "Мультимодальный поиск картинок, видео и 3D-ассетов; интервью вкуса; дистилляция и применение style-паков; редактируемый EDL.", "m": "09-media", "p": false}, {"n": "video-editing", "s": "ECC", "d": "Монтаж с ИИ: нарезка, структура и усиление живых кадров. Полный путь от сырья через FFmpeg к финальному рендеру.", "m": "09-media", "p": false}, {"n": "ASR", "s": "Z.AI", "d": "", "m": "09-media", "p": true}, {"n": "TTS", "s": "Z.AI", "d": "", "m": "09-media", "p": true}, {"n": "VLM", "s": "Z.AI", "d": "", "m": "09-media", "p": true}, {"n": "image-generation", "s": "Z.AI", "d": "", "m": "09-media", "p": true}, {"n": "image-edit", "s": "Z.AI", "d": "", "m": "09-media", "p": true}, {"n": "image-search", "s": "Z.AI", "d": "", "m": "09-media", "p": true}, {"n": "video-understand", "s": "Z.AI", "d": "", "m": "09-media", "p": true}, {"n": "canary-watch", "s": "ECC", "d": "Мониторинг и проверка задеплоенного URL после релизов: HTTP-эндпоинты, SSE-потоки, статика, ошибки консоли, производительность.", "m": "10-devops", "p": false}, {"n": "cisco-ios-patterns", "s": "ECC", "d": "Паттерны ревью Cisco IOS/IOS-XE: show-команды, иерархия конфига, wildcard-маски, размещение ACL, безопасные окна изменений.", "m": "10-devops", "p": false}, {"n": "conventional-commit-review", "s": "ECC", "d": "Ревью стейдженных изменений и черновик сообщения по Conventional Commits: верный тип, scope, длина. Перед коммитом.", "m": "10-devops", "p": false}, {"n": "deployment-patterns", "s": "ECC", "d": "Деплой и CI/CD: паттерны пайплайнов, Docker-контейнеризация, health checks, стратегии отката, чек-листы готовности.", "m": "10-devops", "p": false}, {"n": "docker-patterns", "s": "ECC", "d": "Docker и Compose: локальная разработка, защищённые CLI-установщики, безопасность контейнеров, сети, тома, мульти-сервисные сборки.", "m": "10-devops", "p": false}, {"n": "git-workflow", "s": "ECC", "d": "Git-процессы: стратегии ветвления, конвенции коммитов, чистая и читаемая история, приведение локальных коммитов в порядок перед мерджем.", "m": "10-devops", "p": false}, {"n": "github-ops", "s": "ECC", "d": "Операции GitHub: триаж issues, управление PR, CI/CD, релизы, мониторинг безопасности через gh CLI.", "m": "10-devops", "p": false}, {"n": "kubernetes-patterns", "s": "ECC", "d": "Kubernetes: паттерны workload'ов, ресурсы, RBAC, пробы, автоскейлинг, ConfigMap/Secret, отладка kubectl.", "m": "10-devops", "p": false}, {"n": "network-bgp-diagnostics", "s": "ECC", "d": "Только диагностика BGP: состояние соседей, обмен маршрутами, prefix-политика, осмотр AS-path, безопасный сбор фактов.", "m": "10-devops", "p": false}, {"n": "network-config-validation", "s": "ECC", "d": "Предпродовые проверки конфигов роутеров и свичей: опасные команды, дубли адресов, пересечение подсетей, протухшие ссылки.", "m": "10-devops", "p": false}, {"n": "network-interface-health", "s": "ECC", "d": "Диагностика интерфейсов: ошибки, дропы, CRC, несоответствие дуплекса, флаппинг, согласование скорости, тренды счётчиков.", "m": "10-devops", "p": false}, {"n": "opensource-pipeline", "s": "ECC", "d": "Пайплайн опенсорса: форк, санитизация и упаковка приватных проектов для безопасного публичного релиза. Три агента в цепочке.", "m": "10-devops", "p": false}, {"n": "production-audit", "s": "ECC", "d": "Аудит готовности к проду по локальным фактам: выпущенные приложения, пре-лаунч, пост-мердж, что сломается в проде.", "m": "10-devops", "p": false}, {"n": "terminal-ops", "s": "ECC", "d": "Исполнение в репо по фактам: запустить команду, проверить репо, отладить падение CI, точечно закоммитить фикс.", "m": "10-devops", "p": false}, {"n": "uncloud", "s": "ECC", "d": "Кластер Uncloud: деплой сервисов, настройка Caddy-ингресса, статические прокси-маршруты, публикация портов.", "m": "10-devops", "p": false}, {"n": "ci-cd-and-automation", "s": "agent-skills", "d": "Настройка CI/CD: сборка, деплой-пайплайны, гейты качества, автоматизация рутины.", "m": "10-devops", "p": false}, {"n": "deprecation-and-migration", "s": "agent-skills", "d": "Вывод из эксплуатации и миграции: удаление старых систем и API, перенос пользователей между реализациями.", "m": "10-devops", "p": false}, {"n": "git-workflow-and-versioning", "s": "agent-skills", "d": "Структура git-процессов: коммиты, ветки, конфликты, разбиение незакоммиченного, версионирование.", "m": "10-devops", "p": false}, {"n": "observability-and-instrumentation", "s": "agent-skills", "d": "Инструментирует код, чтобы прод был видим и диагностируем: логи, метрики, трейсинг, алерты.", "m": "10-devops", "p": false}, {"n": "shipping-and-launch", "s": "agent-skills", "d": "Подготовка запуска: что должно быть на месте до деплоя в прод, чек-листы релиза.", "m": "10-devops", "p": false}, {"n": "build", "s": "claude-mem", "d": "Полный автомат задачи по коду: make-plan, do и babysit в цепочке.", "m": "10-devops", "p": false}, {"n": "build-and-release", "s": "claude-mem", "d": "Полный автомат сборки и релиза кодовой задачи.", "m": "10-devops", "p": false}, {"n": "oh-my-issues", "s": "claude-mem", "d": "Кластеризация бэклога GitHub issues по первопричинам в план-мастер issues, redirect детей, бандл архитектуры.", "m": "10-devops", "p": false}, {"n": "release", "s": "claude-mem", "d": "Полный автомат релиза: version-bump и childhood в цепочке.", "m": "10-devops", "p": false}, {"n": "version-bump", "s": "claude-mem", "d": "Автосемвер и релизный workflow для плагинов Claude Code: package.json, marketplace.json, plugin.json синхронно.", "m": "10-devops", "p": false}, {"n": "pr", "s": "mattpocock/skills", "d": "Когда пишете тело PR.", "m": "10-devops", "p": false}, {"n": "finishing-a-development-branch", "s": "superpowers", "d": "Реализация готова, тесты зелёные: как интегрировать ветку.", "m": "10-devops", "p": false}, {"n": "using-git-worktrees", "s": "superpowers", "d": "Изолированный workspace для фичи: git worktree до старта работы или исполнения плана.", "m": "10-devops", "p": false}, {"n": "deploy-to-vercel", "s": "Z.AI", "d": "", "m": "10-devops", "p": true}, {"n": "vercel-cli-with-tokens", "s": "Z.AI", "d": "", "m": "10-devops", "p": true}, {"n": "agent-architecture-audit", "s": "ECC", "d": "Диагностика агентных и LLM-приложений: аудит 12 слоёв стека на деградацию обёрток, загрязнение памяти и провалы дисциплины инструментов.", "m": "11-agent", "p": false}, {"n": "agent-harness-construction", "s": "ECC", "d": "Проектирование пространств действий, описаний инструментов и формата наблюдений агента ради процента доведённых до конца задач.", "m": "11-agent", "p": false}, {"n": "agent-introspection-debugging", "s": "ECC", "d": "Структурированный самолоклад агентов: захват состояния, диагноз, восстановление в изоляции, отчёт об интроспекции после сбоя.", "m": "11-agent", "p": false}, {"n": "agent-runtime-gateway-smoke-test", "s": "ECC", "d": "Проверка локального API агента, временного туннеля-шлюза и колбэка удалённой песочницы задачей без инструментов, затем возврат соединения.", "m": "11-agent", "p": false}, {"n": "agent-security-hardening", "s": "ECC", "d": "Укрепление агентных фреймворков, обрабатывающих недоверенный контент: инструменты, запись файлов, идентификаторы рантайма.", "m": "11-agent", "p": false}, {"n": "agent-self-evaluation", "s": "ECC", "d": "После нетривиальной задачи агент сам оценивает результат по 5 осям: точность, полнота, ясность, применимость, лаконичность.", "m": "11-agent", "p": false}, {"n": "agentic-engineering", "s": "ECC", "d": "Агентная инженерия: сначала оценки, декомпозиция и маршрутизация моделей с учётом стоимости. Для планирования и исполнения работ.", "m": "11-agent", "p": false}, {"n": "ai-first-engineering", "s": "ECC", "d": "Операционная модель команд, где агенты пишут большую часть кода: процессы, ревью-гейты, метрики качества.", "m": "11-agent", "p": false}, {"n": "architecture-decision-records", "s": "ECC", "d": "Архитектурные решения как нумерованные ADR в docs/adr/: контекст, рассмотренные альтернативы, последствия и индексный README.", "m": "11-agent", "p": false}, {"n": "blueprint", "s": "ECC", "d": "Однострочная цель превращается в пошаговый план многосессионного проекта: шаги размером с PR, самодостаточные.", "m": "11-agent", "p": false}, {"n": "brownfield-retrospective", "s": "ECC", "d": "Ретроспектива ECC по живому срезу проекта: аудит текущего состояния, реконструкция прошлых решений, четырёхосевой разбор.", "m": "11-agent", "p": false}, {"n": "code-tour", "s": "ECC", "d": "Файлы CodeTour .tour: пошаговые экскурсии с якорями на файлы и строки, под конкретную персону. Для онбординга и обзоров.", "m": "11-agent", "p": false}, {"n": "context-and-decisions", "s": "ECC", "d": "Стабильный доменный контекст через узкий CONTEXT.md, а необратимые решения: в архитектурные записи ECC.", "m": "11-agent", "p": false}, {"n": "continuous-agent-loop", "s": "ECC", "d": "Паттерны непрерывных автономных циклов агента: гейты качества, оценки, восстановление после сбоев.", "m": "11-agent", "p": false}, {"n": "council", "s": "ECC", "d": "Совет четырёх голосов для неоднозначных решений, трейдоффов и решений go/no-go. Когда валидных путей несколько.", "m": "11-agent", "p": false}, {"n": "dev-team", "s": "ECC", "d": "Симуляция командной сессии: PM, архитектор, разработчик и QA отвечают на одну задачу вместе, в общем чате.", "m": "11-agent", "p": false}, {"n": "docs-governance", "s": "ECC", "d": "Маршрутизация запросов по гигиене документации к скиллам ECC плюс опциональный read-only аудит ролей, ссылок и ADR-индексов.", "m": "11-agent", "p": false}, {"n": "dynamic-workflow-mode", "s": "ECC", "d": "Локальные для задачи обвязки, eval-гейты и извлечение переиспользуемых скиллов в dynamic workflow mode Claude.", "m": "11-agent", "p": false}, {"n": "enterprise-agent-ops", "s": "ECC", "d": "Эксплуатация долгоживущих и облачных агентных систем: жизненный цикл рантайма, наблюдаемость, лимиты, инциденты.", "m": "11-agent", "p": false}, {"n": "intent-driven-development", "s": "ECC", "d": "Расплывчатые или дорогие изменения превращает в проверяемые критерии приёмки до или во время реализации.", "m": "11-agent", "p": false}, {"n": "living-docs-governance", "s": "ECC", "d": "Доки долгого проекта не гниют: у каждой чёткая роль в конституции, карте, статусе и истории, плюс привязка к процессам.", "m": "11-agent", "p": false}, {"n": "loop-design-check", "s": "ECC", "d": "Спроектировать агентный цикл под цель или найти режимы отказа: вращение на месте, гейминг верификатора, доведение неверного ответа.", "m": "11-agent", "p": false}, {"n": "nanoclaw-repl", "s": "ECC", "d": "Работа и расширение NanoClaw, REPL ECC без зависимостей: персистентные сессии на markdown, слэш-команды смены модели.", "m": "11-agent", "p": false}, {"n": "nasiko-control-plane", "s": "ECC", "d": "Жизненный цикл экспериментального CLI Nasiko через ECC: read-only статус, установка запиненной версии только с согласия, dry-run.", "m": "11-agent", "p": false}, {"n": "openclaw-persona-forge", "s": "ECC", "d": "Кузница личности OpenClaw: из предпочтений или случайного выбора собирает идентичность, SOUL.md, правила характера, имя и промпт аватара.", "m": "11-agent", "p": false}, {"n": "operator-approval-loop", "s": "ECC", "d": "Контракт согласований с оператором для исходящих сообщений агента: хэшированные черновики, эпохи решений, подтверждения доставки.", "m": "11-agent", "p": false}, {"n": "orch-add-feature", "s": "ECC", "d": "Новая фича под ключ через оркестрацию: исследование, план, TDD-реализация, ревью и гейт на коммит; фазы уходят профильным агентам.", "m": "11-agent", "p": false}, {"n": "orch-build-mvp", "s": "ECC", "d": "MVP из дизайн-дока или спецификации: приём SDD/PRD, тонкие вертикальные срезы, первый end-to-end скелет продукта.", "m": "11-agent", "p": false}, {"n": "orch-change-feature", "s": "ECC", "d": "Изменение работающей фичи под новое поведение: тесты сначала обновляются под спецификацию, затем реализация, ревью, гейт.", "m": "11-agent", "p": false}, {"n": "orch-fix-defect", "s": "ECC", "d": "Правка бага: воспроизведение падающим регресс-тестом, фикс до зелёного, ревью, гейт на коммит.", "m": "11-agent", "p": false}, {"n": "orch-pipeline", "s": "ECC", "d": "Общий движок оркестрации семейства orch-*: gated-пайплайн Research-Plan-TDD-Review-Commit, классификатор размера, карта агентов.", "m": "11-agent", "p": false}, {"n": "orch-refine-code", "s": "ECC", "d": "Рефакторинг без смены поведения: подтверждаем зелёные тесты, меняем структуру, держим зелёными, ревью, гейт на коммит.", "m": "11-agent", "p": false}, {"n": "parallel-execution-optimizer", "s": "ECC", "d": "Ускорение задачи через граф параллельных дорожек: матрица дорожек, батчевые чтения и проверки, изолированные зоны записи.", "m": "11-agent", "p": false}, {"n": "plan-orchestrate", "s": "ECC", "d": "Читает план-документ, раскладывает на шаги, классифицирует и выдаёт готовую к вставке ECC-команду для каждого шага.", "m": "11-agent", "p": false}, {"n": "project-flow-ops", "s": "ECC", "d": "Поток исполнения через GitHub и Linear: триаж issues и PR, связывание активной работы, публичный GitHub при рабочем Linear.", "m": "11-agent", "p": false}, {"n": "ralphinho-rfc-pipeline", "s": "ECC", "d": "RFC в DAG мультиагентного исполнения: рабочие единицы с зависимостями и критериями приёмки, исследование, план, код, тесты.", "m": "11-agent", "p": false}, {"n": "recursive-decision-ledger", "s": "ECC", "d": "Повторные прогонки в стиле Prime Gauss с append-only реестром решений: попытки, отметки, проверки связности.", "m": "11-agent", "p": false}, {"n": "rules-distill", "s": "ECC", "d": "Сканирует скиллы и выжимает сквозные принципы в правила: дополнить, переписать или создать файл правила.", "m": "11-agent", "p": false}, {"n": "santa-method", "s": "ECC", "d": "Адверсариальная проверка: два независимых ревьюера по одной рубрике должны оба пропустить результат, иначе fix-and-re-review.", "m": "11-agent", "p": false}, {"n": "skill-comply", "s": "ECC", "d": "Визуализирует, соблюдаются ли скиллы и правила: генерирует сценарии на 3 уровнях строгости, гоняет агентов, сравнивает поведение.", "m": "11-agent", "p": false}, {"n": "skill-scout", "s": "ECC", "d": "Поиск по локальным, маркетплейс, GitHub и веб-источникам скиллов до создания нового. Когда нужен готовый, форк или аналог.", "m": "11-agent", "p": false}, {"n": "skill-stocktake", "s": "ECC", "d": "Аудит качества скиллов и команд Claude: Quick Scan по изменённым или полный Stocktake с последовательными сабагентами.", "m": "11-agent", "p": false}, {"n": "story-lifecycle", "s": "ECC", "d": "Эпик-история-спринт на файлах, без внешнего трекера проектов: создаёт, бьёт на части и ведёт учёт.", "m": "11-agent", "p": false}, {"n": "taste-distillation", "s": "ECC", "d": "Сжимает набор референсов в переиспользуемый style-пак: цветокор как 3D LUT, ритм монтажа как распределение длины кадра.", "m": "11-agent", "p": false}, {"n": "team-agent-orchestration", "s": "ECC", "d": "Командная оркестрация отрядов агентов: задачи с владельцами и охватом, Kanban-состояние, изоляция веток, панель контроля.", "m": "11-agent", "p": false}, {"n": "team-builder", "s": "ECC", "d": "Интерактивный сборщик команды: находит персоны агентов, группирует по доменам, предлагает состав под задачу.", "m": "11-agent", "p": false}, {"n": "token-budget-advisor", "s": "ECC", "d": "Перед ответом предлагает глубину (25/50/75/100%) с оценкой токенов и отвечает на выбранном уровне.", "m": "11-agent", "p": false}, {"n": "constraint-driven-development", "s": "agent-skills", "d": "Планка качества проекта как письменный договор: интервью о важных осях, фиксация ограничений, стоп тихому снижению планки.", "m": "11-agent", "p": false}, {"n": "documentation-and-adrs", "s": "agent-skills", "d": "Решения и документация: ADR, обоснование дизайн-выбора, обновление доков при изменении архитектуры.", "m": "11-agent", "p": false}, {"n": "doubt-driven-development", "s": "agent-skills", "d": "Каждое нетривиальное решение проходит адверсариальное ревью со свежим контекстом до того, как станет стандартом.", "m": "11-agent", "p": false}, {"n": "idea-refine", "s": "agent-skills", "d": "Сырая идея превращается в чёткий концепт через структурированную дивергенцию и конвергенцию. Когда мысль ещё туманна.", "m": "11-agent", "p": false}, {"n": "incremental-implementation", "s": "agent-skills", "d": "Изменения тонкими проверяемыми срезами: для фич, затрагивающих несколько файлов, и выбора порядка работ.", "m": "11-agent", "p": false}, {"n": "planning-and-task-breakdown", "s": "agent-skills", "d": "Разбивает работу на упорядоченные задачи по спеке или ясным требованиям.", "m": "11-agent", "p": false}, {"n": "source-driven-development", "s": "agent-skills", "d": "Каждое решение сверяется с официальной документацией: проверка подхода до реализации.", "m": "11-agent", "p": false}, {"n": "spec-driven-development", "s": "agent-skills", "d": "Спека до кода: для новых проектов, фич и значительных изменений, когда спецификации ещё нет. Черновик PRD.", "m": "11-agent", "p": false}, {"n": "using-agent-skills", "s": "agent-skills", "d": "Находит и вызывает скиллы: старт сессии или выбор подходящего workflow под кусок работы.", "m": "11-agent", "p": false}, {"n": "babysit", "s": "claude-mem", "d": "Присматривает за PR и циклом ревью до готовности к мерджу: комментарии, ревью, CI.", "m": "11-agent", "p": false}, {"n": "childhood", "s": "claude-mem", "d": "Присмотр за выпущенным релизом после мерджа и деплоя: пакеты, поведение в проде, плагины, поздние CI и апдейты.", "m": "11-agent", "p": false}, {"n": "do", "s": "claude-mem", "d": "Исполнение поэтапного плана через сабагентов. Когда просят выполнить, запустить или провести план.", "m": "11-agent", "p": false}, {"n": "handoff", "s": "claude-mem", "d": "Сжимает текущий разговор в handoff-документ для другого агента.", "m": "11-agent", "p": false}, {"n": "make-plan", "s": "claude-mem", "d": "Детальный поэтапный план с разведкой документации. Для фич, задач и многошаговых работ.", "m": "11-agent", "p": false}, {"n": "pathfinder", "s": "claude-mem", "d": "Карта кодовой базы в флоучартах по фичам, дубли контекстов между фичами, предложение единой архитектуры.", "m": "11-agent", "p": false}, {"n": "standup", "s": "claude-mem", "d": "Read-only стендап по worktree, веткам и PR: сравнение изменений и один консолидированный план.", "m": "11-agent", "p": false}, {"n": "what-the", "s": "claude-mem", "d": "Простыми словами разбирает техническую тему: кто, что, где, почему и когда.", "m": "11-agent", "p": false}, {"n": "ask-matt", "s": "mattpocock/skills", "d": "Какой скилл или flow под вашу ситуацию: роутер по скиллам репозитория.", "m": "11-agent", "p": false}, {"n": "chief-of-staff", "s": "mattpocock/skills", "d": "Долгая цель в одной сессии через координацию сабагентов.", "m": "11-agent", "p": false}, {"n": "claude-handoff", "s": "mattpocock/skills", "d": "Передаёт текущий разговор свежему фоновому агенту, который подхватывает работу сразу.", "m": "11-agent", "p": false}, {"n": "grill-me", "s": "mattpocock/skills", "d": "Беспощадное интервью, чтобы заострить план или дизайн.", "m": "11-agent", "p": false}, {"n": "grill-with-docs", "s": "mattpocock/skills", "d": "То же беспощадное интервью плюс создание доков (ADR и глоссарий) по ходу.", "m": "11-agent", "p": false}, {"n": "grilling", "s": "mattpocock/skills", "d": "Допросит вас о плане, решении или идее. Когда нужно стресс-тестировать мышление или звучит «grill».", "m": "11-agent", "p": false}, {"n": "handoff--mattpocock", "s": "mattpocock/skills", "d": "Compact the current conversation into a handoff document for another agent to pick up.", "m": "11-agent", "p": false}, {"n": "implement", "s": "mattpocock/skills", "d": "Реализация работы по спеке или набору тикетов.", "m": "11-agent", "p": false}, {"n": "implement-spec", "s": "mattpocock/skills", "d": "Воплощает результат /to-spec и /to-tickets в коде.", "m": "11-agent", "p": false}, {"n": "loop-me", "s": "mattpocock/skills", "d": "Допрашивает по спецификациям workflow, которые вы хотите построить в этом workspace.", "m": "11-agent", "p": false}, {"n": "retro", "s": "mattpocock/skills", "d": "Ретроспектива кодинговой сессии.", "m": "11-agent", "p": false}, {"n": "scaffold-exercises", "s": "mattpocock/skills", "d": "Структуры директорий упражнений с секциями, задачами, решениями и объяснениями, проходящие линт.", "m": "11-agent", "p": false}, {"n": "setup-matt-pocock-skills", "s": "mattpocock/skills", "d": "Настраивает репо под инженерные скиллы: трекер issues, словарь triage-меток, раскладку доменных доков. Один раз.", "m": "11-agent", "p": false}, {"n": "software-factory", "s": "mattpocock/skills", "d": "Общий язык для проектирования софтверной фабрики: какие задачи гоняет и к каким сервисам подключается.", "m": "11-agent", "p": false}, {"n": "to-questionnaire", "s": "mattpocock/skills", "d": "Решение, которое вы не можете принять сами, превращает в анкету для другого человека.", "m": "11-agent", "p": false}, {"n": "to-spec", "s": "mattpocock/skills", "d": "Текущий разговор в спецификацию и в трекер проекта: без интервью, синтез уже сказанного.", "m": "11-agent", "p": false}, {"n": "to-tickets", "s": "mattpocock/skills", "d": "План или разговор в набор tracer-bullet тикетов с указанием блокировок, публикация в трекер.", "m": "11-agent", "p": false}, {"n": "triage", "s": "mattpocock/skills", "d": "Провожает issues и внешние PR через машину состояний триажа: категории, проверка, допрос, брифы для агентов.", "m": "11-agent", "p": false}, {"n": "wayfinder", "s": "mattpocock/skills", "d": "Огромный объём работы как карта тикетов-решений на трекере, разрешаемых по одному.", "m": "11-agent", "p": false}, {"n": "wizard", "s": "mattpocock/skills", "d": "Интерактивный bash-визард, проводящий человека через шаги, которые может сделать только он: инфраструктура, креденшелы.", "m": "11-agent", "p": false}, {"n": "writing-for-agents", "s": "mattpocock/skills", "d": "Документы для агентов: создание и правка скиллов, AGENTS.md и CLAUDE.md.", "m": "11-agent", "p": false}, {"n": "brainstorming", "s": "superpowers", "d": "Обязателен перед любой творческой работой: фичи, компоненты, функциональность, смена поведения, планирование нового.", "m": "11-agent", "p": false}, {"n": "diagnosing-superpowers", "s": "superpowers", "d": "Когда сессия superpowers пошла не так: повторная работа, игнор планов, слабый результат. Разбирает почему.", "m": "11-agent", "p": false}, {"n": "dispatching-parallel-agents", "s": "superpowers", "d": "Две и более независимых задач без общего состояния и последовательных зависимостей.", "m": "11-agent", "p": false}, {"n": "executing-plans", "s": "superpowers", "d": "Исполнение плана в текущей сессии своими руками: инлайн-исполнение или работа без сабагентов.", "m": "11-agent", "p": false}, {"n": "subagent-driven-development", "s": "superpowers", "d": "Исполнение планов с независимыми задачами через сабагентов в текущей сессии.", "m": "11-agent", "p": false}, {"n": "using-superpowers", "s": "superpowers", "d": "В начале любого разговора: как находить и использовать скиллы, вызов скилла до любого ответа.", "m": "11-agent", "p": false}, {"n": "writing-plans", "s": "superpowers", "d": "Есть спека или требования на многошаговую задачу, до касания кода.", "m": "11-agent", "p": false}, {"n": "skill-creator", "s": "Z.AI", "d": "", "m": "11-agent", "p": true}, {"n": "unified-memory", "s": "Z.AI", "d": "", "m": "11-agent", "p": true}, {"n": "knowledge-agent", "s": "Z.AI", "d": "", "m": "11-agent", "p": true}, {"n": "knowledge-ops", "s": "Z.AI", "d": "", "m": "11-agent", "p": true}, {"n": "cost-tracking", "s": "Z.AI", "d": "", "m": "11-agent", "p": true}, {"n": "agent-cost-report", "s": "Z.AI", "d": "", "m": "11-agent", "p": true}, {"n": "agent-eval", "s": "Z.AI", "d": "", "m": "11-agent", "p": true}, {"n": "autonomous-loops", "s": "Z.AI", "d": "", "m": "11-agent", "p": true}, {"n": "autonomous-agent-harness", "s": "Z.AI", "d": "", "m": "11-agent", "p": true}, {"n": "carrier-relationship-management", "s": "ECC", "d": "Портфели грузоперевозчиков (FTL, LTL, интермодал): отбор и проверка FMCSA, торги по ставкам и топливным надбавкам, RFP.", "m": "12-niches", "p": false}, {"n": "counterparty-channel-discipline", "s": "ECC", "d": "Жёсткие промпты по каналам, гейтинг упоминаний, тихое наблюдение и политика автономности для агентов в общих каналах.", "m": "12-niches", "p": false}, {"n": "customer-billing-ops", "s": "ECC", "d": "Биллинговые процессы клиентов: подписки, возвраты, разбор оттока, восстановление доступа к порталу, анализ тарифных планов.", "m": "12-niches", "p": false}, {"n": "customs-trade-compliance", "s": "ECC", "d": "Таможня и ВЭД: классификация HS/HTS по правилам GRI, коммерческие инвойсы и документы, Incoterms, пошлины.", "m": "12-niches", "p": false}, {"n": "defi-amm-security", "s": "ECC", "d": "Чек-лист безопасности Solidity AMM: пулы ликвидности, свопы, реентранси, порядок CEI, атаки донатов и инфляции, оракулы.", "m": "12-niches", "p": false}, {"n": "ecc-tools-cost-audit", "s": "ECC", "d": "Аудит расходов ECC Tools по фактам: убегающие PR, обход квот, утечка в премиум-модели, дублирующиеся джобы.", "m": "12-niches", "p": false}, {"n": "energy-procurement", "s": "ECC", "d": "Закупка электричества и газа для промышленных объектов: тарифы, смягчение demand-charge, поставщики, контракты.", "m": "12-niches", "p": false}, {"n": "evm-token-decimals", "s": "ECC", "d": "Ловит тихие баги десятичных разрядов в EVM: рантайм-справка decimals, кэш по цепям, дрейф точности мостовых токенов.", "m": "12-niches", "p": false}, {"n": "finance-billing-ops", "s": "ECC", "d": "Выручка, прайсинг, возвраты и командный биллинг по фактам: снимок продаж, сверка тарифов, правда о биллинг-модели.", "m": "12-niches", "p": false}, {"n": "healthcare-cdss-patterns", "s": "ECC", "d": "Паттерны систем клинической поддержки решений: взаимодействия лекарств, валидация доз, шкалы NEWS2 и qSOFA, серьёзность алертов.", "m": "12-niches", "p": false}, {"n": "healthcare-emr-patterns", "s": "ECC", "d": "Разработка EMR/EHR: клиническая безопасность, сценарии визитов, генерация рецептов, интеграции поддержки решений.", "m": "12-niches", "p": false}, {"n": "healthcare-eval-harness", "s": "ECC", "d": "Оценочный харнес безопасности пациентов: тест-сьюты точности CDSS, утечек PHI, целостности клинических процессов.", "m": "12-niches", "p": false}, {"n": "healthcare-phi-compliance", "s": "ECC", "d": "Комплаенс PHI и PII в медприложениях: классификация данных, row-level доступ, защита от подделки.", "m": "12-niches", "p": false}, {"n": "hipaa-compliance", "s": "ECC", "d": "Точка входа по HIPAA: работа с PHI, covered entities, соглашения BA, аудиты. Когда задача явно про HIPAA.", "m": "12-niches", "p": false}, {"n": "inventory-demand-planning", "s": "ECC", "d": "Планирование спроса мультилокального ритейла: выбор метода прогноза, сегментация ABC/XYZ, safety stock, точки дозаказа.", "m": "12-niches", "p": false}, {"n": "ito-baskets", "s": "ECC", "d": "Read-only данные корзин Itô и предикт-маркетов: каталог корзин, сверка с вашим исследованием, watchlist.", "m": "12-niches", "p": false}, {"n": "ito-inference", "s": "ECC", "d": "Проверка доступности инференса на брони вычислений Itô и передача явного контракта бэкенду, когда тот поднят.", "m": "12-niches", "p": false}, {"n": "llm-trading-agent-security", "s": "ECC", "d": "Безопасность автономных торговых агентов с доступом к кошельку: промпт-инъекции, лимиты расходов, симуляция перед отправкой.", "m": "12-niches", "p": false}, {"n": "logistics-exception-management", "s": "ECC", "d": "Грузовые исключения: задержки, повреждения, потери, недостачи, споры с перевозчиками, протоколы эскалации и претензии.", "m": "12-niches", "p": false}, {"n": "nodejs-keccak256", "s": "ECC", "d": "Против хэш-багов Ethereum в JS/TS: sha3-256 в Node это NIST SHA3, а не Keccak-256, и он тихо ломает селекторы и подписи.", "m": "12-niches", "p": false}, {"n": "production-scheduling", "s": "ECC", "d": "Производственное планирование: последовательность джоб, балансировка линий, оптимизация переналадок, разбор узких мест.", "m": "12-niches", "p": false}, {"n": "quality-nonconformance", "s": "ECC", "d": "Контроль качества и несоответствия в регулируемом производстве (FDA 820, IATF 16949, AS9100): жизненный цикл NCR, 5-почему.", "m": "12-niches", "p": false}, {"n": "returns-reverse-logistics", "s": "ECC", "d": "Возвраты: авторизация, приёмка и осмотр, решение о судьбе товара, обработка рефандов, детекция фрода, гарантийные претензии.", "m": "12-niches", "p": false}]}</script>
-<script>
-const D = JSON.parse(document.getElementById('data').textContent);
-const RAW = 'https://raw.githubusercontent.com/Genocide12/skills-collection/main/';
-const list = document.getElementById('list'), q = document.getElementById('q'),
-      mf = document.getElementById('mf'), cnt = document.getElementById('cnt');
-const megaTitle = {}; D.megas.forEach(m => megaTitle[m.id] = m);
-const cache = {};
-const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-
-function matches(s){
-  const t = (q.value||'').trim().toLowerCase();
-  if (mf.value && s.m !== mf.value) return false;
-  if (!t) return true;
-  return (s.n + ' ' + s.d).toLowerCase().includes(t);
-}
-function render(){
-  const rows = D.skills.filter(matches);
-  cnt.textContent = 'показано ' + rows.length + ' из ' + D.skills.length;
-  list.innerHTML = rows.map(s => {
-    const m = megaTitle[s.m];
-    return `<div class="row" data-n="${s.n}">
-      <div class="row-head">
-        <span class="row-name">${s.n}</span>
-        ${s.p?'<span class="badge plat">● платформа · локальный</span>':''}
-        <span class="badge mega" title="${m.title}" data-goto="${s.m}">${m.id}</span>
-        <span class="badge">${s.s}</span>
-        ${s.p?'':'<button class="load-btn" style="margin-left:auto">текст ▾</button>'}
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker"><s>393 отдельных скилла</s> 10 файлов · пересобрано 2026-11-03</p>
+      <div class="hero-grid">
+        <div>
+          <h1>Десять файлов.<br><em>Любая задача.</em></h1>
+          <p class="lede">Библиотека из <b>393 скиллов</b> пересобрана в десять дистиллятов — по типу
+          задачи, а не по автору. Вместо сотен пересекающихся описаний агент читает один файл:
+          железные правила, типовые ошибки, готовые команды и чек-лист сдачи.</p>
+        </div>
+        <div class="term">
+          <span class="t-dim"># подключить — одна фраза в чате:</span><br>
+          «Установи скиллы из <span class="t-acc">github.com/Genocide12/skills-collection</span>»<br>
+          <span class="t-dim"># 10 папок встанут в skills/ агента</span><br>
+          <button class="copy" id="copyBtn" type="button">Скопировать фразу</button>
+        </div>
       </div>
-      <div class="row-desc">${esc(s.d)}</div>
-      <div class="row-body"></div>
-    </div>`;
-  }).join('') || '<p class="dim" style="padding:20px 0">Ничего не найдено.</p>';
-}
-async function loadText(btn, row, s){
-  const body = row.querySelector('.row-body');
-  if (body.dataset.loaded){ body.innerHTML = body.dataset.content; return; }
-  btn.textContent = 'загрузка…';
-  const url = RAW + (s.p ? 'plat/' : 'skills/') + s.n + '/SKILL.md';
-  try {
-    let txt = await (cache[url] ||= fetch(url).then(r => {if(!r.ok) throw new Error(r.status); return r.text()}));
-    txt = txt.replace(/^---\n[\s\S]*?\n---\n/, '');
-    body.dataset.content = '<pre>' + esc(txt) + '</pre>';
-    body.innerHTML = body.dataset.content;
-    body.dataset.loaded = 1;
-    btn.textContent = 'текст ▴';
-  } catch(e){
-    body.innerHTML = '<p class="dim" style="font-size:12px">Не удалось загрузить с GitHub: ' + e.message + '</p>';
-    btn.textContent = 'текст ▾';
+      <ul class="stats reveal">
+        <li><b>393 → 10</b><span>исходников в дистилляты</span></li>
+        <li><b>3 966</b><span>строк суммарно</span></li>
+        <li><b>787 КБ</b><span>вся библиотека</span></li>
+        <li><b>1 файл</b><span>на тип задачи</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="router">
+    <div class="wrap">
+      <p class="sec-label">Навигатор · задача → скилл</p>
+      <h2>Что нужно сделать?</h2>
+      <div class="router-box">
+        <div class="in">
+          <input id="q" type="text" placeholder="например: отчёт в Word, починить баг, построить график, задеплоить…"
+                 aria-label="Опишите задачу" autocomplete="off">
+        </div>
+        <div class="chips" id="chips"></div>
+        <p class="verdict" id="verdict" aria-live="polite">Начните печатать — подсвечу подходящий скилл.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog">
+    <div class="wrap">
+      <p class="sec-label">Каталог · 10 скиллов</p>
+      <div class="rows" id="rows">
+
+        <details class="row" id="s01" data-name="frontend" data-k="сайт лендинг лендинга react next nextjs vue nuxt angular vite верстка вёрстка дизайн ui-кит ui ux интерфейс фронтенд frontend tailwind css html анимация анимации motion доступность a11y типографика дашборд-интерфейс">
+          <summary>
+            <span class="num">01</span>
+            <span class="name">frontend<small>Сайты и интерфейсы</small></span>
+            <span class="tsum">сайт / лендинг · React, Vue, Angular · дизайн · a11y · анимации</span>
+            <span class="meta">40 ск · 300 стр</span>
+            <span class="arrow">+</span>
+          </summary>
+          <div class="rbody">
+            <p class="desc">Вёрстка, дизайн-система и вкус (taste-skill, hallmark, impeccable), React/Next.js
+            и Vercel-паттерны, Vue/Nuxt/Angular/Vite и TypeScript, доступность и UX-детали, анимации и движение,
+            проверка фронтенда, мобильный веб.</p>
+            <ul class="inside">
+              <li><b>1</b>Дизайн, вкус и UI-система</li><li><b>2</b>React / Next.js</li>
+              <li><b>3</b>Vue / Nuxt / Angular</li><li><b>4</b>Доступность и UX</li>
+              <li><b>5</b>Анимации</li><li><b>6</b>Тестирование фронтенда</li><li><b>7</b>Мобильный веб</li>
+            </ul>
+            <a class="raw" href="https://github.com/Genocide12/skills-collection/blob/main/01-frontend/SKILL.md">Открыть SKILL.md ↗</a>
+            <p class="src">40 скиллов · 300 строк · 73 КБ</p>
+          </div>
+        </details>
+
+        <details class="row" id="s02" data-name="content" data-k="word docx pdf pptx powerpoint excel xlsx таблица таблицы отчёт документ договор письмо презентация слайды слайд перевод перевести подпись e-sign статья пост текст тексты seo бренд брендинг войс маркетинг кампания рассылка кросспостинг инвестор питч финмодель обучение резюме">
+          <summary>
+            <span class="num">02</span>
+            <span class="name">content<small>Документы, презентации и тексты</small></span>
+            <span class="tsum">Word, PDF, PPTX, Excel · статьи · бренд-войс · SEO · письма</span>
+            <span class="meta">30 ск · 613 стр</span>
+            <span class="arrow">+</span>
+          </summary>
+          <div class="rbody">
+            <p class="desc">Часть I — офисные форматы: docx-пайплайн с пост-проверками, четыре линии PDF
+            (ReportLab / Playwright / LaTeX / обработка), HTML-дека → PPTX, живые формулы Excel, e-sign, переводы,
+            Google Workspace. Часть II — тексты: craft без ИИ-грехов, бренд и войс, SEO и контент-машина, деловая
+            переписка, инвесторские материалы.</p>
+            <ul class="inside">
+              <li><b>1</b>Word / docx</li><li><b>2</b>PDF</li><li><b>3</b>PowerPoint</li><li><b>4</b>Excel</li>
+              <li><b>5</b>e-sign · переводы · Workspace</li><li><b>6</b>Хорошо написанный текст</li>
+              <li><b>7</b>Бренд и позиционирование</li><li><b>8</b>SEO и контент-машина</li>
+              <li><b>9</b>Деловая коммуникация</li><li><b>10</b>Инвесторские материалы</li>
+            </ul>
+            <a class="raw" href="https://github.com/Genocide12/skills-collection/blob/main/02-content/SKILL.md">Открыть SKILL.md ↗</a>
+            <p class="src">30 скиллов · 613 строк · 162 КБ · самый большой файл библиотеки</p>
+          </div>
+        </details>
+
+        <details class="row" id="s03" data-name="backend" data-k="api сервер бэкенд backend микросервис rest grpc контракт база данных бд sql postgresql postgres mysql clickhouse redis миграция схема индекс django fastapi flask spring quarkus nestjs laravel rails aspnet кэш очередь фоновые задачи celery llm промпт интеграция производительность">
+          <summary>
+            <span class="num">03</span>
+            <span class="name">backend<small>Бэкенд, API и базы данных</small></span>
+            <span class="tsum">серверы · API · SQL и миграции · Redis · LLM-интеграции</span>
+            <span class="meta">43 ск · 455 стр</span>
+            <span class="arrow">+</span>
+          </summary>
+          <div class="rbody">
+            <p class="desc">Проектирование API и архитектуры, фреймворки по экосистемам (Python: Django/FastAPI/Flask;
+            JVM: Spring/Quarkus; Node/PHP/Ruby/.NET), базы данных: схемы, SQL, миграции, кэширование, безопасность
+            бэкенда, LLM-интеграции и производительность.</p>
+            <ul class="inside">
+              <li><b>1</b>Проектирование API</li><li><b>2</b>Python-фреймворки</li><li><b>3</b>JVM-фреймворки</li>
+              <li><b>4</b>Node / PHP / Ruby / .NET</li><li><b>5</b>Базы данных</li><li><b>6</b>Безопасность</li>
+              <li><b>7</b>LLM-интеграции</li><li><b>8</b>Прочее</li>
+            </ul>
+            <a class="raw" href="https://github.com/Genocide12/skills-collection/blob/main/03-backend/SKILL.md">Открыть SKILL.md ↗</a>
+            <p class="src">43 скилла · 455 строк · 101 КБ</p>
+          </div>
+        </details>
+
+        <details class="row" id="s04" data-name="languages" data-k="python python-паттерны go golang rust kotlin java c++ cpp perl swift dart flutter android идиома рефакторинг упростить почистить чужой код код-база monorepo зависимости сборка">
+          <summary>
+            <span class="num">04</span>
+            <span class="name">languages<small>Языки и код-база</small></span>
+            <span class="tsum">паттерны и идиомы языков · чужая код-база · упрощение</span>
+            <span class="meta">29 ск · 357 стр</span>
+            <span class="arrow">+</span>
+          </summary>
+          <div class="rbody">
+            <p class="desc">Паттерны и стандарты по языкам: Python, Go/Rust/Kotlin, Java/C++/Perl, мобильная разработка
+            (Swift, Flutter/Dart, Android), навигация по чужой код-базе, упрощение кода, инфраструктура кода.</p>
+            <ul class="inside">
+              <li><b>1</b>Python</li><li><b>2</b>Go, Rust, Kotlin</li><li><b>3</b>Java, C++, Perl</li>
+              <li><b>4</b>Мобильная разработка</li><li><b>5</b>Чужая код-база</li><li><b>6</b>Инфраструктура кода</li>
+            </ul>
+            <a class="raw" href="https://github.com/Genocide12/skills-collection/blob/main/04-languages/SKILL.md">Открыть SKILL.md ↗</a>
+            <p class="src">29 скиллов · 357 строк · 44 КБ</p>
+          </div>
+        </details>
+
+        <details class="row" id="s05" data-name="quality" data-k="тест тесты tdd unittest pytest баг дебаг отладка debugging починить сломалось ошибка исключение ревью review код-ревью безопасность аудит уязвимость xss sql-инъекция benchmark производительность регресс покрытие верификация чек-лист">
+          <summary>
+            <span class="num">05</span>
+            <span class="name">quality<small>Тесты, отладка, надёжность</small></span>
+            <span class="tsum">TDD · найти и починить баг · код-ревью · аудит безопасности</span>
+            <span class="meta">50 ск · 303 стр</span>
+            <span class="arrow">+</span>
+          </summary>
+          <div class="rbody">
+            <p class="desc">Систематическая отладка, TDD и тест-методология, тесты по языкам и фреймворкам (unit,
+            интеграционные, e2e), код-ревью, безопасность (аудит Cloudflare, дефай-амм-контракты), вёрди-чек перед
+            сдачей, производительность и бенчмарки.</p>
+            <ul class="inside">
+              <li><b>1</b>Систематическая отладка</li><li><b>2</b>TDD и методология</li>
+              <li><b>3</b>Тесты по языкам</li><li><b>4</b>Код-ревью</li><li><b>5</b>Безопасность</li>
+              <li><b>6</b>Проверка перед сдачей</li><li><b>7</b>Бенчмарки</li>
+            </ul>
+            <a class="raw" href="https://github.com/Genocide12/skills-collection/blob/main/05-quality/SKILL.md">Открыть SKILL.md ↗</a>
+            <p class="src">50 скиллов · 303 строки · 62 КБ</p>
+          </div>
+        </details>
+
+        <details class="row" id="s06" data-name="data" data-k="данные график графика диаграмма chart майнд-карта дашборд dashboard метрики датасет анализ обработка скрейпинг парсинг краулинг пайплайн ml ml-модель pytorch обучение модель рекомендательный рекsys картинка изображение сгенерировать отредактировать рисунок видео монтаж аудио звук голос озвучить транскрибировать распознать речь tts asr vlm ocr manim remotion blender">
+          <summary>
+            <span class="num">06</span>
+            <span class="name">data<small>Данные, графики и медиа</small></span>
+            <span class="tsum">графики · датасеты и ML · картинки · видео · речь</span>
+            <span class="meta">27 ск · 531 стр</span>
+            <span class="arrow">+</span>
+          </summary>
+          <div class="rbody">
+            <p class="desc">Часть I — данные и ML: маршрутизация графиков (matplotlib/ECharts/Mermaid/Playwright),
+            операционные дашборды, скрейпинг-агенты и дата-пайплайны, PyTorch и прод-MLE, regex против LLM.
+            Часть II — медиа: генерация и правка изображений, VLM-анализ картинок и видео, ASR/TTS, видеомонтаж
+            (FFmpeg/Remotion/Manim), проверка 3D-анимации в Blender.</p>
+            <ul class="inside">
+              <li><b>1</b>Графики и диаграммы</li><li><b>2</b>Дашборды</li><li><b>3</b>Сбор данных</li>
+              <li><b>4</b>ML-пайплайны</li><li><b>5</b>Структурный текст и графы</li>
+              <li><b>6</b>Генерация изображений</li><li><b>7</b>Анализ изображений и видео</li>
+              <li><b>8</b>Речь: ASR и TTS</li><li><b>9</b>Видео-продакшн</li><li><b>10</b>3D и анимация</li>
+            </ul>
+            <a class="raw" href="https://github.com/Genocide12/skills-collection/blob/main/06-data/SKILL.md">Открыть SKILL.md ↗</a>
+            <p class="src">27 скиллов · 531 строка · 80 КБ</p>
+          </div>
+        </details>
+
+        <details class="row" id="s07" data-name="research" data-k="исследование изучить исследовать рынок конкуренты конкурент анализ компании osint поиск факт факты источники разведка лиды научная статья pubmed патент uspto прогноз предикшн">
+          <summary>
+            <span class="num">07</span>
+            <span class="name">research<small>Исследования и поиск</small></span>
+            <span class="tsum">веб-исследования · рынок и конкуренты · OSINT · научные базы</span>
+            <span class="meta">20 ск · 306 стр</span>
+            <span class="arrow">+</span>
+          </summary>
+          <div class="rbody">
+            <p class="desc">Методология глубокого исследования с итеративным поиском, анализ рынка и конкурентов,
+            OSINT и поиск лидов, научные базы (PubMed, USPTO), предикшн-маркеты.</p>
+            <ul class="inside">
+              <li><b>1</b>Методология исследования</li><li><b>2</b>Рынок и конкуренты</li>
+              <li><b>3</b>OSINT и лиды</li><li><b>4</b>Научные базы</li><li><b>5</b>Предикшн-маркеты</li>
+            </ul>
+            <a class="raw" href="https://github.com/Genocide12/skills-collection/blob/main/07-research/SKILL.md">Открыть SKILL.md ↗</a>
+            <p class="src">20 скиллов · 306 строк · 83 КБ</p>
+          </div>
+        </details>
+
+        <details class="row" id="s08" data-name="devops" data-k="git коммит ветка merge ребейз pr pull request релиз release changelog версия ci cd непрерывная интеграция сборка docker контейнер kubernetes k8s helm деплой deploy vercel nginx сеть dns tcp диагностика порты мониторинг логи инцидент алерт backup">
+          <summary>
+            <span class="num">08</span>
+            <span class="name">devops<small>Git, релиз, эксплуатация</small></span>
+            <span class="tsum">Git-дисциплина · PR и CI/CD · Docker/K8s · деплой · сети</span>
+            <span class="meta">30 ск · 376 стр</span>
+            <span class="arrow">+</span>
+          </summary>
+          <div class="rbody">
+            <p class="desc">Git-дисциплина и чистая история, PR и GitHub-процессы, сборка и релизы, CI/CD,
+            контейнеры и деплой, сети и диагностика (BGP, интерфейсы), наблюдаемость и прод-эксплуатация.</p>
+            <ul class="inside">
+              <li><b>1</b>Git-дисциплина</li><li><b>2</b>PR и GitHub</li><li><b>3</b>Сборка и релизы</li>
+              <li><b>4</b>CI/CD</li><li><b>5</b>Контейнеры и деплой</li><li><b>6</b>Сети и диагностика</li>
+              <li><b>7</b>Наблюдаемость и прод</li>
+            </ul>
+            <a class="raw" href="https://github.com/Genocide12/skills-collection/blob/main/08-devops/SKILL.md">Открыть SKILL.md ↗</a>
+            <p class="src">30 скиллов · 376 строк · 57 КБ</p>
+          </div>
+        </details>
+
+        <details class="row" id="s09" data-name="agent" data-k="агент агентный план план планирование спека спецификация декомпозиция субагент сабагент оркестрация параллельно автономный цикл loop долгая задача память контекст handoff непрерывность документация adr решение eval эвалюация бенчмарк-агента харнес harness">
+          <summary>
+            <span class="num">09</span>
+            <span class="name">agent<small>Агентские процессы</small></span>
+            <span class="tsum">планирование · субагенты · автономные циклы · память</span>
+            <span class="meta">101 ск · 473 стр</span>
+            <span class="arrow">+</span>
+          </summary>
+          <div class="rbody">
+            <p class="desc">Самый большой пласт: планирование и спеки, оркестрация субагентов, автономные циклы и
+            харнесы, память и передача контекста, документация и решения, качество и эвалюация агентов, мелкие
+            практики ежедневной работы.</p>
+            <ul class="inside">
+              <li><b>1</b>Планирование и спеки</li><li><b>2</b>Оркестрация субагентов</li>
+              <li><b>3</b>Автономные циклы</li><li><b>4</b>Память и контекст</li>
+              <li><b>5</b>Документация и решения</li><li><b>6</b>Качество агента</li><li><b>7</b>Мелкие практики</li>
+            </ul>
+            <a class="raw" href="https://github.com/Genocide12/skills-collection/blob/main/09-agent/SKILL.md">Открыть SKILL.md ↗</a>
+            <p class="src">101 скилл · 473 строки · 76 КБ · собран из agent-skills, superpowers, claude-mem, ECC</p>
+          </div>
+        </details>
+
+        <details class="row" id="s10" data-name="niches" data-k="логистика поставки таможня таможенное возвраты реверс производство планирование производства несоответствие ncr биллинг взаиморасчёты счёт медицина медицинский hipaa phi комплаенс фармакология крипто defi amm токен oracle энергетика энергоснабжение переговоры тендер аудитор">
+          <summary>
+            <span class="num">10</span>
+            <span class="name">niches<small>Отраслевые ниши</small></span>
+            <span class="tsum">логистика · производство · медицина/HIPAA · крипто · энергетика</span>
+            <span class="meta">23 ск · 252 стр</span>
+            <span class="arrow">+</span>
+          </summary>
+          <div class="rbody">
+            <p class="desc">Готовые регламенты узких отраслей: логистика и поставки (таможня, возвраты, отношения
+            с перевозчиками), производство и качество, деньги и биллинг, медицина и комплаенс (CDSS, PHI, HIPAA),
+            крипто и DeFi (безопасность AMM, оракулы), энергетика, переговоры и аудит.</p>
+            <ul class="inside">
+              <li><b>1</b>Логистика и поставки</li><li><b>2</b>Производство и качество</li>
+              <li><b>3</b>Деньги и биллинг</li><li><b>4</b>Медицина и комплаенс</li>
+              <li><b>5</b>Крипто и DeFi</li><li><b>6</b>Переговоры и аудит</li>
+            </ul>
+            <a class="raw" href="https://github.com/Genocide12/skills-collection/blob/main/10-niches/SKILL.md">Открыть SKILL.md ↗</a>
+            <p class="src">23 скилла · 252 строки · 49 КБ</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="anatomy">
+    <div class="wrap">
+      <p class="sec-label">Устройство · каждый файл одинаков</p>
+      <h2>Анатомия скилла</h2>
+      <p class="lede" style="margin:0 0 30px">Единая структура от «Когда применять» до карты источников —
+      агент всегда знает, где искать ответ внутри файла.</p>
+      <div class="anat reveal">
+        <div><b>01</b><h3>Когда применять</h3><p>маршрутизация: тип запроса → нужный раздел файла</p></div>
+        <div><b>02</b><h3>Железные правила</h3><p>правила по темам, каждое — с источником</p></div>
+        <div><b>03</b><h3>Типовые ошибки</h3><p>реестр реальных провалов из исходников</p></div>
+        <div><b>04</b><h3>Шаблоны и команды</h3><p>готовые команды, дословно из исходников</p></div>
+        <div><b>05</b><h3>Чек-лист сдачи</h3><p>что проверить перед выдачей результата</p></div>
+        <div><b>06</b><h3>Карта источников</h3><p>что и из какого скилла взято</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <p class="sec-label">Установка · два способа</p>
+      <h2>Подключить скиллы</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Сказать агенту</h3>
+          <p>В любом чате z.ai — агент сам склонирует репозиторий и скопирует 10 папок в свой каталог скиллов.
+          Файлы сохраняются между сообщениями, скиллы доступны во всех следующих чатах.</p>
+          <code>Установи скиллы из
+github.com/Genocide12/skills-collection</code>
+        </div>
+        <div class="card">
+          <h3>Руками</h3>
+          <p>Установщик копирует 10 папок в каталог скиллов агента; одноимённые папки бэкапятся.</p>
+          <code><span class="cm"># клонировать и установить</span>
+git clone https://github.com/Genocide12/skills-collection
+cd skills-collection
+./install.sh               <span class="cm"># → skills/ агента</span>
+./install.sh --target DIR  <span class="cm"># или в свой каталог</span></code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <p class="f-brand">СКИЛЛЫ<em>/10</em></p>
+        <p style="color:#9B9078;font-size:14px;margin-top:12px;max-width:40ch">Дистилляты 393 скиллов
+        под типы задач. Один файл — одна компетенция.</p>
+      </div>
+      <div>
+        <h4>Источники</h4>
+        <div class="srcs">
+          <span><b>ECC</b> 257</span><span><b>mattpocock/skills</b> 38</span><span><b>agent-skills</b> 23</span>
+          <span><b>claude-mem</b> 16</span><span><b>superpowers</b> 15</span><span><b>taste-skill</b> 1</span>
+          <span><b>security-audit</b> 1</span><span><b>hallmark</b> 1</span><span><b>impeccable</b> 1</span>
+          <span><b>human-voice</b> 1</span><span><b>платформа z.ai</b> 39</span>
+        </div>
+      </div>
+    </div>
+    <div class="colophon">
+      Страница собрана по правилам скиллов <a href="https://github.com/Genocide12/skills-collection/blob/main/01-frontend/SKILL.md">01-frontend</a>
+      и <a href="https://github.com/Genocide12/skills-collection/blob/main/05-quality/SKILL.md">05-quality</a>:
+      один самодостаточный HTML без зависимостей и сборки, Unbounded / Inter / JetBrains Mono, контраст ≥ 4.5:1,
+      семантика и клавиатурная навигация, поддержка prefers-reduced-motion.<br>
+      Правила принадлежат авторам исходных репозиториев (MIT / Apache-2.0) ·
+      <a href="https://github.com/Genocide12/skills-collection">GitHub</a> · 2026
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  document.documentElement.classList.add('js');
+
+  /* копирование фразы установки */
+  var btn=document.getElementById('copyBtn');
+  var PHRASE='Установи скиллы из https://github.com/Genocide12/skills-collection';
+  btn.addEventListener('click',function(){
+    function done(){btn.textContent='Скопировано ✓';btn.classList.add('ok');
+      setTimeout(function(){btn.textContent='Скопировать фразу';btn.classList.remove('ok');},1800);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(PHRASE).then(done,done);
+    }else{
+      var ta=document.createElement('textarea');ta.value=PHRASE;document.body.appendChild(ta);
+      ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);done();
+    }
+  });
+
+  /* навигатор: задача → скилл */
+  var q=document.getElementById('q'),rows=[].slice.call(document.querySelectorAll('.row')),
+      verdict=document.getElementById('verdict'),chipsBox=document.getElementById('chips');
+  var DEFAULT='Начните печатать — подсвечу подходящий скилл.';
+  var TASKS=['сделать сайт','отчёт в Word','презентация PPTX','починить баг','исследовать рынок',
+    'построить график','спроектировать API','задеплоить','сгенерировать картинку','спланировать задачу агента'];
+  TASKS.forEach(function(t){
+    var b=document.createElement('button');b.type='button';b.className='chip';b.textContent=t;
+    b.addEventListener('click',function(){q.value=t;q.focus();route();});
+    chipsBox.appendChild(b);
+  });
+  function route(){
+    var s=q.value.trim().toLowerCase();
+    if(!s){
+      rows.forEach(function(r){r.classList.remove('dim','hit');});
+      verdict.innerHTML=DEFAULT;return;
+    }
+    var words=s.split(/[^a-zа-яё0-9+]+/i).filter(function(w){return w.length>2;});
+    var best=null,bestScore=0;
+    rows.forEach(function(r){
+      var hay=(r.dataset.k+' '+r.dataset.name).toLowerCase(),score=0;
+      words.forEach(function(w){
+        if(hay.indexOf(w)>-1)score+=2;
+        else if(w.length>4&&hay.indexOf(w.slice(0,-1))>-1)score+=1;
+      });
+      if(score>bestScore){bestScore=score;best=r;}
+      r.classList.toggle('hit',score>0&&score===bestScore&&best===r);
+      r.classList.toggle('dim',score===0);
+    });
+    rows.forEach(function(r){r.classList.toggle('hit',r===best&&bestScore>0);});
+    if(best&&bestScore>0){
+      verdict.innerHTML='→ <b>'+best.querySelector('.num').textContent+' '+best.dataset.name+
+        '</b> <span class="name">'+best.querySelector('.name small').textContent+'</span>'+
+        '<span style="color:var(--muted)">— откройте карточку ниже</span>';
+    }else{
+      verdict.innerHTML='Прямого совпадения нет — опишите задачу другими словами или откройте каталог ниже.';
+    }
   }
-}
-list.addEventListener('click', e => {
-  const goto = e.target.closest('.badge.mega');
-  if (goto){ mf.value = goto.dataset.goto; render(); document.getElementById('mega').scrollIntoView(); return; }
-  const btn = e.target.closest('.load-btn');
-  if (btn){
-    const row = btn.closest('.row');
-    const s = D.skills.find(x => x.n === row.dataset.n);
-    row.classList.toggle('open');
-    if (row.classList.contains('open')) loadText(btn, row, s);
-    else { const b = row.querySelector('.row-body'); b.innerHTML = b.dataset.content || ''; btn.textContent = 'текст ▾'; }
+  q.addEventListener('input',route);
+
+  /* появление секций */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  }else{
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('on');});
   }
-});
-let deb; q.addEventListener('input', () => { clearTimeout(deb); deb = setTimeout(render, 120); });
-mf.addEventListener('change', render);
-render();
+
+  /* каталожная карточка открывается по «→» в вердикте */
+  verdict.addEventListener('click',function(){});
+})();
 </script>
 </body>
 </html>
