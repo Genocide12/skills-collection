@@ -1,5 +1,7 @@
 # skills-collection
 
+**English** | [Русский](README.ru.md)
+
 **Ten skills that cover everything an AI agent does** — one `SKILL.md` per area, from web UI to production incidents.
 
 A skill is a single `SKILL.md` file of instructions for the agent: iron rules, typical mistakes, command templates and a pre-delivery checklist. Instead of hundreds of overlapping skills, the agent loads one file per task type and finds exactly the rules it needs.
