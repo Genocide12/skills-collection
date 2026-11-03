@@ -12,12 +12,6 @@
     "description": "Full-stack diagnostic for agent and LLM applications. Audits the 12-layer agent stack for wrapper regression, memory pollution, tool discipline failures, hidden repair loops, and rendering corruption. Produces severity-ranked findings with code-first fixes. Essential for developers building agent applications, autonomous loops, or any LLM-powered feature. Use when an agent or LLM feature misbehaves and the failing layer is unknown, or before shipping an agent stack."
   },
   {
-    "folder": "agent-eval",
-    "skill": "agent-eval",
-    "source": "ECC",
-    "description": "Head-to-head comparison of coding agents (Claude Code, Aider, Codex, etc.) on custom tasks with pass rate, cost, time, and consistency metrics. Use when choosing between coding agents, or when a change to an agent setup needs measured pass rate, cost, and time rather than an impression."
-  },
-  {
     "folder": "agent-harness-construction",
     "skill": "agent-harness-construction",
     "source": "ECC",
@@ -28,12 +22,6 @@
     "skill": "agent-introspection-debugging",
     "source": "ECC",
     "description": "Structured self-debugging workflow for AI agent failures using capture, diagnosis, contained recovery, and introspection reports. Use when an agent run fails and you need a reproducible diagnosis instead of a retry."
-  },
-  {
-    "folder": "agent-payment-x402",
-    "skill": "agent-payment-x402",
-    "source": "ECC",
-    "description": "Add x402 payment execution to AI agents with per-task budgets, spending controls, and non-custodial wallets. Supports Base through agentwallet-sdk, X Layer through OKX Payments / OKX Agent Payments Protocol, and Solana plus multi-network EVM through the upstream x402 packages with facilitator-based settlement. Use when an agent must pay for something itself and needs per-task budgets, spending controls, and a non-custodial wallet."
   },
   {
     "folder": "agent-runtime-gateway-smoke-test",
@@ -54,22 +42,10 @@
     "description": "Use after completing any non-trivial task. The agent self-rates its output on 5 axes — accuracy, completeness, clarity, actionability, conciseness — with concrete evidence per criterion. Produces a structured 1-5 scorecard with specific improvement suggestions."
   },
   {
-    "folder": "agent-sort",
-    "skill": "agent-sort",
-    "source": "ECC",
-    "description": "Build an evidence-backed ECC install plan for a specific repo by sorting skills, commands, rules, hooks, and extras into DAILY vs LIBRARY buckets using parallel repo-aware review passes. Use when ECC should be trimmed to what a project actually needs instead of loading the full bundle."
-  },
-  {
     "folder": "agentic-engineering",
     "skill": "agentic-engineering",
     "source": "ECC",
     "description": "Operate as an agentic engineer using eval-first execution, decomposition, and cost-aware model routing. Use when planning or executing engineering work that agents will carry out end to end."
-  },
-  {
-    "folder": "agentic-os",
-    "skill": "agentic-os",
-    "source": "ECC",
-    "description": "Build persistent multi-agent operating systems on Claude Code. Covers kernel architecture, specialist agents, slash commands, file-based memory, scheduled automation, and state management without external databases. Use when building a persistent multi-agent system on Claude Code with its own memory, commands, and scheduling."
   },
   {
     "folder": "ai-first-engineering",
@@ -118,24 +94,6 @@
     "skill": "article-writing",
     "source": "ECC",
     "description": "Write articles, guides, blog posts, tutorials, newsletter issues, and other long-form content in a distinctive voice derived from supplied examples or brand guidance. Use when the user wants polished written content longer than a paragraph, especially when voice consistency, structure, and credibility matter."
-  },
-  {
-    "folder": "automation-audit-ops",
-    "skill": "automation-audit-ops",
-    "source": "ECC",
-    "description": "Evidence-first automation inventory and overlap audit workflow for ECC. Use when the user wants to know which jobs, hooks, connectors, MCP servers, or wrappers are live, broken, redundant, or missing before fixing anything."
-  },
-  {
-    "folder": "autonomous-agent-harness",
-    "skill": "autonomous-agent-harness",
-    "source": "ECC",
-    "description": "Transform Claude Code into a fully autonomous agent system with persistent memory, scheduled operations, computer use, and task queuing. Replaces standalone agent frameworks (Hermes, AutoGPT) by leveraging Claude Code's native crons, dispatch, MCP tools, and memory. Use when the user wants continuous autonomous operation, scheduled tasks, or a self-directing agent loop."
-  },
-  {
-    "folder": "autonomous-loops",
-    "skill": "autonomous-loops",
-    "source": "ECC",
-    "description": "Patterns and architectures for autonomous Claude Code loops — from simple sequential pipelines to RFC-driven multi-agent DAG systems. Retained for compatibility only: when new autonomous loop guidance is needed, use continuous-agent-loop instead."
   },
   {
     "folder": "backend-patterns",
@@ -198,12 +156,6 @@
     "description": "Run the ECC engineering process retroactively against an existing project slice. Audit current state, reconstruct past decisions, produce a four-axis gap register (thinking, coding practice, missing features, technology selection), then execute fixes forward through the plan-TDD-review pipeline. Use when adopting ECC mid-project, taking over an inherited codebase, or asking what was missed and what would have been built differently from day one."
   },
   {
-    "folder": "browser-qa",
-    "skill": "browser-qa",
-    "source": "ECC",
-    "description": "Run automated post-deploy UI verification with a browser automation MCP (claude-in-chrome, Playwright, or Puppeteer): console-error and Core Web Vitals smoke checks, form and auth-flow interaction tests, screenshot visual regression across three breakpoints, and axe-core accessibility audits ending in a SHIP / DO-NOT-SHIP verdict. Use when testing a deployed feature on staging or preview, before shipping frontend changes, reviewing a frontend PR, or checking responsive layout and accessibility."
-  },
-  {
     "folder": "bun-runtime",
     "skill": "bun-runtime",
     "source": "ECC",
@@ -234,18 +186,6 @@
     "description": "Cisco IOS and IOS-XE review patterns for show commands, config hierarchy, wildcard masks, ACL placement, interface hygiene, and safe change-window verification. Use when reading, writing, or reviewing Cisco IOS / IOS-XE configuration or planning a change window."
   },
   {
-    "folder": "ck",
-    "skill": "ck",
-    "source": "ECC",
-    "description": "Persistent per-project memory for Claude Code (Context Keeper) driven by deterministic Node.js /ck commands: init, save, resume, info, list, forget, and v1-to-v2 migrate, plus a SessionStart hook that injects a compact project brief. Use when context must survive across sessions, saving session state with next steps and decisions, resuming where a previous session left off, or picking up a project without re-explaining it."
-  },
-  {
-    "folder": "claude-devfleet",
-    "skill": "claude-devfleet",
-    "source": "ECC",
-    "description": "Orchestrate multi-agent coding tasks via Claude DevFleet — plan projects, dispatch parallel agents in isolated worktrees, monitor progress, and read structured reports. Use when dispatching parallel coding agents across isolated worktrees and tracking their reports."
-  },
-  {
     "folder": "click-path-audit",
     "skill": "click-path-audit",
     "source": "ECC",
@@ -268,12 +208,6 @@
     "skill": "codebase-onboarding",
     "source": "ECC",
     "description": "Analyze an unfamiliar codebase and generate a structured onboarding guide with architecture map, key entry points, conventions, and a starter CLAUDE.md. Use when joining a new project or setting up Claude Code for the first time in a repo."
-  },
-  {
-    "folder": "codehealth-mcp",
-    "skill": "codehealth-mcp",
-    "source": "ECC",
-    "description": "Real-time structural Code Health via CodeScene MCP — review before edits, verify score deltas after changes, gate commits and PRs. Use when reviewing code quality, refactoring, checking if AI changes degraded a file, or before commit/PR."
   },
   {
     "folder": "coding-standards",
@@ -300,18 +234,6 @@
     "description": "Compose Multiplatform and Jetpack Compose patterns for KMP projects — state management, navigation, theming, performance, and platform-specific UI. Use when building Compose or Jetpack Compose UI, state, navigation, or theming in a KMP project."
   },
   {
-    "folder": "config-gc",
-    "skill": "config-gc",
-    "source": "ECC",
-    "description": "Garbage collection for your Claude Code configuration. Periodically scans ~/.claude (skills, memory, hooks, permissions, MCP servers, caches) for redundant, stale, orphaned, or low-value items, then walks the user through a confirm-each-deletion cleanup. Use when the user says \"clean up my config\", \"config GC\", \"too many skills\", \"audit my setup\", \"my .claude is bloated\", or asks for a periodic config review."
-  },
-  {
-    "folder": "configure-ecc",
-    "skill": "configure-ecc",
-    "source": "ECC",
-    "description": "Run the conversational ECC setup wizard inside the current harness: inventory the install, collect scope (user/project/local) and hook mode (off/minimal/standard/strict) in Claude Code, use Codex's native plugin lifecycle, or install the project surface under ./.kimi-code, then preview, apply, and verify. Use when installing, updating, reconfiguring, or repairing an ECC installation, changing hook profiles, or moving ECC between install scopes."
-  },
-  {
     "folder": "connections-optimizer",
     "skill": "connections-optimizer",
     "source": "ECC",
@@ -336,28 +258,10 @@
     "description": "Govern stable domain context with a narrowly scoped CONTEXT.md when needed, and route hard-to-reverse decisions to ECC's existing architecture-decision-records skill. Use when domain terms require repeated explanation, one term has multiple meanings, unclear language causes module-boundary mistakes, or domain semantics must remain separate from architecture decisions."
   },
   {
-    "folder": "context-budget",
-    "skill": "context-budget",
-    "source": "ECC",
-    "description": "Routes live context checks to the native Codex or Claude Code meter without scanning files, and performs a bounded static component audit only when explicitly requested. Use for context-budget requests about remaining capacity or installed context overhead."
-  },
-  {
     "folder": "continuous-agent-loop",
     "skill": "continuous-agent-loop",
     "source": "ECC",
     "description": "Patterns for continuous autonomous agent loops with quality gates, evals, and recovery controls. Use when running an agent loop that must self-check, gate on evals, and recover from failures."
-  },
-  {
-    "folder": "continuous-learning",
-    "skill": "continuous-learning",
-    "source": "ECC",
-    "description": "[DEPRECATED - use continuous-learning-v2] Legacy v1 stop-hook skill extractor. v2 is a strict superset with instinct-based, project-scoped, hook-reliable learning. Do not invoke v1: when continuous learning, session learning, or pattern extraction is requested, route to continuous-learning-v2 instead."
-  },
-  {
-    "folder": "continuous-learning-v2",
-    "skill": "continuous-learning-v2",
-    "source": "ECC",
-    "description": "Instinct-based learning system that observes sessions via hooks, creates atomic instincts with confidence scoring, and evolves them into skills/commands/agents. v2.1 adds project-scoped instincts to prevent cross-project contamination. Use when capturing lessons from a session, managing instincts, or promoting them into skills, commands, or agents."
   },
   {
     "folder": "contract-first",
@@ -378,22 +282,10 @@
     "description": "Cost optimization patterns for LLM API usage — model routing by task complexity, budget tracking, retry logic, and prompt caching. Use when LLM spend needs to come down, or when routing tasks across model tiers and budgets."
   },
   {
-    "folder": "cost-tracking",
-    "skill": "cost-tracking",
-    "source": "ECC",
-    "description": "Track and report Claude Code token usage, spending, and budgets from the local ECC cost-tracker metrics log. Use when the user asks about costs, spending, usage, tokens, budgets, or cost breakdowns by model, session, or date."
-  },
-  {
     "folder": "council",
     "skill": "council",
     "source": "ECC",
     "description": "Convene a four-voice council for ambiguous decisions, tradeoffs, and go/no-go calls. Use when multiple valid paths exist and you need structured disagreement before choosing."
-  },
-  {
-    "folder": "council-multi-model",
-    "skill": "council-multi-model",
-    "source": "ECC",
-    "description": "Add one optional external Codex critique after the existing council has produced a decision draft. Use when an ambiguous, high-consequence decision would benefit from a separate model invocation's attempt to break the synthesis. Requires explicit consent before sending the compact draft and disagreement to OpenAI, labels same-provider reviews honestly, and marks the review absent when the adapter is unavailable."
   },
   {
     "folder": "counterparty-channel-discipline",
@@ -474,22 +366,10 @@
     "description": "Produce cited research reports from multiple web sources using firecrawl and exa MCP tools — plan sub-questions, search and deep-read sources, then synthesize findings with inline citations and confidence levels. Use when the user asks to research a topic in depth, run a deep dive or investigation, or do competitive analysis, technology evaluation, market sizing, or due diligence on a company."
   },
   {
-    "folder": "deepseek-harness-setup",
-    "skill": "deepseek-harness-setup",
-    "source": "ECC",
-    "description": "Install and operate Everything Claude Code (ECC) on the DeepSeek Harness (DSH): native skill roots (~/.dsh/skills, .agents/skills), the @deepseek-ai/dsh-hooks-claude-code bridge for command hooks, bare-insert patch mounting, generator usage, event-support limits, and update workflow. Use when setting up ECC on DeepSeek Harness, wiring ECC hooks into a DSH profile, or debugging why ECC skills or hooks do not appear in a DSH session."
-  },
-  {
     "folder": "defi-amm-security",
     "skill": "defi-amm-security",
     "source": "ECC",
     "description": "Security checklist for Solidity AMM contracts, liquidity pools, and swap flows. Covers reentrancy, CEI ordering, donation or inflation attacks, oracle manipulation, slippage, admin controls, and integer math. Use when auditing or writing Solidity AMM, liquidity pool, or swap code."
-  },
-  {
-    "folder": "delivery-gate",
-    "skill": "delivery-gate",
-    "source": "ECC",
-    "description": "Stop hook that blocks Claude from finishing until quality checks pass. Detects rationalization patterns (surface text heuristics), stale learning logs (filesystem mtime), and low disk space. Complements self-audit by mechanically enforcing learning capture habits. Use when Claude should be mechanically blocked from declaring work finished before quality checks and learning capture actually pass."
   },
   {
     "folder": "deployment-patterns",
@@ -540,12 +420,6 @@
     "description": "Run the full Django verification loop — environment check, mypy/ruff/black linting, migration safety, pytest with coverage targets, pip-audit and bandit security scans, settings and logging review, and diff review — producing a phased pass/fail report before release or PR. Use when preparing a Django pull request, validating migrations or coverage, or running pre-deploy readiness checks."
   },
   {
-    "folder": "dmux-workflows",
-    "skill": "dmux-workflows",
-    "source": "ECC",
-    "description": "Multi-agent orchestration using dmux (tmux pane manager for AI agents). Patterns for parallel agent workflows across Claude Code, Codex, OpenCode, and other harnesses. Use when running multiple agent sessions in parallel or coordinating multi-agent development workflows."
-  },
-  {
     "folder": "docker-patterns",
     "skill": "docker-patterns",
     "source": "ECC",
@@ -556,12 +430,6 @@
     "skill": "docs-governance",
     "source": "ECC",
     "description": "Route broad documentation-governance requests to existing ECC skills and run an opt-in, read-only audit of mapped documentation roles, links, ADR indexes, and evidence references. Use when a user asks for documentation governance, project-knowledge organization, documentation integrity, or a deterministic docs audit without naming a narrower skill."
-  },
-  {
-    "folder": "documentation-lookup",
-    "skill": "documentation-lookup",
-    "source": "ECC",
-    "description": "Use up-to-date library and framework docs via Context7 MCP instead of training data. Activates for setup questions, API references, code examples, or when the user names a framework (e.g. React, Next.js, Prisma)."
   },
   {
     "folder": "dotnet-patterns",
@@ -580,18 +448,6 @@
     "skill": "e2e-testing",
     "source": "ECC",
     "description": "Playwright E2E testing patterns, Page Object Model, configuration, CI/CD integration, artifact management, and flaky test strategies. Use when writing Playwright tests, structuring page objects, or fixing flaky E2E runs in CI."
-  },
-  {
-    "folder": "ecc-guide",
-    "skill": "ecc-guide",
-    "source": "ECC",
-    "description": "Answer questions about ECC by reading the live repo surface — agents, skills, commands, hooks, rules, install profiles, and docs — instead of memory. Use when the user asks what ECC includes, how to install or reset it, which skill or command fits a task, or how project onboarding works."
-  },
-  {
-    "folder": "ecc-recipes",
-    "skill": "ecc-recipes",
-    "source": "ECC",
-    "description": "Map a described workflow to the right ECC command group with run-order and stop condition, or browse all command-group recipe families read live from the commands directory. Advisory only — never executes. Use when asked which commands run a workflow, the command sequence for a task, or to list ECC pipelines; not for executing the task (route to the command itself), single-command docs (use ecc-guide), or prompt rewrites (use prompt-optimizer)."
   },
   {
     "folder": "ecc-tools-cost-audit",
@@ -642,18 +498,6 @@
     "description": "Prevent silent decimal mismatch bugs across EVM chains. Covers runtime decimal lookup, chain-aware caching, bridged-token precision drift, and safe normalization for bots, dashboards, and DeFi tools. Use when handling token amounts across EVM chains, or when a balance, price, or transfer amount is off by orders of magnitude."
   },
   {
-    "folder": "exa-search",
-    "skill": "exa-search",
-    "source": "ECC",
-    "description": "Neural search via Exa MCP for web, code, and company research. Use when the user needs web search, code examples, company intel, people lookup, or AI-powered deep research with Exa's neural search engine."
-  },
-  {
-    "folder": "fal-ai-media",
-    "skill": "fal-ai-media",
-    "source": "ECC",
-    "description": "Unified media generation via fal.ai MCP — image, video, and audio. Covers text-to-image (Nano Banana), text/image-to-video (Seedance, Kling, Veo 3), text-to-speech (CSM-1B), and video-to-audio (ThinkSound). Use when the user wants to generate images, videos, or audio with AI."
-  },
-  {
     "folder": "fastapi-patterns",
     "skill": "fastapi-patterns",
     "source": "ECC",
@@ -664,12 +508,6 @@
     "skill": "finance-billing-ops",
     "source": "ECC",
     "description": "Evidence-first revenue, pricing, refunds, team-billing, and billing-model truth workflow for ECC. Use when the user wants a sales snapshot, pricing comparison, duplicate-charge diagnosis, or code-backed billing reality instead of generic payments advice."
-  },
-  {
-    "folder": "flox-environments",
-    "skill": "flox-environments",
-    "source": "ECC",
-    "description": "Create reproducible, cross-platform (macOS/Linux) development environments with Flox, a declarative Nix-based environment manager. Use when setting up project toolchains, installing system-level dependencies (compilers, databases, native libs), pinning exact package versions for a team, onboarding developers, running local services (PostgreSQL, Redis, Kafka), or solving 'works on my machine' problems — including agent/vibe-coding setups that need project-scoped tools without sudo. Also use when the user mentions .flox/, manifest.toml, flox activate, or FloxHub."
   },
   {
     "folder": "flutter-dart-code-review",
@@ -718,12 +556,6 @@
     "skill": "gan-style-harness",
     "source": "ECC",
     "description": "GAN-inspired Generator-Evaluator agent harness for building high-quality applications autonomously. Based on Anthropic's March 2026 harness design paper. Use when a feature should be built autonomously through generator and evaluator iteration until it clears a quality bar."
-  },
-  {
-    "folder": "gateguard",
-    "skill": "gateguard",
-    "source": "ECC",
-    "description": "PreToolUse fact-forcing gate that denies the first Edit/Write/Bash (including MultiEdit and NotebookEdit) attempt until the agent presents concrete facts (importers, data schemas, verbatim user instruction), then allows retry; A/B-tested at +2.25 quality points. Use when enabling or configuring the GateGuard hook, exempting paths via env vars, or handling first-touch denials."
   },
   {
     "folder": "generating-python-installer",
@@ -810,42 +642,6 @@
     "description": "HIPAA-specific entrypoint for healthcare privacy and security work. Use when a task is explicitly framed around HIPAA, PHI handling, covered entities, BAAs, breach posture, or US healthcare compliance requirements."
   },
   {
-    "folder": "homelab-network-readiness",
-    "skill": "homelab-network-readiness",
-    "source": "ECC",
-    "description": "Readiness checklist for homelab VLAN segmentation, local DNS filtering (Pi-hole, AdGuard Home), and WireGuard-style remote access. Use when planning or reviewing home network changes — splitting a flat network into trusted, IoT, guest, or management VLANs, moving DHCP to a local resolver, or adding VPN access — before changing router, firewall, DHCP, or VPN configuration."
-  },
-  {
-    "folder": "homelab-network-setup",
-    "skill": "homelab-network-setup",
-    "source": "ECC",
-    "description": "Practical home and homelab network planning for gateways, switches, access points, IP ranges, DHCP reservations, DNS, cabling, and common beginner mistakes. Use when planning or fixing a home or homelab network — gateway, switch, AP, IP ranges, DHCP, DNS, or cabling."
-  },
-  {
-    "folder": "homelab-pihole-dns",
-    "skill": "homelab-pihole-dns",
-    "source": "ECC",
-    "description": "Pi-hole installation, blocklist management, DNS-over-HTTPS setup, DHCP integration, local DNS records, and troubleshooting broken DNS resolution on a home network. Use when the task explicitly involves Pi-hole — installing it, managing blocklists, configuring DoH or DHCP, adding local DNS records, or diagnosing DNS resolution with Pi-hole in the path."
-  },
-  {
-    "folder": "homelab-vlan-segmentation",
-    "skill": "homelab-vlan-segmentation",
-    "source": "ECC",
-    "description": "Segmenting home networks into VLANs for IoT, guest, trusted, and server traffic using UniFi, pfSense/OPNsense, and MikroTik — including switch trunk config, firewall rules, and wireless SSID mapping. Use when splitting a home network into IoT, guest, trusted, and server VLANs on UniFi, pfSense/OPNsense, or MikroTik."
-  },
-  {
-    "folder": "homelab-wireguard-vpn",
-    "skill": "homelab-wireguard-vpn",
-    "source": "ECC",
-    "description": "WireGuard VPN server setup, peer configuration, key generation, split tunneling vs full tunnel routing, and remote access to a home network from mobile and laptop clients. Use when setting up WireGuard for remote access to a home network, or deciding between split and full tunnel routing."
-  },
-  {
-    "folder": "hookify-rules",
-    "skill": "hookify-rules",
-    "source": "ECC",
-    "description": "Create and configure hookify rules — markdown files with YAML frontmatter that match bash, file, prompt, or stop events by regex or conditions and show warn/block messages to the agent. Use when creating a hookify rule, writing hook rule syntax, configuring hookify, or adding pattern guardrails such as blocking dangerous commands, .env edits, or debug code."
-  },
-  {
     "folder": "i18n-sync",
     "skill": "i18n-sync",
     "source": "ECC",
@@ -906,22 +702,10 @@
     "description": "Read-only Itô basket and prediction-market data skill. Index the live basket catalog, compare a basket against user-supplied research or a watchlist, build a source-grounded market brief, or draft a non-executable planning worksheet. Use when a user asks to browse or index Itô baskets, compare a basket against notes or a thesis, research prediction-market events/venues/liquidity, or plan a basket or market idea without trading. Never advises, orders, trades, reserves, or executes."
   },
   {
-    "folder": "ito-compute",
-    "skill": "ito-compute",
-    "source": "ECC",
-    "description": "Query live GPU inventory, submit an authenticated Itô fixed-rate RFQ, inspect RFQ or procurement status, revoke device credentials, and run explicitly gated node qualification through the separately installed canonical CLI. Use when a user asks to find H100/H200 capacity, request a fixed compute rate, check Itô compute status, validate GPU nodes, revoke Itô access, or rent or purchase GPU compute and needs the supported boundary explained."
-  },
-  {
     "folder": "ito-inference",
     "skill": "ito-inference",
     "source": "ECC",
     "description": "Inspect the availability of model serving on a completed Itô compute booking and, when the canonical backend becomes available, hand off an explicitly confirmed serving manifest. Use after ito-compute has booked GPU nodes and the user asks for an OpenAI-compatible endpoint, ito-serve, hosted Kimi, or self-hosted open-weights inference. ECC implements no serving stack of its own."
-  },
-  {
-    "folder": "ito-training",
-    "skill": "ito-training",
-    "source": "ECC",
-    "description": "Inspect the availability of ML training on a completed Itô compute booking and, when the canonical backend becomes available, hand off an explicitly confirmed training manifest. Use after ito-compute has booked GPU nodes and the user wants pre-training, fine-tuning, or RL on that metal. ECC implements no training stack of its own."
   },
   {
     "folder": "java-coding-standards",
@@ -930,22 +714,10 @@
     "description": "Java coding standards for Spring Boot and Quarkus services: naming, immutability, Optional usage, streams, exceptions, generics, CDI, reactive patterns, and project layout. Automatically applies framework-specific conventions. Use when writing or reviewing Java in a Spring Boot or Quarkus service."
   },
   {
-    "folder": "jira-integration",
-    "skill": "jira-integration",
-    "source": "ECC",
-    "description": "Use this skill when retrieving Jira tickets, analyzing requirements, updating ticket status, adding comments, or transitioning issues. Provides Jira API patterns via MCP or direct REST calls."
-  },
-  {
     "folder": "jpa-patterns",
     "skill": "jpa-patterns",
     "source": "ECC",
     "description": "JPA/Hibernate patterns for entity design, relationships, query optimization, transactions, auditing, indexing, pagination, and pooling in Spring Boot. Use when designing JPA entities or relationships, or when a Hibernate query, transaction, or N+1 problem needs fixing."
-  },
-  {
-    "folder": "knowledge-ops",
-    "skill": "knowledge-ops",
-    "source": "ECC",
-    "description": "Knowledge base management, ingestion, sync, and retrieval across multiple storage layers (local files, MCP memory, vector stores, Git repos). Use when the user wants to save, organize, sync, deduplicate, or search across their knowledge systems."
   },
   {
     "folder": "kotlin-coroutines-flows",
@@ -988,12 +760,6 @@
     "skill": "laravel-patterns",
     "source": "ECC",
     "description": "Laravel architecture patterns, routing/controllers, Eloquent ORM, service layers, queues, events, caching, and API resources for production apps. Use when building or reviewing Laravel apps — controllers, Eloquent, service layers, queues, or API resources."
-  },
-  {
-    "folder": "laravel-plugin-discovery",
-    "skill": "laravel-plugin-discovery",
-    "source": "ECC",
-    "description": "Discover and evaluate Laravel packages via LaraPlugins.io MCP. Use when the user wants to find plugins, check package health, or assess Laravel/PHP compatibility."
   },
   {
     "folder": "laravel-security",
@@ -1092,12 +858,6 @@
     "description": "Generate review drafts of counterparty master agreements from one template plus a JSON spec, with role-selected clauses and a Schedule A workflow limited to the executed agreement's notice authority. Use when you need reproducible drafting and separately reviewed execution preparation."
   },
   {
-    "folder": "mcp-dependency-review",
-    "skill": "mcp-dependency-review",
-    "source": "ECC",
-    "description": "Statically review MCP configuration for mutable package references before approval or CI, without executing discovered MCP servers. Use when reviewing .mcp.json, Cursor, VS Code, Claude, Windsurf, or other repo-scoped MCP config."
-  },
-  {
     "folder": "mcp-server-patterns",
     "skill": "mcp-server-patterns",
     "source": "ECC",
@@ -1182,12 +942,6 @@
     "description": "NestJS architecture patterns for modules, controllers, providers, DTO validation, guards, interceptors, config, and production-grade TypeScript backends. Use when building or reviewing a NestJS backend — modules, providers, DTO validation, guards, or interceptors."
   },
   {
-    "folder": "netmiko-ssh-automation",
-    "skill": "netmiko-ssh-automation",
-    "source": "ECC",
-    "description": "Safe Python Netmiko patterns for read-only collection, bounded batch SSH, TextFSM parsing, guarded config changes, timeouts, and network automation error handling. Use when automating network device access with Python Netmiko, whether collecting state or pushing guarded config changes."
-  },
-  {
     "folder": "network-bgp-diagnostics",
     "skill": "network-bgp-diagnostics",
     "source": "ECC",
@@ -1216,12 +970,6 @@
     "skill": "nodejs-keccak256",
     "source": "ECC",
     "description": "Prevent Ethereum hashing bugs in JavaScript and TypeScript. Node's sha3-256 is NIST SHA3, not Ethereum Keccak-256, and silently breaks selectors, signatures, storage slots, and address derivation. Use when hashing for Ethereum in JavaScript or TypeScript, or when a selector, signature, storage slot, or derived address is wrong."
-  },
-  {
-    "folder": "nutrient-document-processing",
-    "skill": "nutrient-document-processing",
-    "source": "ECC",
-    "description": "Process, convert, OCR, extract, redact, sign, and fill documents using the Nutrient DWS API. Works with PDFs, DOCX, XLSX, PPTX, HTML, and images. Use when converting, OCRing, extracting from, redacting, signing, or filling documents via the Nutrient DWS API."
   },
   {
     "folder": "nuxt4-patterns",
@@ -1314,22 +1062,10 @@
     "description": "Perl testing patterns using Test2::V0, Test::More, prove runner, mocking, coverage with Devel::Cover, and TDD methodology. Use when writing Perl tests with Test2::V0 or Test::More, or measuring coverage."
   },
   {
-    "folder": "plan-canvas",
-    "skill": "plan-canvas",
-    "source": "ECC",
-    "description": "Open plans and HTML artifacts in a local browser canvas where the human annotates elements, chats, and approves or requests changes without leaving the page. Use when presenting a plan for review, or when feedback like \"move this, change that\" is easier pointed at than typed."
-  },
-  {
     "folder": "plan-orchestrate",
     "skill": "plan-orchestrate",
     "source": "ECC",
     "description": "Read a plan document, decompose it into steps, classify each step, and emit the ready-to-paste ECC slash command for that step, carrying the step identifier and scope in the command's own documented argument form. Generative only — never invokes commands itself and never claims to control what a command runs internally. Steps whose command cannot carry plan scope fail closed instead of being emitted. Use when the user has a multi-step plan and wants the right command for each step without picking it by hand."
-  },
-  {
-    "folder": "plankton-code-quality",
-    "skill": "plankton-code-quality",
-    "source": "ECC",
-    "description": "Write-time code quality enforcement using Plankton — auto-formatting, linting, and Claude-powered fixes on every file edit via hooks. Use when setting up write-time formatting, linting, or auto-fix hooks on file edits."
   },
   {
     "folder": "postgres-patterns",
@@ -1512,12 +1248,6 @@
     "description": "Best practices for Remotion - Video creation in React. 29 domain-specific rules covering 3D, animations, audio, captions, charts, transitions, and more. Use when building video in React with Remotion — animations, audio, captions, charts, or transitions."
   },
   {
-    "folder": "repo-scan",
-    "skill": "repo-scan",
-    "source": "ECC",
-    "description": "Bootstrap pointer that installs the external repo-scan skill from a pinned, reviewable commit. Use when repo-scan must be installed before running its cross-stack source-code asset audit; this ECC pointer does not perform the audit itself."
-  },
-  {
     "folder": "research-ops",
     "skill": "research-ops",
     "source": "ECC",
@@ -1546,12 +1276,6 @@
     "skill": "rust-testing",
     "source": "ECC",
     "description": "Rust testing patterns including unit tests, integration tests, async testing, property-based testing, mocking, and coverage. Follows TDD methodology. Use when writing Rust tests — unit, integration, async, property-based, or coverage."
-  },
-  {
-    "folder": "safety-guard",
-    "skill": "safety-guard",
-    "source": "ECC",
-    "description": "Guard against destructive operations with three modes: Careful intercepts dangerous commands (rm -rf, git push --force, DROP TABLE) for confirmation, Freeze locks writes to one directory, and Guard combines both. Advisory: the agent applies these rules itself; no hook ships with it. Use when working on production systems, running agents autonomously, restricting edits to a directory, or during migrations, deploys, and data changes."
   },
   {
     "folder": "santa-method",
@@ -1608,12 +1332,6 @@
     "description": "Use this skill when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features. Provides comprehensive security checklist and patterns."
   },
   {
-    "folder": "security-scan",
-    "skill": "security-scan",
-    "source": "ECC",
-    "description": "Scan your Claude Code configuration (.claude/ directory) for security vulnerabilities, misconfigurations, and injection risks using AgentShield. Checks CLAUDE.md, settings.json, MCP servers, hooks, and agent definitions. Use when auditing a .claude/ directory — CLAUDE.md, settings.json, MCP servers, hooks, or agent definitions."
-  },
-  {
     "folder": "seo",
     "skill": "seo",
     "source": "ECC",
@@ -1624,12 +1342,6 @@
     "skill": "skill-comply",
     "source": "ECC",
     "description": "Visualize whether skills, rules, and agent definitions are actually followed — auto-generates scenarios at 3 prompt strictness levels, runs agents, classifies behavioral sequences, and reports compliance rates with full tool call timelines. Use when checking whether agents actually follow the skills, rules, and definitions they were given, rather than assuming they do."
-  },
-  {
-    "folder": "skill-host-compat",
-    "skill": "skill-host-compat",
-    "source": "ECC",
-    "description": "Lint ECC skills for Codex/Cursor-safe frontmatter and Claude-only substitutions before a skill PR."
   },
   {
     "folder": "skill-scout",
@@ -1648,12 +1360,6 @@
     "skill": "social-graph-ranker",
     "source": "ECC",
     "description": "Weighted social-graph ranking for warm intro discovery, bridge scoring, and network gap analysis across X and LinkedIn. Use when the user wants the reusable graph-ranking engine itself, not the broader outreach or network-maintenance workflow layered on top of it."
-  },
-  {
-    "folder": "social-publisher",
-    "skill": "social-publisher",
-    "source": "ECC",
-    "description": "Agent-driven scheduling and publishing of social media posts across 13 platforms via SocialClaw. Use when the user wants to publish to X, LinkedIn, Instagram, Facebook Pages, TikTok, Discord, Telegram, YouTube, Reddit, WordPress, or Pinterest — or when managing campaigns, uploading media, or monitoring post delivery status."
   },
   {
     "folder": "springboot-patterns",
@@ -1684,12 +1390,6 @@
     "skill": "story-lifecycle",
     "source": "ECC",
     "description": "Manage a file-based epic → story → sprint development loop without requiring an external project management tool. Creates and tracks epics, breaks them into user stories, assigns them to sprints, and drives implementation story by story. Use when starting a new feature initiative or when the team has no Jira/Linear/Taiga but needs structured delivery tracking."
-  },
-  {
-    "folder": "strategic-compact",
-    "skill": "strategic-compact",
-    "source": "ECC",
-    "description": "Suggests manual context compaction at logical intervals to preserve context through task phases rather than arbitrary auto-compaction. Use when a session is approaching a context limit and a task phase is a natural place to compact."
   },
   {
     "folder": "swift-actor-persistence",
@@ -1758,12 +1458,6 @@
     "description": "Interactive picker that discovers available agent personas via the claude agents command and agents/ markdown globs, groups them into domains, has the user select up to five, dispatches them in parallel on one task, and synthesizes agreements and conflicts into a unified report. Use when composing a team of agents, browsing available agent personas, or running several specialist agents in parallel."
   },
   {
-    "folder": "terminal-opener",
-    "skill": "terminal-opener",
-    "source": "ECC",
-    "description": "Open an executable and its argument array in a visible terminal window through a reusable, shell-free launch plan with dry-run, JSON, capability detection, detached fallback, and standalone recovery modes. Use when Codex needs to open an interactive CLI, SSH session, local development process, sandbox, or other argv-based command in a new host terminal; diagnose whether a supported terminal is available; or provide an actionable plan when the requested terminal is unsupported."
-  },
-  {
     "folder": "terminal-ops",
     "skill": "terminal-ops",
     "source": "ECC",
@@ -1786,12 +1480,6 @@
     "skill": "token-budget-advisor",
     "source": "ECC",
     "description": "Offer a choice of response depth (25%/50%/75%/100%) with token estimates before answering, then answer at that level. Use when the user asks to control response length or token budget, such as 'token budget', 'short version', 'brief answer', 'respuesta corta vs larga', 'cuántos tokens', 'ahorrar tokens', 'responde al 50%', 'dame la versión corta', 'quiero controlar cuánto usas'. Skip if depth is already set this session or 'token' means an auth/payment token."
-  },
-  {
-    "folder": "token-card",
-    "skill": "token-card",
-    "source": "ECC",
-    "description": "Render a token-usage stat card from local Claude Code, Codex, Gemini CLI, and OpenCode session logs and commit it into the repository as a file. Use when someone wants a current usage figure in a README, or asks for a shareable card of their coding-agent activity."
   },
   {
     "folder": "typescript-patterns",
@@ -1818,18 +1506,6 @@
     "description": "Use when managing an Uncloud cluster — deploying services, configuring Caddy ingress, adding static proxy routes for non-cluster devices, publishing ports, scaling, inspecting logs, or managing machines and volumes with the `uc` CLI."
   },
   {
-    "folder": "unified-memory",
-    "skill": "unified-memory",
-    "source": "ECC",
-    "description": "Share durable, inspectable context and handoffs between Claude, Codex, Hermes, Cursor, OpenCode, and other agents through the local ECC Memory Vault. Use when an agent must save work state, transfer context, resume another agent's task, or search shared project knowledge."
-  },
-  {
-    "folder": "unified-notifications-ops",
-    "skill": "unified-notifications-ops",
-    "source": "ECC",
-    "description": "Operate notifications as one ECC-native workflow across GitHub, Linear, desktop alerts, hooks, and connected communication surfaces. Use when the real problem is alert routing, deduplication, escalation, or inbox collapse."
-  },
-  {
     "folder": "verification-loop",
     "skill": "verification-loop",
     "source": "ECC",
@@ -1840,12 +1516,6 @@
     "skill": "video-editing",
     "source": "ECC",
     "description": "AI-assisted video editing workflows for cutting, structuring, and augmenting real footage. Covers the full pipeline from raw capture through FFmpeg, Remotion, ElevenLabs, fal.ai, and final polish in Descript or CapCut. Use when the user wants to edit video, cut footage, create vlogs, or build video content."
-  },
-  {
-    "folder": "videodb",
-    "skill": "videodb",
-    "source": "ECC",
-    "description": "Ingest, index, search, edit, and monitor video and audio with the VideoDB Python SDK — upload from files, URLs, or RTSP feeds, build spoken and scene indexes with timestamped search and playable clips, transcode and reframe, do timeline edits (subtitles, overlays, dubbing), and run real-time alerts on live streams or desktop capture. Use when working with video search, transcription, clipping, transcoding, streaming, or live video alerts."
   },
   {
     "folder": "visa-doc-translate",
@@ -1872,28 +1542,10 @@
     "description": "E2E testing for Windows native desktop apps (WPF, WinForms, Win32/MFC, Qt) using pywinauto and Windows UI Automation. Use when writing E2E tests for a Windows native desktop app with pywinauto or UI Automation."
   },
   {
-    "folder": "workspace-surface-audit",
-    "skill": "workspace-surface-audit",
-    "source": "ECC",
-    "description": "Audit the active repo, MCP servers, plugins, connectors, env surfaces, and harness setup, then recommend the highest-value ECC-native skills, hooks, agents, and operator workflows. Use when the user wants help setting up Claude Code or understanding what capabilities are actually available in their environment."
-  },
-  {
-    "folder": "x-api",
-    "skill": "x-api",
-    "source": "ECC",
-    "description": "X/Twitter API integration for posting tweets, threads, reading timelines, search, and analytics. Covers OAuth auth patterns, rate limits, and platform-native content posting. Use when the user wants to interact with X programmatically."
-  },
-  {
     "folder": "api-and-interface-design",
     "skill": "api-and-interface-design",
     "source": "agent-skills",
     "description": "Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface. Use when creating REST or GraphQL endpoints, defining type contracts between modules, or establishing boundaries between frontend and backend."
-  },
-  {
-    "folder": "browser-testing-with-devtools",
-    "skill": "browser-testing-with-devtools",
-    "source": "agent-skills",
-    "description": "Tests in real browsers via Chrome DevTools MCP. Use when building or debugging anything that runs in a browser. Use when you need to inspect the DOM, capture console errors, analyze network requests, profile performance, or verify visual output with real runtime data. Requires the chrome-devtools MCP server to be configured."
   },
   {
     "folder": "ci-cd-and-automation",
@@ -1918,12 +1570,6 @@
     "skill": "constraint-driven-development",
     "source": "agent-skills",
     "description": "Establishes a project's quality bar as a written contract and stops agents quietly lowering it. Interviews the user on which dimensions matter, supplies sane default thresholds when they have no number in mind, records everything in CONSTRAINTS.md, and watches the diff for a weakened bar — new @ts-ignore or eslint-disable suppressions, skipped or deleted tests, assertions stripped out, unimplemented stubs, thresholds edited down. Use when no quality bar is written down, when the user says \"set up constraints\" or \"define our standards\", when the user wants dimensions they care about — accessibility, web performance, coverage — set up as enforced constraints, when an agent keeps silencing checks or skipping tests to get to green, when you need a coverage or performance threshold and don't know what number to pick, or when an agent writes more code than anyone will read."
-  },
-  {
-    "folder": "context-engineering",
-    "skill": "context-engineering",
-    "source": "agent-skills",
-    "description": "Optimizes agent context setup. Use when starting a new session, when agent output quality degrades, when switching between tasks, or when you need to configure rules files and context for a project."
   },
   {
     "folder": "debugging-and-error-recovery",
@@ -2034,22 +1680,10 @@
     "description": "Discovers and invokes agent skills. Use when starting a session, or when you need to decide which skill or workflow applies to the piece of work at hand. This is the meta-skill that governs how all other skills are discovered and invoked."
   },
   {
-    "folder": "agent-cost-report",
-    "skill": "Agent Cost Report",
-    "source": "claude-mem",
-    "description": "Believable agent cost report for any period, default the last 7 full days PT, not counting today. Measured tokens from Claude Code transcripts priced at OpenRouter list prices (ESTIMATED), measured provider spend when a sanctioned source exists, note-taker cost separate, Timing-style HTML/PDF plus report.json, line-items.csv, evidence.json."
-  },
-  {
     "folder": "babysit",
     "skill": "babysit",
     "source": "claude-mem",
     "description": "Watch a pull request or review cycle until it is ready to merge. Use when asked to babysit, monitor, or keep checking PR comments, reviews, and CI until all actionable issues are resolved."
-  },
-  {
-    "folder": "backup-setup",
-    "skill": "backup-setup",
-    "source": "claude-mem",
-    "description": "Set up, check, or restore local claude-mem database snapshots. Use when the user says \"set up backups\", \"back up my memories\", \"backup status\", or \"restore my database\"."
   },
   {
     "folder": "build",
@@ -2064,22 +1698,10 @@
     "description": "Fully automate building and releasing a coding task."
   },
   {
-    "folder": "ccs-align",
-    "skill": "ccs-align",
-    "source": "claude-mem",
-    "description": "Run the CCS Align seat's hourly breathing cycle — prove the local claude-mem worker is healthy, pull needle observations through search → timeline → get_observations, land them in a seat-owned middle cache via atomic grab → append → filter exclude-marks → replace, manage exclude marks, and walk house → project → seat rules to detect conflicts (SHADOW_HOUSE, DENY_ALLOW, DRIFT, CLOCK_HEADER) with an append-only rules-report.md. Use when asked to run CCS Align, breathe the alignment seat, refresh the middle cache, exclude or restore an observation, walk rules, check rules conflicts, or check the Worker Watch board."
-  },
-  {
     "folder": "childhood",
     "skill": "childhood",
     "source": "claude-mem",
     "description": "Babysit a shipped release after merge, publication, or deployment. Verify published packages, production behavior, installed plugins, and late CI or user reports until the observation window is clean; use babysit for PR readiness before release."
-  },
-  {
-    "folder": "cloud-sync",
-    "skill": "cloud-sync",
-    "source": "claude-mem",
-    "description": "Set up or check claude-mem cloud sync with cmem.ai Pro. Use when the user says \"set up cloud sync\", \"sync my memories\", \"cmem pro\", \"cloud backup\", \"sync status\", or wants their memory database backed up or synced to their cmem.ai account."
   },
   {
     "folder": "design-is",
@@ -2100,18 +1722,6 @@
     "description": "Generate a HANDOFF.md that captures goal, current state, files touched, failed attempts, and next steps — so a fresh Claude session can continue exactly where this one left off. Use when sessions are getting long, Claude keeps retrying the same broken solution, or the user wants to step away and resume later."
   },
   {
-    "folder": "how-it-works",
-    "skill": "how-it-works",
-    "source": "claude-mem",
-    "description": "Explain how claude-mem captures observations, when memory injection kicks in, and where data lives. Use when the user asks \"how does claude-mem work?\" or \"what is this thing doing?\"."
-  },
-  {
-    "folder": "knowledge-agent",
-    "skill": "knowledge-agent",
-    "source": "claude-mem",
-    "description": "Build and query AI-powered knowledge bases from claude-mem observations. Use when users want to create focused \"brains\" from their observation history, ask questions about past work patterns, or compile expertise on specific topics."
-  },
-  {
     "folder": "learn-codebase",
     "skill": "learn-codebase",
     "source": "claude-mem",
@@ -2124,28 +1734,10 @@
     "description": "Create a detailed, phased implementation plan with documentation discovery. Use when asked to plan a feature, task, or multi-step implementation — especially before executing with do."
   },
   {
-    "folder": "mem-search",
-    "skill": "mem-search",
-    "source": "claude-mem",
-    "description": "Smart search (default). Search claude-mem's persistent cross-session memory database in three steps: search, timeline, then selected get_observations. Use when user asks \"did we already solve this?\", \"how did we do X last time?\", or needs work from previous sessions."
-  },
-  {
-    "folder": "mode-creator",
-    "skill": "mode-creator",
-    "source": "claude-mem",
-    "description": "Interactively create, install, activate, and verify custom claude-mem modes, including domain-specific observation types, concept tags, optional Telegram alerts, bot setup, worker restart, and startup-context verification. Use this whenever someone asks to customize what claude-mem remembers, create or change a mode, track domain-specific notes, add observation types or tags, or send Telegram notifications for particular memories—even if they do not use the word \"mode."
-  },
-  {
     "folder": "oh-my-issues",
     "skill": "oh-my-issues",
     "source": "claude-mem",
     "description": "Cluster a GitHub issue backlog by root cause into a small set of plan-master issues, redirect children with a standardized comment, and bundle architectural-fix PRs that close clusters atomically. Use when an issue tracker has accumulated dozens of reports that share underlying defects, when asked to triage / consolidate / cluster / dedupe issues, when asked to build a plan series or roadmap from open issues, or when routing a new incoming bug into an existing plan."
-  },
-  {
-    "folder": "owner-goals",
-    "skill": "owner-goals",
-    "source": "claude-mem",
-    "description": "Map what the owner wants from the prompts they typed themselves (prompts an agent wrote are left out), then sort it into focus areas, asks and rules, each with dated quotes, and save them to My Work (areas as My Focus suggestions, rules as My Rules suggestions). Use when asked for \"owner goals\", \"my goals\", \"what do I want\", \"what am I asking for\", \"map my prompts\", or to refresh Goals in My Work."
   },
   {
     "folder": "pathfinder",
@@ -2160,18 +1752,6 @@
     "description": "Fully automate a release with version-bump and childhood."
   },
   {
-    "folder": "request-progress",
-    "skill": "request-progress",
-    "source": "claude-mem",
-    "description": "Group recent conversations into overall requests, review each one's progress from memory, sort each into one of the owner's focus areas, and write the build story, so My Work shows progress meters, shipping velocity and learned working preferences. Use when asked to \"group requests\", \"group by overall request\", \"review request progress\", \"refresh progress\", \"build story\", \"shipping velocity\", or \"how do I like to work with agents\"."
-  },
-  {
-    "folder": "screenpipe",
-    "skill": "screenpipe",
-    "source": "claude-mem",
-    "description": "Search screen and audio history recorded by Screenpipe and optionally save selected context into claude-mem. Use when the user asks to recall desktop activity, a meeting, or something seen in another app through Screenpipe."
-  },
-  {
     "folder": "smart-explore",
     "skill": "smart-explore",
     "source": "claude-mem",
@@ -2184,34 +1764,16 @@
     "description": "Facilitate a read-only standup across git worktrees, branches, or PRs to compare changes and produce one consolidation plan."
   },
   {
-    "folder": "timeline-report",
-    "skill": "timeline-report",
-    "source": "claude-mem",
-    "description": "Generate a \"Journey Into [Project]\" narrative report analyzing a project's entire development history from claude-mem's timeline. Use when asked for a timeline report, project history analysis, development journey, or full project report."
-  },
-  {
     "folder": "version-bump",
     "skill": "version-bump",
     "source": "claude-mem",
     "description": "Automated semantic versioning and release workflow for Claude Code plugins. Handles version increments across package.json, marketplace.json, plugin.json manifests, build verification, git tagging, GitHub releases, and changelog generation. npm publishing is done by the tag-triggered GitHub Actions workflow through npm trusted publishing."
   },
   {
-    "folder": "weekly-digests",
-    "skill": "weekly-digests",
-    "source": "claude-mem",
-    "description": "Generate a serial week-by-week narrative digest of a project's full claude-mem timeline. Splits the timeline into per-ISO-week files, then runs one consecutive subagent per week — each receiving the prior week's carry-forward block — to produce one chapter per ISO week of data. Use when asked for \"weekly digests\", \"week-by-week story\", \"serial timeline\", or \"narrative chapters\" of a project's history."
-  },
-  {
     "folder": "what-the",
     "skill": "what-the",
     "source": "claude-mem",
     "description": "What the? Use when the user wants a plain-English breakdown of something technical — the who, what, where, why, and when."
-  },
-  {
-    "folder": "wowerpoint",
-    "skill": "wowerpoint",
-    "source": "claude-mem",
-    "description": "Turn one document into a kawaii NotebookLM slide deck. Use for \"wowerpoint this\", \"make a deck about <file>\", \"turn this report into slides\", or any request to render a single document as shareable narrative slides."
   },
   {
     "folder": "hallmark",
@@ -2266,12 +1828,6 @@
     "skill": "domain-modeling",
     "source": "mattpocock/skills",
     "description": "Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR."
-  },
-  {
-    "folder": "git-guardrails-claude-code",
-    "skill": "git-guardrails-claude-code",
-    "source": "mattpocock/skills",
-    "description": "Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code."
   },
   {
     "folder": "grill-me",
