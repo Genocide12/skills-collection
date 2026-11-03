@@ -84,9 +84,9 @@ for e in manifest:
     shutil.copytree(src, dst)
 
 print(f"Установлено {len(manifest)} скиллов в {target}")
-for folder in ("taste-skill", "superpowers", "ECC"):
-    p = os.path.join(target, folder, "SKILL.md")
-    if not os.path.exists(p):
-        sys.exit(f"ОШИБКА: {p} не найден после установки")
+missing = [e["folder"] for e in manifest
+           if not os.path.exists(os.path.join(target, e["folder"], "SKILL.md"))]
+if missing:
+    sys.exit(f"ОШИБКА: нет SKILL.md для: {missing[:5]}")
 print("Проверка целостности: OK")
 PY
