@@ -6,9 +6,10 @@
 # Этот скрипт — ручной резервный вариант, если нужно поставить самому.
 #
 # Использование:
-#   ./install.sh                  # авто: в чате → /home/z/my-project/skills/, иначе → ./skills/
+#   ./install.sh                  # МЕГА-СКИЛЛЫ (12 файлов-дистиллятов из mega/) — режим по умолчанию
+#   ./install.sh --full           # полная коллекция: все 354 исходных скилла из skills/
 #   ./install.sh --target DIR     # в указанный каталог
-#   ./install.sh --only A,B       # только скиллы выбранных источников (см. --list)
+#   ./install.sh --only A,B       # (с --full) только скиллы выбранных источников (см. --list)
 #   ./install.sh --list           # показать источники и количество скиллов
 #
 # Существующие файлы перезаписываются. Одноимённые папки бэкапятся
@@ -25,11 +26,14 @@ fi
 CALLER_DIR="$PWD"
 ONLY=""
 LIST=0
+MEGA=1
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --target) TARGET="$2"; shift 2 ;;
     --only)   ONLY="$2"; shift 2 ;;
+    --full)   MEGA=0; shift ;;
+    --mega)   MEGA=1; shift ;;
     --list)   LIST=1; shift ;;
     -h|--help) grep '^#' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) echo "Неизвестный аргумент: $1" >&2; exit 1 ;;
@@ -56,10 +60,36 @@ PY
   exit 0
 fi
 
-python3 - "$TARGET" "$ONLY" <<'PY'
+python3 - "$TARGET" "$ONLY" "$MEGA" <<'PY'
 import json, os, shutil, sys, time
 
-target, only = sys.argv[1], sys.argv[2]
+target, only, mega = sys.argv[1], sys.argv[2], sys.argv[3] in ("1", "True")
+
+if mega:
+    if os.path.exists(target):
+        ts = time.strftime("%Y%m%d-%H%M%S")
+        backup = f"{target.rstrip('/')}-backup-{ts}"
+        os.makedirs(backup, exist_ok=True)
+        for d in sorted(os.listdir("mega")):
+            dst = os.path.join(target, d)
+            if os.path.isdir(dst):
+                shutil.move(dst, os.path.join(backup, d))
+        print(f"Бэкап перезаписанных папок: {backup}")
+    else:
+        os.makedirs(target, exist_ok=True)
+    installed = []
+    for d in sorted(os.listdir("mega")):
+        src = os.path.join("mega", d)
+        if not os.path.exists(os.path.join(src, "SKILL.md")):
+            continue
+        shutil.copytree(src, os.path.join(target, d))
+        installed.append(d)
+    print(f"Установлено {len(installed)} мега-скиллов в {target}:")
+    for d in installed:
+        print(f"  {d}")
+    print("Полная коллекция (354 скилла) доступна: ./install.sh --full")
+    sys.exit(0)
+
 manifest = json.load(open("manifest.json"))
 sources = {s.strip() for s in only.split(",") if s.strip()} if only else None
 if sources:

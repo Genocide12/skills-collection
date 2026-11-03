@@ -1,408 +1,500 @@
 # Полный каталог скиллов
 
-Всего: **354** скилла из **10** источников (9 репозиториев + собственные сборки).
+Всего: **354** коллекционных + **39** платформенных = **393** скилла, сведённых в **12 мега-скиллов** (`mega/`). Каталог сгруппирован по назначению: какой мега-скилл под какие задачи и из чего собран. Полные тексты исходников — в `skills/<имя>/SKILL.md`.
 
+| Мега-скилл | Для каких задач | Скиллов | Файл |
+| --- | --- | ---: | --- |
+| **01-frontend** · Сайты и интерфейсы | сделать сайт / лендинг / дашборд, react, next.js, vue, angular, vite, дизайн, ui-кит, анимации | 40 | [`mega/01-frontend/SKILL.md`](mega/01-frontend/SKILL.md) |
+| **02-documents** · Документы и презентации | отчёт / договор / письмо в word, pdf: создать, разобрать, заполнить, презентация pptx или слайды html | 9 | [`mega/02-documents/SKILL.md`](mega/02-documents/SKILL.md) |
+| **03-writing** · Тексты и контент | статья / пост / рассылка, тон и бренд-войс, seo и маркетинг | 21 | [`mega/03-writing/SKILL.md`](mega/03-writing/SKILL.md) |
+| **04-backend** · Бэкенд, API и базы данных | сервер / api / микросервис, спроектировать api или контракт, база данных: схема, sql, миграции | 43 | [`mega/04-backend/SKILL.md`](mega/04-backend/SKILL.md) |
+| **05-languages** · Языки и код-база | паттерны/идиомы конкретного языка, разобраться в чужой код-базе, почистить и упростить код | 29 | [`mega/05-languages/SKILL.md`](mega/05-languages/SKILL.md) |
+| **06-quality** · Тесты, отладка и надёжность | написать тесты / tdd, найти и починить баг, провести код-ревью | 50 | [`mega/06-quality/SKILL.md`](mega/06-quality/SKILL.md) |
+| **07-data** · Данные, ML и графики | обработать данные / датасет, построить график или дашборд, ml-модель или пайплайн | 14 | [`mega/07-data/SKILL.md`](mega/07-data/SKILL.md) |
+| **08-research** · Исследования и поиск | исследовать тему / рынок / конкурентов, поиск фактов и источников, osint / анализ компании | 20 | [`mega/08-research/SKILL.md`](mega/08-research/SKILL.md) |
+| **09-media** · Медиа и графика | сгенерировать/отредактировать картинку, видео: монтаж, анимация, титры, текст → речь, речь → текст | 13 | [`mega/09-media/SKILL.md`](mega/09-media/SKILL.md) |
+| **10-devops** · Git, релиз и эксплуатация | закоммитить / pr / релиз, ci/cd и сборка, docker, k8s, деплой | 30 | [`mega/10-devops/SKILL.md`](mega/10-devops/SKILL.md) |
+| **11-agent** · Агентские процессы | спланировать сложную задачу, распределить работу по субагентам, долгий автономный прогон | 101 | [`mega/11-agent/SKILL.md`](mega/11-agent/SKILL.md) |
+| **12-niches** · Отраслевые ниши | логистика, таможня, возвраты, производство и несоответствия, биллинг и взаиморасчёты | 23 | [`mega/12-niches/SKILL.md`](mega/12-niches/SKILL.md) |
 
-## taste-skill (1)
+## 01-frontend · Сайты и интерфейсы
 
-| Скилл | Описание |
-| --- | --- |
-| `design-taste-frontend` | tasteskill v2, the anti-slop frontend skill. Art direction for websites, distilled from a study of 247 curated gallery sites (One Page Love, Awwwards Sites of the Day). Deals researched directions (idea, composition, type, palette, phot ... |
+Сайты, лендинги и веб-приложения: вёрстка, дизайн-система, React/Next/Vue/Angular/Vite, TypeScript, анимации, доступность, производительность фронтенда.
 
-## superpowers (15)
+**Задачи:** сделать сайт / лендинг / дашборд; React, Next.js, Vue, Angular, Vite; дизайн, UI-кит, анимации; доступность (a11y); тестирование и деплой фронтенда.
 
-| Скилл | Описание |
-| --- | --- |
-| `brainstorming` | You MUST use this before any creative work - creating features, building components, adding functionality, modifying behavior, or planning anything new, in software or out of it (a talk, a business, a renovation). |
-| `diagnosing-superpowers` | Use when a superpowers session went wrong and your human partner wants to know why — repeated work, ignored plans, stumbles, poor results, a skill that didn't fire, "it took too long", "why is it so expensive", "what is it doing" — or w ... |
-| `dispatching-parallel-agents` | Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies |
-| `executing-plans` | Use when executing an implementation plan in the current session as the implementer yourself — your human partner chose inline execution, or no subagent tool is available |
-| `finishing-a-development-branch` | Use when implementation is complete, all tests pass, and you need to decide how to integrate the work |
-| `receiving-code-review` | Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation |
-| `requesting-code-review` | Use when completing tasks, implementing major features, or before merging to verify work meets requirements |
-| `subagent-driven-development` | Use when executing implementation plans with independent tasks in the current session |
-| `systematic-debugging` | Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes |
-| `test-driven-development` | Use when implementing any feature or bugfix, before writing implementation code |
-| `using-git-worktrees` | Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback |
-| `using-superpowers` | Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions |
-| `verification-before-completion` | Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always |
-| `writing-plans` | Use when you have a spec or requirements for a multi-step task, before touching code |
-| `writing-skills` | Use when creating new skills, editing existing skills, or verifying skills work before deployment |
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `accessibility` | ECC | Доступный UI по WCAG 2.2 AA для web, iOS и Android: семантические ARIA-роли, управление фокусом, контраст, размеры целей, скринридеры. |
+| `angular-developer` | ECC | Генерация Angular-кода и архитектурные советы: проекты, компоненты, сервисы, реактивность (signals, linkedSignal), практики. |
+| `click-path-audit` | ECC | Трассировка каждой кнопки по всей цепочке состояний: ловит баги, где функции по отдельности работают, а вместе отменяют друг друга. |
+| `design-system` | ECC | Дизайн-система из живого кода или аудит консистентности: извлечение токенов (цвета, типографика, отступы, тени) в файл токенов. |
+| `frontend-a11y` | ECC | Доступность в React и Next.js: семантический HTML, ARIA-атрибуты, подписи форм, клавиатура, фокус, скринридеры. |
+| `frontend-design-direction` | ECC | Дизайн-направление фронтенда ECC для продакшн-UI: сайты, дашборды, приложения, компоненты, лендинги. |
+| `frontend-patterns` | ECC | Фронтенд-паттерны React и Next.js: состояние, производительность, UI-практики. Для сборки и ревью. |
+| `liquid-glass-design` | ECC | Дизайн-система iOS 26 Liquid Glass: динамическое стекло с блюром, отражениями и морфингом для SwiftUI, UIKit и WidgetKit. |
+| `make-interfaces-feel-better` | ECC | Конкретные детали, делающие интерфейс дорогим: отступы, типографика, границы, тени, микроанимации. Ревью и улучшение UI. |
+| `motion-advanced` | ECC | Продвинутый моушен в React/Next.js: drag и drop, жесты, анимация текста, отрисовка SVG-путей, кастомные хуки, императивные секвенции. |
+| `motion-foundations` | ECC | Токены моушена, пружинные пресеты, правила производительности, адаптация под устройства, доступность, SSR-безопасность. |
+| `motion-patterns` | ECC | Боевые анимации React/Next.js: кнопка, модалка, тост, стаггер, переходы страниц, выходные анимации, скролл, раскладка. |
+| `nextjs-turbopack` | ECC | Next.js 16+ и Turbopack: инкрементальная сборка на Rust, кэш файловой системы, быстрый старт dev-сервера и HMR, сравнение с webpack. |
+| `nuxt4-patterns` | ECC | Nuxt 4: безопасность гидратации, производительность, route rules, ленивая загрузка, SSR-безопасный fetch через useFetch и useAsyncData. |
+| `react-native-patterns` | ECC | React Native и Expo: навигация Expo Router, разделение состояния (сервер/клиент/роут/форма), TanStack Query с Zod, производительность. |
+| `react-patterns` | ECC | React 18/19: дисциплина хуков, границы серверных и клиентских компонентов, Suspense и error boundaries, form actions, данные. |
+| `react-performance` | ECC | Оптимизация React и Next.js по практикам Vercel Engineering: лишние рендеры, бандл, загрузка. |
+| `react-testing` | ECC | Тесты React: Testing Library, Vitest/Jest, моки сети на MSW, проверки доступности через axe, граница с E2E. |
+| `swiftui-patterns` | ECC | SwiftUI: архитектура, состояние на @Observable, композиция вью, навигация, производительность, практики iOS и macOS. |
+| `taste` | ECC | Креатив-дирекшн клипов и шорт-форм в эстетике angelcore, cloud-trance, hyperpop: словарь жанра, палитра, монтаж. |
+| `taste-application` | ECC | Новое видео по style-паку и финальный монтаж: ритм нарезки от референса, генерация на fal, пост-обработка до готовой работы. |
+| `typescript-patterns` | ECC | TypeScript: строгая типизация и поддерживаемость, конфигурация компилятора, типы, практики современного JS. |
+| `ui-demo` | ECC | Видео-демо UI через Playwright: записывает отполированные walkthrough, туториалы и записи экрана веб-приложений. |
+| `ui-to-vue` | ECC | Скриншоты и экспорты дизайна в компоненты Vue 3 пакетно: особенно с Vant, Element Plus, Ant Design. |
+| `vite-patterns` | ECC | Vite: конфигурации, плагины, HMR, переменные окружения, прокси, SSR, library mode, пре-бандлинг зависимостей, оптимизация сборки. |
+| `vue-patterns` | ECC | Vue 3 Composition API: архитектура компонентов, реактивность, Pinia, навигация Vue Router, SSR-паттерны Nuxt. |
+| `frontend-ui-engineering` | agent-skills | Продакшн UI: доступность, адаптивность, компоненты, страницы. Для сборки и правки интерфейсов. |
+| `design-is` | claude-mem | Аудит дизайна по десяти принципам Рамса «хороший дизайн — это…», затем /make-plan под один из трёх исходов. |
+| `hallmark` | hallmark | Дизайн сайтов и новых страниц, которые выглядят сделанными, а не сгенерированными. |
+| `impeccable` | impeccable | Дизайн, редизайн, критика, аудит, полировка, упрощение и анимация фронтенда: веб-интерфейсы в целом. |
+| `prototype` | mattpocock/skills | Одноразовый прототип для ответа на дизайн-вопрос: проверка модели состояний или логики. |
+| `taste-skill` | taste-skill | tasteskill v2, the anti-slop frontend skill. Art direction for websites, distilled from a study of 247 curated gallery sites (One Page Love, Awwwards Sites of the Day). Deals researched directions (idea, composition, type,… |
 
-## claude-mem (16)
+Платформенные (8, живут в самом агенте): `agent-browser`, `browser-testing-with-devtools`, `web-design-guidelines`, `vercel-react-best-practices`, `vercel-optimize`, `vercel-react-view-transitions`, `vercel-composition-patterns`, `vercel-react-native-skills`.
 
-| Скилл | Описание |
-| --- | --- |
-| `babysit` | Watch a pull request or review cycle until it is ready to merge. Use when asked to babysit, monitor, or keep checking PR comments, reviews, and CI until all actionable issues are resolved. |
-| `build` | Fully automate a coding task with make-plan, do, and babysit. |
-| `build-and-release` | Fully automate building and releasing a coding task. |
-| `childhood` | Babysit a shipped release after merge, publication, or deployment. Verify published packages, production behavior, installed plugins, and late CI or user reports until the observation window is clean; use babysit for PR readiness before ... |
-| `design-is` | Audit a design against Dieter Rams' ten "Good design is..." principles, then hand off a /make-plan prompt for one of three outcomes — new design, refine design, or redesign. Use when the user says "audit this design", "design review", " ... |
-| `do` | Execute a phased implementation plan using subagents. Use when asked to execute, run, or carry out a plan — especially one created by make-plan. |
-| `handoff` | Generate a HANDOFF.md that captures goal, current state, files touched, failed attempts, and next steps — so a fresh Claude session can continue exactly where this one left off. Use when sessions are getting long, Claude keeps retrying ... |
-| `learn-codebase` | Prime a codebase by reading every source file in full. Use when starting work on a new or unfamiliar project, or when the user asks to "learn the codebase", "read the codebase", "prime", or "get up to speed". |
-| `make-plan` | Create a detailed, phased implementation plan with documentation discovery. Use when asked to plan a feature, task, or multi-step implementation — especially before executing with do. |
-| `oh-my-issues` | Cluster a GitHub issue backlog by root cause into a small set of plan-master issues, redirect children with a standardized comment, and bundle architectural-fix PRs that close clusters atomically. Use when an issue tracker has accumulat ... |
-| `pathfinder` | Map a codebase into feature-grouped flowcharts, identify duplicated concerns across features, and propose a unified architecture. Use when asked to "find the ideal path," unify duplicated systems, or audit architecture before a refactor ... |
-| `release` | Fully automate a release with version-bump and childhood. |
-| `smart-explore` | Token-optimized structural code search using tree-sitter AST parsing. Use instead of reading full files when you need to understand code structure, find functions, or explore a codebase efficiently. |
-| `standup` | Facilitate a read-only standup across git worktrees, branches, or PRs to compare changes and produce one consolidation plan. |
-| `version-bump` | Automated semantic versioning and release workflow for Claude Code plugins. Handles version increments across package.json, marketplace.json, plugin.json manifests, build verification, git tagging, GitHub releases, and changelog generat ... |
-| `what-the` | What the? Use when the user wants a plain-English breakdown of something technical — the who, what, where, why, and when. |
+## 02-documents · Документы и презентации
 
-## ECC (257)
+Офисные форматы: Word (docx), PDF, PowerPoint (pptx), Excel (xlsx), подписи и поля e-sign, переводы документов, Google Workspace.
 
-| Скилл | Описание |
-| --- | --- |
-| `accessibility` | Design, implement, and audit accessible UI to WCAG 2.2 Level AA across Web, iOS, and Android — semantic ARIA roles and labels, accessibility traits and hints, focus management, contrast, target size, and screen-reader support. Use when ... |
-| `agent-architecture-audit` | Full-stack diagnostic for agent and LLM applications. Audits the 12-layer agent stack for wrapper regression, memory pollution, tool discipline failures, hidden repair loops, and rendering corruption. Produces severity-ranked findings w ... |
-| `agent-harness-construction` | Design and optimize AI agent action spaces, tool definitions, and observation formatting for higher completion rates. Use when defining or revising an agent's tool set, action space, or observation format. |
-| `agent-introspection-debugging` | Structured self-debugging workflow for AI agent failures using capture, diagnosis, contained recovery, and introspection reports. Use when an agent run fails and you need a reproducible diagnosis instead of a retry. |
-| `agent-runtime-gateway-smoke-test` | Verify a local agent API, temporary gateway tunnel, and remote sandbox callback with a tool-free task, then restore the original app connection. |
-| `agent-security-hardening` | Security hardening guidance for AI agent frameworks that process untrusted content, invoke tools, write workspace files, manage runtime identifiers, or handle credentials. Use when building or reviewing an agent runtime, autonomous work ... |
-| `agent-self-evaluation` | Use after completing any non-trivial task. The agent self-rates its output on 5 axes — accuracy, completeness, clarity, actionability, conciseness — with concrete evidence per criterion. Produces a structured 1-5 scorecard with specific ... |
-| `agentic-engineering` | Operate as an agentic engineer using eval-first execution, decomposition, and cost-aware model routing. Use when planning or executing engineering work that agents will carry out end to end. |
-| `ai-first-engineering` | Engineering operating model for teams where AI agents generate a large share of implementation output. Use when setting team process, review gates, or ownership rules for a codebase largely written by agents. |
-| `ai-regression-testing` | Regression testing strategies for AI-assisted development. Sandbox-mode API testing without database dependencies, automated bug-check workflows, and patterns to catch AI blind spots where the same model writes and reviews code. Use whe ... |
-| `android-clean-architecture` | Clean Architecture patterns for Android and Kotlin Multiplatform projects — module structure, dependency rules, UseCases, Repositories, and data layer patterns. Use when structuring modules, layers, or data flow in an Android or KMP pro ... |
-| `angular-developer` | Generates Angular code and provides architectural guidance. Trigger when creating projects, components, or services, or for best practices on reactivity (signals, linkedSignal, resource), forms, dependency injection, routing, SSR, acces ... |
-| `api-connector-builder` | Build a new API connector or provider by matching the target repo's existing integration pattern exactly. Use when adding one more integration without inventing a second architecture. |
-| `api-design` | REST API design patterns including resource naming, status codes, pagination, filtering, error responses, versioning, and rate limiting for production APIs. Use when designing or reviewing REST endpoints, resource names, status codes, p ... |
-| `architecture-decision-records` | Capture architectural decisions as numbered ADR markdown files in docs/adr/ with context, alternatives considered, consequences, and an index README. Use when the user says 'record this decision' or 'ADR this', chooses between framework ... |
-| `article-writing` | Write articles, guides, blog posts, tutorials, newsletter issues, and other long-form content in a distinctive voice derived from supplied examples or brand guidance. Use when the user wants polished written content longer than a paragr ... |
-| `backend-patterns` | Backend architecture patterns, API design, database optimization, and server-side best practices for Node.js, Express, and Next.js API routes. Use when building or reviewing Node.js, Express, or Next.js API routes and their data access. |
-| `benchmark` | Measure performance baselines and detect regressions across browser Core Web Vitals (LCP, INP, CLS, page weight), API endpoint latency percentiles, and build/test feedback times, with before/after comparison stored in git-tracked .ecc/b ... |
-| `benchmark-methodology` | Score a scoped competitor set into comparable profile cards: nine weighted dimensions (positioning, voice, visual craft, offer packaging, evidence, enterprise-readiness, thought leadership, pricing, client tension) with 1-5 evidence-anc ... |
-| `benchmark-optimization-loop` | Convert 'make it faster' requests into a bounded measured optimization loop — baseline first, generate one-hypothesis variants, benchmark each against a correctness gate, and promote the fastest safe variant with reproducible commands. ... |
-| `bengali-nlp` | Bengali (Bangla) text processing patterns including Unicode normalization, script detection, tokenization, conjunct handling, and Bangla-specific NLP best practices for AI applications. |
-| `blender-motion-state-inspection` | Use this skill when inspecting Blender characters, rigs, poses, animation retargeting, ground contact, facing direction, or model-vs-motion alignment where screenshots alone are not enough. |
-| `blueprint` | Turn a one-line objective into a step-by-step construction plan for multi-session, multi-agent engineering projects: one-PR-sized steps with self-contained context briefs, dependency graph with parallel-step detection, adversarial revie ... |
-| `brand-discovery` | Run a structured, resumable multi-session brand identity interview across 8 modules (purpose, positioning, audience, personality, voice, narrative, founder tension) using laddering, 5 Whys, and projective techniques, persisting answers ... |
-| `brand-voice` | Build a source-derived writing style profile from real posts, essays, launch notes, docs, or site copy, then reuse that profile across content, outreach, and social workflows. Use when the user wants voice consistency without generic AI ... |
-| `brownfield-retrospective` | Run the ECC engineering process retroactively against an existing project slice. Audit current state, reconstruct past decisions, produce a four-axis gap register (thinking, coding practice, missing features, technology selection), then ... |
-| `bun-runtime` | Bun as runtime, package manager, bundler, and test runner. When to choose Bun vs Node, migration notes, and Vercel support. |
-| `canary-watch` | Use this skill to monitor and verify a deployed URL after releases — checks HTTP endpoints, SSE streams, static assets, console errors, and performance regressions after deploys, merges, or dependency upgrades. Smoke / canary / post-dep ... |
-| `carrier-relationship-management` | Manage truckload, LTL, and intermodal carrier portfolios: sourcing and FMCSA vetting, freight rate and fuel-surcharge negotiation, RFPs and routing guides, carrier scorecards, allocation, and renewals. Use when onboarding carriers, runn ... |
-| `change-impact` | Perform evidence-backed impact analysis before changing code, data, interfaces, or governance documents, then compare the planned impact with the actual diff after implementation. Covers call paths, data and schema, API contracts, tests ... |
-| `cisco-ios-patterns` | Cisco IOS and IOS-XE review patterns for show commands, config hierarchy, wildcard masks, ACL placement, interface hygiene, and safe change-window verification. Use when reading, writing, or reviewing Cisco IOS / IOS-XE configuration or ... |
-| `click-path-audit` | Trace every user-facing button/touchpoint through its full state change sequence to find bugs where functions individually work but cancel each other out, produce wrong final state, or leave the UI in an inconsistent state. Use when: sy ... |
-| `clickhouse-io` | ClickHouse database patterns, query optimization, analytics, and data engineering best practices for high-performance analytical workloads. Use when writing ClickHouse schemas or queries, or when an analytical query is too slow. |
-| `code-tour` | Create CodeTour `.tour` files — persona-targeted, step-by-step walkthroughs with real file and line anchors. Use for onboarding tours, architecture walkthroughs, PR tours, RCA tours, and structured "explain how this works" requests. Use ... |
-| `codebase-onboarding` | Analyze an unfamiliar codebase and generate a structured onboarding guide with architecture map, key entry points, conventions, and a starter CLAUDE.md. Use when joining a new project or setting up Claude Code for the first time in a repo. |
-| `coding-standards` | Baseline cross-project coding conventions for naming, readability, immutability, and code-quality review. Use detailed frontend or backend skills for framework-specific patterns. Use when reviewing code quality or naming with no framewo ... |
-| `competitive-platform-analysis` | Use when scoping a competitive landscape — identifying, categorising, and score-filtering a competitor set before any benchmarking begins. Decides who counts as a competitor, which tier they belong to, and which sources to mine. First s ... |
-| `competitive-report-structure` | Assemble scored competitor profile cards (from benchmark-methodology) into a decision-grade competitive report with landscape map, competitor tiers, benchmarking matrix, white-space analysis, strategic recommendations, and team alignmen ... |
-| `compose-multiplatform-patterns` | Compose Multiplatform and Jetpack Compose patterns for KMP projects — state management, navigation, theming, performance, and platform-specific UI. Use when building Compose or Jetpack Compose UI, state, navigation, or theming in a KMP ... |
-| `connections-optimizer` | Reorganize the user's X and LinkedIn network with review-first pruning, add/follow recommendations, and channel-specific warm outreach drafted in the user's real voice. Use when the user wants to clean up following lists, grow toward cu ... |
-| `content-engine` | Create platform-native content systems for X, LinkedIn, TikTok, YouTube, newsletters, and repurposed multi-platform campaigns. Use when the user wants social posts, threads, scripts, content calendars, or one source asset adapted cleanl ... |
-| `content-hash-cache-pattern` | Cache expensive file processing results using SHA-256 content hashes — path-independent, auto-invalidating, with service layer separation. Use when repeated file processing is slow and results should be cached and invalidated by content ... |
-| `context-and-decisions` | Govern stable domain context with a narrowly scoped CONTEXT.md when needed, and route hard-to-reverse decisions to ECC's existing architecture-decision-records skill. Use when domain terms require repeated explanation, one term has mult ... |
-| `continuous-agent-loop` | Patterns for continuous autonomous agent loops with quality gates, evals, and recovery controls. Use when running an agent loop that must self-check, gate on evals, and recover from failures. |
-| `contract-first` | Coordinate frontend/backend or service-to-service work through one authoritative machine-checkable contract (OpenAPI, AsyncAPI, Protocol Buffers, or JSON Schema), with generated consumer types and contract-verified integration. Use when ... |
-| `conventional-commit-review` | Reviews staged changes and drafts a Conventional Commits-compliant commit message with the right type, scope, and length. Use before committing, or when the user asks to write, fix, or review a commit message. |
-| `cost-aware-llm-pipeline` | Cost optimization patterns for LLM API usage — model routing by task complexity, budget tracking, retry logic, and prompt caching. Use when LLM spend needs to come down, or when routing tasks across model tiers and budgets. |
-| `council` | Convene a four-voice council for ambiguous decisions, tradeoffs, and go/no-go calls. Use when multiple valid paths exist and you need structured disagreement before choosing. |
-| `counterparty-channel-discipline` | Per-channel strict prompts, mention gating, silent observation, and a communication autonomy policy for agents that sit in shared channels with external counterparties. Use when an agent joins group chats, shared channels, or DMs where ... |
-| `cpp-coding-standards` | C++ coding standards based on the C++ Core Guidelines (isocpp.github.io). Use when writing, reviewing, or refactoring C++ code to enforce modern, safe, and idiomatic practices. |
-| `cpp-testing` | Use only when writing/updating/fixing C++ tests, configuring GoogleTest/CTest, diagnosing failing or flaky tests, or adding coverage/sanitizers. |
-| `crosspost` | Multi-platform content distribution across X, LinkedIn, Threads, and Bluesky. Adapts content per platform using content-engine patterns. Never posts identical content cross-platform. Use when the user wants to distribute content across ... |
-| `csharp-testing` | C# and .NET testing patterns with xUnit, FluentAssertions, mocking, integration tests, and test organization best practices. Use when writing or reviewing xUnit tests, mocks, or integration tests in a C# / .NET project. |
-| `customer-billing-ops` | Operate customer billing workflows such as subscriptions, refunds, churn triage, billing-portal recovery, and plan analysis using connected billing tools like Stripe. Use when the user needs to help a customer, inspect subscription stat ... |
-| `customs-trade-compliance` | Codified customs and trade compliance expertise — HS/HTS tariff classification with GRI rules, commercial invoices and entry documentation, Incoterms 2020, FTA qualification and duty optimization (USMCA, RCEP, FTZs, drawback), denied-pa ... |
-| `dart-flutter-patterns` | Production-ready Dart and Flutter patterns covering null safety, immutable state with Freezed, async composition, widget architecture, state management (BLoC, Riverpod, Provider), GoRouter navigation with auth guards, Dio networking, er ... |
-| `dashboard-builder` | Build monitoring dashboards that answer real operator questions for Grafana, SigNoz, and similar platforms. Use when turning metrics into a working dashboard instead of a vanity board. |
-| `data-scraper-agent` | Build a fully automated AI-powered data collection agent for any public source — job boards, prices, news, GitHub, sports, anything. Runs on a schedule, enriches data with a free LLM (Gemini Flash), stores results in Notion/Sheets/Supab ... |
-| `data-throughput-accelerator` | Diagnose and accelerate large data movement — ingestion, backfill, export, ETL, warehouse loading, manifest catch-up, and table synchronization — by isolating the true bottleneck, benchmarking variants, and codifying the fastest path wi ... |
-| `database-migrations` | Safe, reversible database migration patterns: forward-only production changes, expand-contract zero-downtime renames, concurrent indexes, batched backfills, and per-tool workflows for PostgreSQL, Prisma, Drizzle, Kysely, Django, and gol ... |
-| `deep-research` | Produce cited research reports from multiple web sources using firecrawl and exa MCP tools — plan sub-questions, search and deep-read sources, then synthesize findings with inline citations and confidence levels. Use when the user asks ... |
-| `defi-amm-security` | Security checklist for Solidity AMM contracts, liquidity pools, and swap flows. Covers reentrancy, CEI ordering, donation or inflation attacks, oracle manipulation, slippage, admin controls, and integer math. Use when auditing or writin ... |
-| `deployment-patterns` | Deployment workflows, CI/CD pipeline patterns, Docker containerization, health checks, rollback strategies, and production readiness checklists for web applications. Use when setting up CI/CD, containerizing an app, or checking producti ... |
-| `design-system` | Generate a design system from an existing codebase or audit one for visual consistency: extract tokens (colors, typography, spacing, shadows) into design-tokens.json and CSS custom properties with DESIGN.md rationale and an interactive ... |
-| `dev-team` | Simulate a collaborative dev team session where multiple role-based personas (PM, Architect, Developer, QA) respond to the same problem together in one session. Use when designing a feature, reviewing a proposal, or onboarding a new ini ... |
-| `django-celery` | Django + Celery async task patterns — configuration, task design, beat scheduling, retries, canvas workflows, monitoring, and testing. Use when adding background jobs, scheduled tasks, or async processing to a Django app. |
-| `django-patterns` | Django architecture patterns, REST API design with DRF, ORM best practices, caching, signals, middleware, and production-grade Django apps. Use when building or reviewing Django apps, DRF APIs, ORM queries, or caching. |
-| `django-security` | Django security best practices, authentication, authorization, CSRF protection, SQL injection prevention, XSS prevention, and secure deployment configurations. Use when reviewing Django authentication, authorization, input handling, or ... |
-| `django-tdd` | Django testing strategies with pytest-django, TDD methodology, factory_boy, mocking, coverage, and testing Django REST Framework APIs. Use when writing Django or DRF tests with pytest-django, or driving a Django feature test-first. |
-| `django-verification` | Run the full Django verification loop — environment check, mypy/ruff/black linting, migration safety, pytest with coverage targets, pip-audit and bandit security scans, settings and logging review, and diff review — producing a phased p ... |
-| `docker-patterns` | Docker and Docker Compose patterns for local development, hardened CLI installer harnesses, container security, networking, volumes, and multi-service orchestration. Use when creating or reviewing Dockerfiles and Compose services, testi ... |
-| `docs-governance` | Route broad documentation-governance requests to existing ECC skills and run an opt-in, read-only audit of mapped documentation roles, links, ADR indexes, and evidence references. Use when a user asks for documentation governance, proje ... |
-| `dotnet-patterns` | Idiomatic C# and .NET patterns, conventions, dependency injection, async/await, and best practices for building robust, maintainable .NET applications. Use when writing or reviewing C# / .NET code — DI, async, or general conventions. |
-| `dynamic-workflow-mode` | Design task-local harnesses, eval gates, and reusable skill extraction for Claude dynamic workflow mode and other adaptive agent harnesses. Use when building a task-local harness, adding eval gates, or extracting a reusable skill from a ... |
-| `e2e-testing` | Playwright E2E testing patterns, Page Object Model, configuration, CI/CD integration, artifact management, and flaky test strategies. Use when writing Playwright tests, structuring page objects, or fixing flaky E2E runs in CI. |
-| `ecc-tools-cost-audit` | Evidence-first ECC Tools burn and billing audit workflow. Use when investigating runaway PR creation, quota bypass, premium-model leakage, duplicate jobs, or GitHub App cost spikes in the ECC Tools repo. |
-| `email-ops` | Evidence-first mailbox triage, drafting, send verification, and sent-mail-safe follow-up workflow for ECC. Use when the user wants to organize email, draft or send through the real mail surface, or prove what landed in Sent. |
-| `energy-procurement` | Procure electricity and natural gas for commercial and industrial facilities: tariff and rate-schedule optimization, demand-charge mitigation, supplier RFPs, fixed/index/block-and-index hedging, renewable PPA and REC evaluation, and sus ... |
-| `enterprise-agent-ops` | Operational controls for long-lived or cloud-hosted agent systems — runtime lifecycle (start, pause, stop, restart), observability (logs, metrics, traces), least-privilege safety scopes and kill switches, and rollout/rollback change man ... |
-| `error-handling` | Patterns for robust error handling across TypeScript, Python, and Go. Covers typed errors, error boundaries, retries, circuit breakers, and user-facing error messages. Use when designing error types, retries, circuit breakers, or user-f ... |
-| `esign-field-placement` | Deterministic method for placing signature, date, and text fields in a web e-signature composer through a browser automation session, using a fixed signature page, numeric Location panel coordinates instead of drag, and a save-as-draft ... |
-| `eval-harness` | Eval-driven development (EDD) framework for AI coding sessions — define capability and regression evals before coding, grade with code-based, model-based, rule, or human graders, and track pass@k and pass^k reliability. Use when definin ... |
-| `evm-token-decimals` | Prevent silent decimal mismatch bugs across EVM chains. Covers runtime decimal lookup, chain-aware caching, bridged-token precision drift, and safe normalization for bots, dashboards, and DeFi tools. Use when handling token amounts acro ... |
-| `fastapi-patterns` | FastAPI best practices covering project structure, Pydantic v2 schemas, dependency injection, async handlers, authentication, authorization, transactional service layers, and testing with httpx and pytest. Use when building or reviewing ... |
-| `finance-billing-ops` | Evidence-first revenue, pricing, refunds, team-billing, and billing-model truth workflow for ECC. Use when the user wants a sales snapshot, pricing comparison, duplicate-charge diagnosis, or code-backed billing reality instead of generi ... |
-| `flutter-dart-code-review` | Library-agnostic Flutter/Dart code review checklist covering widget best practices, state management patterns (BLoC, Riverpod, Provider, GetX, MobX, Signals), Dart idioms, performance, accessibility, security, and clean architecture. Us ... |
-| `foundation-models-on-device` | Apple FoundationModels framework for on-device LLM — text generation, guided generation with @Generable, tool calling, and snapshot streaming in iOS 26+. Use when adding on-device LLM features with Apple FoundationModels on iOS 26+. |
-| `frontend-a11y` | Accessibility patterns for React and Next.js — semantic HTML, ARIA attributes, form labeling, keyboard navigation, focus management, and screen reader support. Use when building or reviewing forms, modals, dropdowns, tooltips, or tabs, ... |
-| `frontend-design-direction` | Set an ECC-specific frontend design direction for production UI work. Use when building or improving websites, dashboards, applications, components, landing pages, visual tools, or any web UI that needs stronger product-specific design ... |
-| `frontend-patterns` | Frontend development patterns for React, Next.js, state management, performance optimization, and UI best practices. Use when building or reviewing React or Next.js components, state, or render performance. |
-| `frontend-slides` | Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a talk/pitch. Helps non-designers discov ... |
-| `fsharp-testing` | F# testing patterns with xUnit, FsUnit, Unquote, FsCheck property-based testing, integration tests, and test organization best practices. Use when writing F# tests with xUnit, FsUnit, Unquote, or FsCheck. |
-| `gan-style-harness` | GAN-inspired Generator-Evaluator agent harness for building high-quality applications autonomously. Based on Anthropic's March 2026 harness design paper. Use when a feature should be built autonomously through generator and evaluator it ... |
-| `generating-python-installer` | Commercial-grade Python installer expert for Windows: Nuitka extreme compilation, dist slimming, DLL footprint analysis, and Inno Setup packaging to ship the smallest, fastest installers. Use when a Python app must ship as a minimal, fa ... |
-| `git-workflow` | Git workflow patterns including branching strategies, commit conventions, keeping history clean and readable, tidying local commits before merging, merge vs rebase, conflict resolution, and collaborative development best practices for t ... |
-| `github-ops` | GitHub repository operations, automation, and management. Issue triage, PR management, CI/CD operations, release management, and security monitoring using the gh CLI. Use when the user wants to manage GitHub issues, PRs, CI status, rele ... |
-| `golang-patterns` | Idiomatic Go patterns, best practices, and conventions for building robust, efficient, and maintainable Go applications. Use when writing or reviewing Go code and idiomatic structure or conventions are in question. |
-| `golang-testing` | Go testing patterns including table-driven tests, subtests, benchmarks, fuzzing, and test coverage. Follows TDD methodology with idiomatic Go practices. Use when writing Go tests — table-driven cases, subtests, benchmarks, fuzzing, or c ... |
-| `google-workspace-ops` | Operate across Google Drive, Docs, Sheets, and Slides as one workflow surface for plans, trackers, decks, and shared documents. Use when the user needs to find, summarize, edit, migrate, or clean up Google Workspace assets without dropp ... |
-| `growth-log` | Write growth log entries that extract reusable patterns from completed work — root cause, transferable rule, and a recognizable signal — instead of diary-style event narration, with a 4-8 sentence template and merge-duplicates disciplin ... |
-| `healthcare-cdss-patterns` | Clinical Decision Support System (CDSS) development patterns. Drug interaction checking, dose validation, clinical scoring (NEWS2, qSOFA), alert severity classification, and integration into EMR workflows. Use when building clinical dec ... |
-| `healthcare-emr-patterns` | EMR/EHR development patterns for healthcare applications. Clinical safety, encounter workflows, prescription generation, clinical decision support integration, and accessibility-first UI for medical data entry. Use when building EMR or ... |
-| `healthcare-eval-harness` | Patient safety evaluation harness for healthcare application deployments. Automated test suites for CDSS accuracy, PHI exposure, clinical workflow integrity, and integration compliance. Blocks deployments on safety failures. Use when a ... |
-| `healthcare-phi-compliance` | Protected Health Information (PHI) and PII compliance patterns for healthcare applications: data classification, row-level access control, tamper-proof audit trails, schema tagging, and common leak vectors such as logs, URLs, and browse ... |
-| `hermes-imports` | Convert local Hermes operator workflows into sanitized ECC skills and release-pack artifacts. Use when preparing a Hermes workflow for public ECC reuse without leaking private workspace state, credentials, or local-only paths. |
-| `hexagonal-architecture` | Design, implement, and refactor Ports & Adapters systems with clear domain boundaries, dependency inversion, and testable use-case orchestration across TypeScript, Java, Kotlin, and Go services. Use when introducing or refactoring towar ... |
-| `hipaa-compliance` | HIPAA-specific entrypoint for healthcare privacy and security work. Use when a task is explicitly framed around HIPAA, PHI handling, covered entities, BAAs, breach posture, or US healthcare compliance requirements. |
-| `i18n-sync` | Translate and synchronize application JSON locale files using source-key usage, project terminology, and focused validation. Use when adding keys or languages, updating source copy, or reviewing missing and stale translations. |
-| `inherit-legacy-style` | Prevent AI style drift on legacy projects by scanning the codebase for implicit conventions, resolving conflicts with the operator one at a time, and writing an enforceable .ai-style-rules.md (Golden Files, naming rules, DONTs) plus an ... |
-| `intent-driven-development` | Turn ambiguous or high-impact product and engineering changes into scoped, verifiable acceptance criteria before or alongside implementation. Use when a user asks to clarify a feature, define acceptance criteria, de-risk a security/data ... |
-| `inventory-demand-planning` | Codified demand planning expertise for multi-location retailers: demand forecasting method selection, ABC/XYZ segmentation, safety stock and reorder-point optimization, promotional lift and post-promo dip estimation, and seasonal transi ... |
-| `investor-materials` | Create and update pitch decks, one-pagers, investor memos, accelerator applications, financial models, and fundraising materials. Use when the user needs investor-facing documents, projections, use-of-funds tables, milestone plans, or m ... |
-| `investor-outreach` | Draft cold emails, warm intro blurbs, follow-ups, update emails, and investor communications for fundraising. Use when the user wants outreach to angels, VCs, strategic investors, or accelerators and needs concise, personalized, investo ... |
-| `ios-icon-gen` | Generate iOS app icons as PNG imagesets for Xcode asset catalogs from SF Symbols (5000+ Apple-native) or Iconify API (275k+ open source icons from 200+ collections). Use when generating icons, creating icon assets, adding icons to asset ... |
-| `issue-review` | Review a GitHub issue the way /code-review reviews a PR. Fetches the issue with the gh CLI, checks the report against the current codebase, searches for duplicates and prior fixes, scores completeness, assigns severity, and writes a tri ... |
-| `iterative-retrieval` | Pattern for progressively refining context retrieval to solve the subagent context problem. Use when a subagent lacks the context it needs and retrieval must be refined across passes. |
-| `ito-baskets` | Read-only Itô basket and prediction-market data skill. Index the live basket catalog, compare a basket against user-supplied research or a watchlist, build a source-grounded market brief, or draft a non-executable planning worksheet. Us ... |
-| `ito-inference` | Inspect the availability of model serving on a completed Itô compute booking and, when the canonical backend becomes available, hand off an explicitly confirmed serving manifest. Use after ito-compute has booked GPU nodes and the user a ... |
-| `java-coding-standards` | Java coding standards for Spring Boot and Quarkus services: naming, immutability, Optional usage, streams, exceptions, generics, CDI, reactive patterns, and project layout. Automatically applies framework-specific conventions. Use when ... |
-| `jpa-patterns` | JPA/Hibernate patterns for entity design, relationships, query optimization, transactions, auditing, indexing, pagination, and pooling in Spring Boot. Use when designing JPA entities or relationships, or when a Hibernate query, transact ... |
-| `kotlin-coroutines-flows` | Kotlin Coroutines and Flow patterns for Android and KMP — structured concurrency, Flow operators, StateFlow, error handling, and testing. Use when writing coroutines or Flow code on Android or KMP, or debugging cancellation and concurrency. |
-| `kotlin-exposed-patterns` | JetBrains Exposed ORM patterns including DSL queries, DAO pattern, transactions, HikariCP connection pooling, Flyway migrations, and repository pattern. Use when working with the Exposed ORM — DSL or DAO queries, transactions, pooling, ... |
-| `kotlin-ktor-patterns` | Ktor server patterns including routing DSL, plugins, authentication, Koin DI, kotlinx.serialization, WebSockets, and testApplication testing. Use when building a Ktor server — routing, plugins, auth, DI, serialization, or tests. |
-| `kotlin-patterns` | Idiomatic Kotlin patterns, best practices, and conventions for building robust, efficient, and maintainable Kotlin applications with coroutines, null safety, and DSL builders. Use when writing or reviewing Kotlin code and idiomatic stru ... |
-| `kotlin-testing` | Kotlin testing patterns with Kotest, MockK, coroutine testing, property-based testing, and Kover coverage. Follows TDD methodology with idiomatic Kotlin practices. Use when writing Kotlin tests with Kotest or MockK, or testing coroutine ... |
-| `kubernetes-patterns` | Kubernetes workload patterns, resource management, RBAC, probes, autoscaling, ConfigMap/Secret handling, and kubectl debugging for production-grade deployments. Use when writing or reviewing Kubernetes manifests, or debugging probes, RB ... |
-| `laravel-patterns` | Laravel architecture patterns, routing/controllers, Eloquent ORM, service layers, queues, events, caching, and API resources for production apps. Use when building or reviewing Laravel apps — controllers, Eloquent, service layers, queue ... |
-| `laravel-security` | Laravel security best practices — authentication, authorization, Eloquent safety, CSRF, XSS prevention, API security, and secure deployment configurations. Use when reviewing Laravel auth, Eloquent safety, CSRF, XSS, API security, or de ... |
-| `laravel-tdd` | Laravel testing strategies with PHPUnit, Pest, model factories, HTTP tests, Sanctum authentication testing, mocking, and coverage. Use when writing Laravel tests with PHPUnit or Pest, or driving a Laravel feature test-first. |
-| `laravel-verification` | Verification loop for Laravel projects: env checks, linting, static analysis, tests with coverage, security scans, and deployment readiness. Use when verifying a Laravel project before merge or deploy — lint, static analysis, tests, cov ... |
-| `latency-critical-systems` | Optimize and verify latency-sensitive systems — realtime dashboards, market data feeds, streaming agents, execution gateways, queues, and caches — by tracking p50/p95/p99 latency, freshness age, and queue depth, mapping hot paths, and r ... |
-| `lead-intelligence` | AI-native lead intelligence and outreach pipeline. Replaces Apollo, Clay, and ZoomInfo with agent-powered signal scoring, mutual ranking, warm path discovery, source-derived voice modeling, and channel-specific outreach across email, Li ... |
-| `liquid-glass-design` | iOS 26 Liquid Glass design system — dynamic glass material with blur, reflection, and interactive morphing for SwiftUI, UIKit, and WidgetKit. Use when building iOS 26 Liquid Glass UI in SwiftUI, UIKit, or WidgetKit. |
-| `living-docs-governance` | Keep a long-lived project's documentation from rotting by assigning existing project docs clear constitution, map, status, and history roles, then wiring the active agent harness to those canonical sources. Use in the maintain phase whe ... |
-| `llm-trading-agent-security` | Security patterns for autonomous trading agents with wallet or transaction authority. Covers prompt injection, spend limits, pre-send simulation, circuit breakers, MEV protection, and key handling. Use when an autonomous agent holds wal ... |
-| `logistics-exception-management` | Codified freight-exception handling expertise for shipment delays, damages, losses, shortages, and carrier disputes, with escalation protocols, carrier-specific behaviors by mode, claims procedures, and eat-the-cost vs fight-the-claim j ... |
-| `loop-design-check` | Design a goal-oriented agent loop or review one for failure modes: spinning, Goodhart-gaming the verifier, or running a wrong answer to completion. Covers machine-decidable goals, loop types, plan/build/judge skeletons, and runaway prev ... |
-| `mailtrap-email-integration` | Guides agents through integrating transactional email sending via Mailtrap's Email API, including sandbox testing, domain verification, and API authentication. Use when implementing email-sending features, debugging delivery issues, or ... |
-| `make-interfaces-feel-better` | Apply concrete design-engineering details that make interfaces feel polished. Use when reviewing or improving UI spacing, typography, borders, shadows, motion, hit areas, icons, text wrapping, and interaction states. |
-| `manim-video` | Build reusable Manim explainers for technical concepts, graphs, system diagrams, and product walkthroughs, then hand off to the wider ECC video stack if needed. Use when the user wants a clean animated explainer rather than a generic ta ... |
-| `market-research` | Conduct market research, competitive analysis, investor due diligence, and industry intelligence with source attribution and decision-oriented summaries. Use when the user wants market sizing, competitor comparisons, fund research, tech ... |
-| `marketing-campaign` | End-to-end marketing campaign planning and execution. Covers audience research, positioning, campaign angle definition, landing page copy, email sequences, social posts, ad copy, short-form video scripts, and content calendars. Use as t ... |
-| `master-agreement-generator` | Generate review drafts of counterparty master agreements from one template plus a JSON spec, with role-selected clauses and a Schedule A workflow limited to the executed agreement's notice authority. Use when you need reproducible draft ... |
-| `mcp-server-patterns` | Build MCP servers with Node/TypeScript SDK — tools, resources, prompts, Zod validation, stdio vs Streamable HTTP. Use Context7 or official MCP docs for latest API. Use when building or debugging an MCP server — tools, resources, prompts ... |
-| `messages-ops` | Evidence-first live messaging workflow for ECC. Use when the user wants to read texts or DMs, recover a recent one-time code, inspect a thread before replying, or prove which message source was actually checked. |
-| `ml-adoption-playbook` | End-to-end methodology for AI agents and software engineers to add machine learning algorithms to existing non-ML codebases. Covers problem framing, data readiness, architectural decoupling, and baseline model integration. Use when addi ... |
-| `mle-workflow` | Production machine-learning engineering workflow for data contracts, reproducible training, model evaluation, deployment, monitoring, and rollback. Use when building, reviewing, or hardening ML systems beyond one-off notebooks. |
-| `module-governance` | Establish or maintain a business module's local agent instructions, domain-context links, and interface ownership when implementing a new module or changing its responsibilities. Reuse project-level rules and existing ECC workflows; ord ... |
-| `module-regression` | Govern cross-module regression in large repositories with a REGRESSION.md ledger that records each module's downstream consumers and executable acceptance command. After a change, run the changed module and every affected downstream com ... |
-| `motion-advanced` | Advanced motion patterns for React / Next.js — drag & drop, gestures, text animations, SVG path drawing, custom hooks, imperative sequences (useAnimate), loaders, and the full API decision tree. Requires motion-foundations. Use when bui ... |
-| `motion-foundations` | Motion tokens, spring presets, performance rules, device adaptation, accessibility enforcement, and SSR safety for React / Next.js using motion/react. Foundation layer — all other motion skills depend on this. Use when setting up motion ... |
-| `motion-patterns` | Production-ready animation patterns for React / Next.js — button, modal, toast, stagger, page transitions, exit animations, scroll, and layout — built on motion-foundations tokens and springs. Use when animating a specific UI element in ... |
-| `mybatis-patterns` | MyBatis and MyBatis-Spring patterns for mapper design, XML and annotation SQL, result mapping, dynamic SQL safety, transactions, batching, pagination, and query performance. Use when building or reviewing Java persistence code with MyBa ... |
-| `mysql-patterns` | MySQL and MariaDB schema, query, indexing, transaction, replication, and connection-pool patterns for production backends. Use when designing MySQL or MariaDB schemas and indexes, or when a query, transaction, or replica lags. |
-| `nanoclaw-repl` | Operate and extend NanoClaw, ECC's zero-dependency session-aware REPL, with persistent markdown-backed sessions and slash commands for model switching, skill loading, session branching, cross-session search, history compaction, and expo ... |
-| `nasiko-control-plane` | Manage the experimental Nasiko CLI lifecycle through ECC — read-only status checks, consent-gated install of the pinned qualified version with dry-run preview, and ownership-checked uninstall, under explicit telemetry and secrets bounda ... |
-| `nestjs-patterns` | NestJS architecture patterns for modules, controllers, providers, DTO validation, guards, interceptors, config, and production-grade TypeScript backends. Use when building or reviewing a NestJS backend — modules, providers, DTO validati ... |
-| `network-bgp-diagnostics` | Diagnostics-only BGP troubleshooting patterns for neighbor state, route exchange, prefix policy, AS path inspection, and safe evidence collection. Use when a BGP neighbor is down, routes are missing, or prefix policy and AS path need in ... |
-| `network-config-validation` | Pre-deployment checks for router and switch configuration, including dangerous commands, duplicate addresses, subnet overlaps, stale references, management-plane risk, and IOS-style security hygiene. Use when reviewing a router or switc ... |
-| `network-interface-health` | Diagnose interface errors, drops, CRCs, duplex mismatches, flapping, speed negotiation issues, and counter trends on routers, switches, and Linux hosts. Use when an interface shows errors, drops, CRCs, flapping, or a duplex or speed mis ... |
-| `nextjs-turbopack` | Next.js 16+ and Turbopack guidance — incremental Rust bundling, file-system caching, faster dev startup and HMR, Turbopack vs webpack tradeoffs, and the middleware.ts to proxy.ts filename change. Use when developing or debugging Next.js ... |
-| `nodejs-keccak256` | Prevent Ethereum hashing bugs in JavaScript and TypeScript. Node's sha3-256 is NIST SHA3, not Ethereum Keccak-256, and silently breaks selectors, signatures, storage slots, and address derivation. Use when hashing for Ethereum in JavaSc ... |
-| `nuxt4-patterns` | Nuxt 4 app patterns for hydration safety, performance, route rules, lazy loading, and SSR-safe data fetching with useFetch and useAsyncData. Use when building or reviewing a Nuxt 4 app, or debugging hydration mismatches and SSR-safe dat ... |
-| `openclaw-persona-forge` | 为 OpenClaw AI Agent 锻造完整的龙虾灵魂方案。根据用户偏好或随机抽卡， 输出身份定位、灵魂描述(SOUL.md)、角色化底线规则、名字和头像生图提示词。 如当前环境提供已审核的生图 skill，可自动生成统一风格头像图片。 当用户需要创建、设计或定制 OpenClaw 龙虾灵魂时使用。 不适用于：微调已有 SOUL.md、非 OpenClaw 平台的角色设计、纯工具型无性格 Agent。 触发词：龙虾灵魂、虾魂、OpenClaw 灵魂、养虾灵魂、龙虾 ... |
-| `opensource-pipeline` | Open-source pipeline: fork, sanitize, and package private projects for safe public release. Chains 3 agents (forker, sanitizer, packager). Triggers: '/opensource', 'open source this', 'make this public', 'prepare for open source'. Use w ... |
-| `operator-approval-loop` | Operator approval contract with internal filing notices for agent-drafted outbound messages, hashed drafts, epoch-keyed decisions, durable delivery claims and receipts, and a pre-draft baseline gate. Use when an agent drafts messages to ... |
-| `orch-add-feature` | Orchestrate building a brand-new feature end to end — research, plan, TDD implementation, review, and gated commit — by delegating each phase to the matching ECC agent. Use when adding a capability that does not exist yet. |
-| `orch-build-mvp` | Orchestrate bootstrapping a working MVP from a design or spec document — ingest the SDD/PRD, plan thin vertical slices, scaffold the first end-to-end slice, then drive a generator-evaluator build loop with review and gated feat commits. ... |
-| `orch-change-feature` | Orchestrate altering an existing, working feature to new desired behavior — update its tests to the new spec, change the implementation to match, review, and gated commit. Use when behavior is not broken but should be different. |
-| `orch-fix-defect` | Orchestrate fixing a bug — reproduce it as a failing regression test, fix to green, review, and gated commit — by delegating each phase to the matching ECC agent. Use when existing behavior is broken or wrong. |
-| `orch-pipeline` | Shared orchestration engine behind the orch-* skill family — the gated Research-Plan-TDD-Review-Commit pipeline, size classifier, agent and command map, and two human gates (plan approval, commit confirmation) that orch-* operation skil ... |
-| `orch-refine-code` | Orchestrate a behavior-preserving refactor — confirm tests are green, restructure without changing behavior, keep tests green, review, and gated commit. Use when the structure should improve but behavior must not change. |
-| `osint-investigation` | Sparse-clue OSINT investigation methodology for extracting overlooked leads, connecting fragmented evidence, and testing explanations across sources. Use for multi-step CTF challenges, image/video geolocation, event reconstruction, publ ... |
-| `parallel-execution-optimizer` | Speed up a task by turning it into a dependency graph of parallel lanes with a lane matrix, batched reads and checks, write surfaces isolated by file, worktree, branch, or service, and a final verification table. Use when the user wants ... |
-| `perl-patterns` | Modern Perl 5.36+ idioms, best practices, and conventions for building robust, maintainable Perl applications. Use when writing or reviewing modern Perl 5.36+ code. |
-| `perl-security` | Comprehensive Perl security covering taint mode, input validation, safe process execution, DBI parameterized queries, web security (XSS/SQLi/CSRF), and perlcritic security policies. Use when reviewing Perl input handling, process execut ... |
-| `perl-testing` | Perl testing patterns using Test2::V0, Test::More, prove runner, mocking, coverage with Devel::Cover, and TDD methodology. Use when writing Perl tests with Test2::V0 or Test::More, or measuring coverage. |
-| `plan-orchestrate` | Read a plan document, decompose it into steps, classify each step, and emit the ready-to-paste ECC slash command for that step, carrying the step identifier and scope in the command's own documented argument form. Generative only — neve ... |
-| `postgres-patterns` | PostgreSQL database patterns for query optimization, schema design, indexing, and security. Based on Supabase best practices. Use when designing PostgreSQL schemas, indexes, or RLS policies, or when a query is too slow. |
-| `prediction-market-oracle-research` | Research prediction markets as data sources or oracle signals for products, agents, dashboards, and corporate decision intelligence. Use for source-grounded analysis of market-implied probabilities, caveats, and integration patterns wit ... |
-| `prediction-market-risk-review` | Review prediction-market, basket, oracle, and trading-agent workflows for compliance, safety, data-quality, privacy, and execution risk. Use before any workflow handles venue auth, user portfolio data, API keys, or trade planning. |
-| `prisma-patterns` | Prisma ORM patterns for TypeScript backends — schema design, query optimization, transactions, pagination, and critical traps like updateMany returning count not records, $transaction timeouts, migrate dev resetting the DB, @updatedAt s ... |
-| `product-capability` | Translate PRD intent, roadmap asks, or product discussions into an implementation-ready capability plan that exposes constraints, invariants, interfaces, and unresolved decisions before multi-service work starts. Use when the user needs ... |
-| `product-lens` | Validate the why before building through four product diagnostics — a YC-style product diagnostic that produces PRODUCT-BRIEF.md with a go/no-go recommendation, a founder review scoring product-market-fit signals, a user journey audit m ... |
-| `production-audit` | Local-evidence production readiness audit for shipped apps, pre-launch reviews, post-merge checks, and "what breaks in prod?" questions without sending repo data to an external audit service. Use when auditing production readiness befor ... |
-| `production-scheduling` | Codified expertise for production scheduling, job sequencing, line balancing, changeover optimization, and bottleneck resolution in discrete and batch manufacturing. Informed by production schedulers with 15+ years experience. Includes ... |
-| `project-flow-ops` | Operate execution flow across GitHub and Linear by triaging issues and pull requests, linking active work, and keeping GitHub public-facing while Linear remains the internal execution layer. Use when the user wants backlog control, PR t ... |
-| `prompt-caching-strategy` | Optimize LLM prompt caching hit rate to reduce API costs and improve latency. Analyzes prompt structure, identifies cacheable vs non-cacheable content, and recommends restructuring to maximize cache reuse. TRIGGER when: user says "promp ... |
-| `prompt-optimizer` | Analyze draft prompts, detect intent and missing context, match ECC commands, skills, and agents, and output a ready-to-paste optimized prompt with diagnosis and rationale — advisory only, never executes the task. Use when the user says ... |
-| `python-patterns` | Pythonic idioms, PEP 8 standards, type hints, and best practices for building robust, efficient, and maintainable Python applications. Use when writing or reviewing Python code and idiomatic structure, typing, or PEP 8 is in question. |
-| `python-testing` | Python testing strategies using pytest, TDD methodology, fixtures, mocking, parametrization, and coverage requirements. Use when writing pytest tests — fixtures, mocks, parametrization, or coverage. |
-| `pytorch-patterns` | PyTorch deep learning patterns and best practices for building robust, efficient, and reproducible training pipelines, model architectures, and data loading. Use when writing or reviewing PyTorch training loops, model architectures, or ... |
-| `quality-nonconformance` | Quality control and non-conformance management for regulated manufacturing (FDA 21 CFR 820, IATF 16949, AS9100): NCR lifecycle and disposition, 5-Why/Ishikawa/fault-tree/8D root cause analysis, CAPA systems, SPC interpretation, AQL samp ... |
-| `quarkus-patterns` | Quarkus 3.x LTS architecture patterns with Camel for messaging, RESTful API design, CDI services, data access with Panache, and async processing. Use for Java Quarkus backend work with event-driven architectures. Use when building or re ... |
-| `quarkus-security` | Quarkus security implementation patterns: JWT and OIDC authentication, @RolesAllowed RBAC and SecurityIdentity checks, Bean Validation and custom validators, parameterized Panache queries, BCrypt password hashing, CORS and security head ... |
-| `quarkus-tdd` | Test-driven development for Quarkus 3.x LTS using JUnit 5, Mockito, REST Assured, Camel testing, and JaCoCo. Use when adding features, fixing bugs, or refactoring event-driven services. |
-| `quarkus-verification` | Verification loop for Quarkus projects: build, static analysis (Checkstyle, PMD, SpotBugs), tests with JaCoCo coverage, OWASP dependency and container security scans, GraalVM native compilation, health checks, and config validation. Use ... |
-| `rails-patterns` | Ruby on Rails framework patterns for Rails 7.1+ and 8.x apps. Covers the directory contract, skinny controllers with service objects, form objects, query objects, idiomatic ActiveRecord, background jobs, ViewComponent, Hotwire, and the ... |
-| `ralphinho-rfc-pipeline` | Split an RFC into a multi-agent execution DAG — decompose into work units with dependencies and acceptance tests, run research, plan, implement, test, and review per unit, then merge through a queue with re-based branches and final syst ... |
-| `react-native-patterns` | React Native and Expo app patterns — Expo Router navigation, state separation (server/client/route/form), TanStack Query data fetching with Zod, performant lists, NativeWind/StyleSheet styling, native APIs, and secure storage. Use when ... |
-| `react-patterns` | React 18/19 patterns including hooks discipline, server/client component boundaries, Suspense + error boundaries, form actions, data fetching, state management decision trees, and accessibility-first composition. Use when writing or rev ... |
-| `react-performance` | React and Next.js performance optimization patterns adapted from Vercel Engineering's React Best Practices (https://github.com/vercel-labs/agent-skills). Organizes 70+ rules across 8 priority categories — waterfalls, bundle size, server ... |
-| `react-testing` | React component testing with React Testing Library, Vitest/Jest, MSW for network mocking, accessibility assertions with axe, and the decision boundary between component tests and Playwright/Cypress end-to-end runs. Use when writing or f ... |
-| `recsys-pipeline-architect` | Design composable recommendation, ranking, and feed pipelines using the six-stage Source→Hydrator→Filter→Scorer→Selector→SideEffect framework popularized by xAI's open-sourced For You algorithm. Use this skill whenever the user is build ... |
-| `recursive-decision-ledger` | Run repeated rollouts ("Prime Gauss" style recursive prompting) while keeping an append-only decision ledger of trials, marks, coherence checks, and promotion gates, so recursive confidence never auto-approves live trading, deploy, or d ... |
-| `redis-patterns` | Redis data structure patterns, caching strategies, distributed locks, rate limiting, pub/sub, and connection management for production applications. Use when adding caching, a distributed lock, rate limiting, or pub/sub with Redis, or w ... |
-| `regex-vs-llm-structured-text` | Decision framework for parsing structured text (quizzes, forms, invoices, receipts, tables) with a hybrid regex-first pipeline — regex extraction handles 95%+ cheaply, a confidence scorer flags low-confidence items, and an LLM validator ... |
-| `remotion-video-creation` | Best practices for Remotion - Video creation in React. 29 domain-specific rules covering 3D, animations, audio, captions, charts, transitions, and more. Use when building video in React with Remotion — animations, audio, captions, chart ... |
-| `research-ops` | Evidence-first current-state research workflow for ECC. Use when the user wants fresh facts, comparisons, enrichment, or a recommendation built from current public evidence and any supplied local context. |
-| `returns-reverse-logistics` | Codified expertise for returns authorization, receipt and inspection, disposition decisions, refund processing, fraud detection, and warranty claims management. Informed by returns operations managers with 15+ years experience. Includes ... |
-| `rules-distill` | Scan skills to extract cross-cutting principles and distill them into rules — append, revise, or create new rule files. Use when the same principle keeps recurring across skills and belongs in a rule file instead. |
-| `rust-patterns` | Idiomatic Rust patterns, ownership, error handling, traits, concurrency, and best practices for building safe, performant applications. Use when writing or reviewing Rust code and ownership, error handling, traits, or concurrency is in ... |
-| `rust-testing` | Rust testing patterns including unit tests, integration tests, async testing, property-based testing, mocking, and coverage. Follows TDD methodology. Use when writing Rust tests — unit, integration, async, property-based, or coverage. |
-| `santa-method` | Multi-agent adversarial verification: two independent reviewers with the same rubric must both pass before output ships, with a fix-and-re-review convergence loop and human escalation cap. Use when gating publishing, production deploys, ... |
-| `scientific-db-pubmed-database` | Direct PubMed and NCBI E-utilities search workflows for biomedical literature, MeSH queries, PMID lookup, citation retrieval, and API-backed literature monitoring. Use when a task needs biomedical literature from PubMed rather than gene ... |
-| `scientific-db-uspto-database` | USPTO patent and trademark data workflow for official record lookup, PatentSearch queries, TSDR checks, assignment data, and reproducible IP research logs. Use when a task needs official United States patent or trademark records from US ... |
-| `scientific-pkg-gget` | gget CLI and Python workflow for quick genomic database queries, sequence lookup, BLAST-style searches, enrichment checks, and reproducible bioinformatics evidence logs. Use when a task needs quick bioinformatics lookup across genomic r ... |
-| `scientific-thinking-literature-review` | Systematic literature-review workflow for academic, biomedical, technical, and scientific topics, including search planning, source screening, synthesis, citation checks, and evidence logging. Use when the task is to find, screen, synth ... |
-| `scientific-thinking-scholar-evaluation` | Structured scholarly-work evaluation for papers, proposals, literature reviews, methods sections, evidence quality, citation support, and research-writing feedback. Use when evaluating academic or scientific work — papers, proposals, me ... |
-| `search-first` | Research-before-coding workflow: search npm/PyPI, MCP servers, skills, and GitHub for existing tools before writing custom code, then adopt, extend, or build. Launches the researcher agent for non-trivial needs. Use when starting a feat ... |
-| `security-bounty-hunter` | Hunt for exploitable, bounty-worthy security issues in repositories. Focuses on remotely reachable vulnerabilities that qualify for real reports instead of noisy local-only findings. Use when hunting reportable, remotely reachable vulne ... |
-| `security-review` | Use this skill when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features. Provides comprehensive security checklist and patterns. |
-| `seo` | Audit, plan, and implement SEO improvements across technical SEO, on-page optimization, structured data, Core Web Vitals, and content strategy. Use when the user wants better search visibility, SEO remediation, schema markup, sitemap/ro ... |
-| `skill-comply` | Visualize whether skills, rules, and agent definitions are actually followed — auto-generates scenarios at 3 prompt strictness levels, runs agents, classifies behavioral sequences, and reports compliance rates with full tool call timeli ... |
-| `skill-scout` | Search existing local, marketplace, GitHub, and web skill sources before creating a new skill. Use when the user wants to create, build, fork, or find a skill for a workflow. |
-| `skill-stocktake` | Use when auditing Claude skills and commands for quality. Supports Quick Scan (changed skills only) and Full Stocktake modes with sequential subagent batch evaluation. |
-| `social-graph-ranker` | Weighted social-graph ranking for warm intro discovery, bridge scoring, and network gap analysis across X and LinkedIn. Use when the user wants the reusable graph-ranking engine itself, not the broader outreach or network-maintenance wo ... |
-| `springboot-patterns` | Spring Boot architecture patterns, REST API design, layered services, data access, caching, async processing, and logging. Use for Java Spring Boot backend work. Use when building or reviewing a Spring Boot backend — REST layer, service ... |
-| `springboot-security` | Spring Security best practices for authn/authz, validation, CSRF, secrets, headers, rate limiting, and dependency security in Java Spring Boot services. Use when reviewing Spring Security authn/authz, validation, CSRF, secrets, headers, ... |
-| `springboot-tdd` | Test-driven development for Spring Boot using JUnit 5, Mockito, MockMvc, Testcontainers, and JaCoCo. Use when adding features, fixing bugs, or refactoring. |
-| `springboot-verification` | Run the full Spring Boot verification loop — Maven or Gradle build, SpotBugs, PMD, and Checkstyle static analysis, unit and Testcontainers integration tests with JaCoCo coverage, OWASP dependency and secret scans, and diff review — prod ... |
-| `story-lifecycle` | Manage a file-based epic → story → sprint development loop without requiring an external project management tool. Creates and tracks epics, breaks them into user stories, assigns them to sprints, and drives implementation story by story ... |
-| `swift-actor-persistence` | Thread-safe data persistence in Swift using actors — in-memory cache with file-backed storage, eliminating data races by design. Use when persisting data in Swift and a data race or thread-safety problem needs designing out. |
-| `swift-concurrency-6-2` | Swift 6.2 Approachable Concurrency — single-threaded by default, @concurrent for explicit background offloading, isolated conformances for main actor types. Use when adopting Swift 6.2 concurrency — offloading with @concurrent or resolv ... |
-| `swift-protocol-di-testing` | Protocol-based dependency injection for testable Swift code — mock file system, network, and external APIs using focused protocols and Swift Testing. Use when Swift code needs testing and file system, network, or external APIs must be m ... |
-| `swiftui-patterns` | SwiftUI architecture patterns, state management with @Observable, view composition, navigation, performance optimization, and modern iOS/macOS UI best practices. Use when building or reviewing SwiftUI views, @Observable state, navigatio ... |
-| `taste` | Creative-direction layer for music videos and short-form edits in the angelcore / cloud-trance / hyperpop family — a named-genre aesthetic vocabulary, mood + color + light system, beat-synced editing grammar, and a pipeline chaining ECC ... |
-| `taste-application` | Generate new video against a distilled style pack and cut it into a finished piece - plan takes from the reference's cut rhythm, generate on fal, grade with the pack's measured LUT, cut at the measured cadence, weave in existing footage ... |
-| `taste-distillation` | Measure a set of reference videos into a reusable style pack - colour grade as a 3D LUT, cut rhythm as a shot-length distribution, hero stills, screen-blend overlay plates, and a text spec for a generative model. Use when the user wants ... |
-| `tasteforge-video` | Use for file-driven multimodal image, video, and 3D-asset discovery; taste interviews; distill or apply workflows; style-pack validation; editable EDL/FCPXML export; provenance audits; and offline planning that must fail closed before p ... |
-| `tdd-workflow` | Test-driven development workflow: write a failing test first, watch it fail, implement the smallest change to green, then refactor with 80%+ coverage across unit, integration, and E2E tests. Use when writing a new feature, fixing a bug, ... |
-| `team-agent-orchestration` | Run team-based orchestration for agent squads: work items with owners and scope, agent Kanban state, branch isolation, control pane visibility, and merge gates. Use when coordinating multiple agents in parallel across branches or worktr ... |
-| `team-builder` | Interactive picker that discovers available agent personas via the claude agents command and agents/ markdown globs, groups them into domains, has the user select up to five, dispatches them in parallel on one task, and synthesizes agre ... |
-| `terminal-ops` | Evidence-first repo execution workflow for ECC. Use when the user wants a command run, a repo checked, a CI failure debugged, or a narrow fix pushed with exact proof of what was executed and verified. |
-| `test-collaboration` | Inventory and govern a project's test assets. Connect requirements, business rules, risks, bugs, and cross-boundary contracts to stable TEST-IDs and executable evidence in the repository's existing test registry or TESTS.md. Use for tes ... |
-| `tinystruct-patterns` | Expert guidance for developing with the tinystruct Java framework. Use when working on the tinystruct codebase or any project built on tinystruct — including generating the bin/dispatcher and bin/dispatcher.cmd launcher scripts when a p ... |
-| `token-budget-advisor` | Offer a choice of response depth (25%/50%/75%/100%) with token estimates before answering, then answer at that level. Use when the user asks to control response length or token budget, such as 'token budget', 'short version', 'brief ans ... |
-| `typescript-patterns` | TypeScript patterns for strict, type-safe, maintainable code in modern TypeScript and JavaScript applications. Covers strict compiler configuration, type design, narrowing, discriminated unions, generics, async and error handling, modul ... |
-| `ui-demo` | Record polished UI demo videos using Playwright. Use when the user asks to create a demo, walkthrough, screen recording, or tutorial video of a web application. Produces WebM videos with visible cursor, natural pacing, and professional ... |
-| `ui-to-vue` | Use when the user has UI screenshots or design exports that need batch conversion into Vue 3 components, especially with Vant, Element Plus, or Ant Design Vue. |
-| `uncloud` | Use when managing an Uncloud cluster — deploying services, configuring Caddy ingress, adding static proxy routes for non-cluster devices, publishing ports, scaling, inspecting logs, or managing machines and volumes with the `uc` CLI. |
-| `verification-loop` | Run a six-phase verification of a Claude Code session's work — build, type check, lint, tests with coverage, security grep, and diff review — then produce a PASS/FAIL verification report. Use when verifying work after completing a featu ... |
-| `video-editing` | AI-assisted video editing workflows for cutting, structuring, and augmenting real footage. Covers the full pipeline from raw capture through FFmpeg, Remotion, ElevenLabs, fal.ai, and final polish in Descript or CapCut. Use when the user ... |
-| `visa-doc-translate` | Translate visa document images (bank deposit, employment, income, and retirement certificates; HEIC, PNG, or JPG) into English via OCR and produce a bilingual PDF pairing the original image with a formatted certified-style translation. ... |
-| `vite-patterns` | Vite build tool patterns including config, plugins, HMR, env variables, proxy setup, SSR, library mode, dependency pre-bundling, and build optimization. Activate when working with vite.config.ts, Vite plugins, or Vite-based projects. |
-| `vue-patterns` | Vue.js 3 Composition API patterns, component architecture, reactivity best practices, Pinia state management, Vue Router navigation, and Nuxt SSR patterns. Activates for Vue, Nuxt, Vite, or Pinia projects. Use when building or reviewing ... |
-| `windows-desktop-e2e` | E2E testing for Windows native desktop apps (WPF, WinForms, Win32/MFC, Qt) using pywinauto and Windows UI Automation. Use when writing E2E tests for a Windows native desktop app with pywinauto or UI Automation. |
+**Задачи:** отчёт / договор / письмо в Word; PDF: создать, разобрать, заполнить; презентация PPTX или слайды HTML; таблица Excel с формулами и графиками.
 
-## security-audit-skill (1)
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `esign-field-placement` | ECC | Детерминированная расстановка полей подписи, даты и текста в веб-композере e-подписи через браузерную автоматизацию. |
+| `frontend-slides` | ECC | Эффектные HTML-презентации с анимацией: с нуля или конвертацией из PowerPoint. Когда нужен доклад. |
+| `google-workspace-ops` | ECC | Drive, Docs, Sheets и Slides как единая поверхность: планы, трекеры, презентации, общие документы. |
+| `visa-doc-translate` | ECC | Перевод сканов визовых документов (справки, депозиты, доходы) через OCR в аккуратный английский двуязычный формат. |
 
-| Скилл | Описание |
-| --- | --- |
-| `security-audit` | Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons. Use for security questions, focused reviews, vulnerability research, security audits, or pen tests. Run the complete workflow o ... |
+Платформенные (5, живут в самом агенте): `docx`, `pdf`, `pptx`, `xlsx`, `nutrient-document-processing`.
 
-## hallmark (1)
+## 03-writing · Тексты и контент
 
-| Скилл | Описание |
-| --- | --- |
-| `hallmark` | Design skill for websites and new pages that look designed, not generated. Use when the user asks to build or design something new, or names Hallmark. Never use it on an existing design unless the user names Hallmark, as in `/hallmark r ... |
+Статьи и посты, человеческий голос текста, бренд и войс, SEO, маркетинговые кампании, письма и сообщения, инвесторские материалы, обучение.
 
-## impeccable (1)
+**Задачи:** статья / пост / рассылка; тон и бренд-войс; SEO и маркетинг; письма, сообщения, документы-тексты.
 
-| Скилл | Описание |
-| --- | --- |
-| `impeccable` | Use when the user wants to design, redesign, shape, critique, audit, polish, simplify, harden, animate, or otherwise improve a frontend interface: websites, landing pages, dashboards, product UI, components, forms, settings, onboarding, ... |
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `article-writing` | ECC | Статьи, гайды, посты, туториалы и рассылки в узнаваемом голосе, выведенном из ваших примеров. |
+| `brand-discovery` | ECC | Структурированное бренд-интервью на 8 модулей с возобновлением: цель, позиционирование, аудитория, характер, голос, фирстиль. |
+| `brand-voice` | ECC | Профиль стиля письма из ваших постов, эссе, релизов и доков, затем переиспользование в контенте и аутриче. |
+| `content-engine` | ECC | Контент-системы под платформу: X, LinkedIn, TikTok, YouTube, рассылки и перепаковка кампаний между площадками. |
+| `crosspost` | ECC | Кросспостинг в X, LinkedIn, Threads и Bluesky с адаптацией под каждую платформу. Без публикации без подтверждения. |
+| `email-ops` | ECC | Разбор почты по фактам: триаж, черновики, проверка перед отправкой, безопасные follow-up. Организация ящика. |
+| `growth-log` | ECC | Записи growth-лога: из завершённой работы извлекаем первопричину, переносимое правило и узнаваемый сигнал. |
+| `investor-materials` | ECC | Питч-деки, one-pager, мемо для инвесторов, заявки в акселераторы, финмодели и материалы для раунда. |
+| `investor-outreach` | ECC | Холодные письма, тёплые представления, follow-up и апдейты для fundraising: аутрич к ангелам и фондам. |
+| `marketing-campaign` | ECC | Маркетинговая кампания под ключ: исследование аудитории, позиционирование, угол подачи, лендинг, email-цепочки, метрики. |
+| `master-agreement-generator` | ECC | Черновики мастер-соглашений с контрагентами из шаблона и JSON-спецификации: клаузулы по ролям, workflow Schedule A. |
+| `messages-ops` | ECC | Живые мессенджеры по фактам: чтение SMS и DM, восстановление одноразового кода, осмотр треда перед ответом. |
+| `seo` | ECC | SEO под ключ: технический аудит, on-page-оптимизация, структурированные данные, Core Web Vitals, контент-стратегия. |
+| `interview-me` | agent-skills | Вытягивает, чего вы хотите на самом деле, интервью по одному вопросу до примерно 95% уверенности. |
+| `teach` | mattpocock/skills | Обучает вас новому навыку или концепции в этом workspace. |
+| `writing-beats` | mattpocock/skills | Письмо, эксплуатация: собирает сырьё в путешествие по битам, заземляя термины до опоры на них. |
+| `writing-fragments` | mattpocock/skills | Письмо, добыча: сырые фрагменты, пока без структуры. |
+| `writing-shape` | mattpocock/skills | Письмо, эксплуатация: форма из сырого материала, абзац за абзацем. |
+| `writing-skills` | superpowers | Создание, правка и проверка скиллов перед деплоем. |
+| `human-voice` | custom | Убирает ИИ-маркеры из текста на английском и русском и приводит пунктуацию к регистру: тире против дефиса, штампы, канцелярит. |
 
-## agent-skills (23)
+Платформенные (1, живут в самом агенте): `writing-guidelines`.
 
-| Скилл | Описание |
-| --- | --- |
-| `api-and-interface-design` | Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface. Use when creating REST or GraphQL endpoints, defining type contracts between modules, or establishing boundaries between fronte ... |
-| `ci-cd-and-automation` | Automates CI/CD pipeline setup. Use when setting up or modifying build and deployment pipelines. Use when you need to automate quality gates, configure test runners in CI, or establish deployment strategies. |
-| `code-review-and-quality` | Conducts multi-axis code review. Use before merging any change. Use when reviewing code written by yourself, another agent, or a human. Use when you need to assess code quality across multiple dimensions before it enters the main branch ... |
-| `code-simplification` | Simplifies code for clarity. Use when refactoring code for clarity without changing behavior. Use when code works but is harder to read, maintain, or extend than it should be. Use when reviewing code that has accumulated unnecessary com ... |
-| `constraint-driven-development` | Establishes a project's quality bar as a written contract and stops agents quietly lowering it. Interviews the user on which dimensions matter, supplies sane default thresholds when they have no number in mind, records everything in CON ... |
-| `debugging-and-error-recovery` | Guides systematic root-cause debugging. Use when tests fail, builds break, something that worked yesterday broke, behavior doesn't match expectations, or you encounter any unexpected error. Use when you need to figure out what broke and ... |
-| `deprecation-and-migration` | Manages deprecation and migration. Use when removing old systems, APIs, or features. Use when migrating users from one implementation to another. Use when migrating a database schema in production, such as renaming or dropping a column ... |
-| `documentation-and-adrs` | Records decisions and documentation. Use when you need to document an architecture decision (ADR) or the reasoning behind a design choice, when changing public APIs, shipping features, or when you need to record context that future engi ... |
-| `doubt-driven-development` | Subjects every non-trivial decision to a fresh-context adversarial review before it stands. Use when you want every assumption cross-examined before proceeding, when stress-testing a plan for hidden failure modes, when correctness matte ... |
-| `frontend-ui-engineering` | Builds production-quality, accessible, responsive user-facing UIs. Use when building or modifying interfaces and pages, creating components, implementing layouts, meeting WCAG accessibility requirements, managing state, or when the outp ... |
-| `git-workflow-and-versioning` | Structures git workflow practices. Use when making any code change. Use when committing, branching, resolving conflicts, splitting uncommitted work in a messy working tree into clean atomic commits, opening or reviewing a pull request ( ... |
-| `idea-refine` | Refines raw ideas into sharp, actionable concepts through structured divergent and convergent thinking. Use when an idea is still vague, when you need to stress-test assumptions before committing to a plan, or when you want to expand op ... |
-| `incremental-implementation` | Delivers changes incrementally in thin, verifiable slices. Use when implementing any feature or change that touches more than one file, or when picking up the next task from a plan. Use when rolling a change out behind a feature flag, w ... |
-| `interview-me` | Extracts what the user actually wants instead of what they think they should want. Achieves this through one-question-at-a-time interview until ~95% confidence about the underlying intent. Use when an ask is underspecified ("build me X" ... |
-| `observability-and-instrumentation` | Instruments code so production behavior is visible and diagnosable. Use when adding logging, metrics, tracing, or alerting. Use when shipping any feature that runs in production and you need evidence it works. Use when production issues ... |
-| `performance-optimization` | Optimizes application performance across frontend, backend, queries, and databases. Use when performance requirements exist, when you suspect performance regressions, when Core Web Vitals or load times need improvement, when N+1 query p ... |
-| `planning-and-task-breakdown` | Breaks work into ordered tasks. Use when you have a spec or clear requirements and need to break work into implementable tasks. Use when a task feels too large to start, when you need to estimate scope, or when parallel work is possible. |
-| `security-and-hardening` | Hardens code against vulnerabilities. Use when auditing an input handler for vulnerabilities, when handling user input, authentication, data storage, or external integrations, or when checking a login flow is safe against the OWASP Top ... |
-| `shipping-and-launch` | Prepares production launches. Use when preparing to deploy to production, or when asking what needs to be in place before shipping. Use when you need a pre-launch checklist, when setting up monitoring, when planning a staged rollout, or ... |
-| `source-driven-development` | Grounds every implementation decision in official documentation. Use when you want to verify an approach against the official docs before implementing it, or when you want authoritative, source-cited code free from outdated patterns. Us ... |
-| `spec-driven-development` | Creates specs before coding. Use when starting a new project, feature, or significant change and no specification exists yet. Use when drafting a PRD or requirements document with objectives and scope, or when requirements are unclear, ... |
-| `test-driven-development` | Drives development with tests using the red-green-refactor loop. Use when implementing any logic, fixing any bug, or changing any behavior. Use when you need to prove that code works, when a bug report arrives, or when you're about to m ... |
-| `using-agent-skills` | Discovers and invokes agent skills. Use when starting a session, or when you need to decide which skill or workflow applies to the piece of work at hand. This is the meta-skill that governs how all other skills are discovered and invoked. |
+## 04-backend · Бэкенд, API и базы данных
 
-## mattpocock/skills (38)
+Серверная разработка: FastAPI/Django/Spring/Quarkus/NestJS/Laravel/Rails/.NET, проектирование API и MCP, SQL (MySQL/Postgres/ClickHouse), Redis, миграции, LLM-интеграции и кэширование промптов.
 
-| Скилл | Описание |
-| --- | --- |
-| `ask-matt` | Ask which skill or flow fits your situation. A router over the skills in this repo. |
-| `chief-of-staff` | Pursue a long-running goal in a single session by co-ordinating subagents. |
-| `claude-handoff` | Hand the current conversation off to a fresh background agent that picks up the work immediately. |
-| `code-review` | Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked fo ... |
-| `codebase-design` | Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill need ... |
-| `diagnosing-bugs` | Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow. |
-| `domain-modeling` | Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR. |
-| `grill-me` | A relentless interview to sharpen a plan or design. |
-| `grill-with-docs` | A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go. |
-| `grilling` | Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases. |
-| `handoff` | Compact the current conversation into a handoff document for another agent to pick up. |
-| `implement` | Implement a piece of work based on a spec or set of tickets. |
-| `implement-spec` | Implement the result of /to-spec and /to-tickets in code. |
-| `improve-codebase-architecture` | Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick. |
-| `loop-me` | Grill me about specs for the workflows I want to build, within this workspace. |
-| `migrate-to-shoehorn` | Migrate test files from `as` type assertions to @total-typescript/shoehorn. Use when user mentions shoehorn, wants to replace `as` in tests, or needs partial test data. |
-| `pr` | Use when writing a PR body. |
-| `prototype` | Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like. |
-| `research` | Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent. |
-| `retro` | Conduct a retrospective on a coding session. |
-| `scaffold-exercises` | Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section. |
-| `setup-matt-pocock-skills` | Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills. |
-| `setup-pre-commit` | Set up Husky pre-commit hooks with lint-staged (Prettier), type checking, and tests in the current repo. Use when user wants to add pre-commit hooks, set up Husky, configure lint-staged, or add commit-time formatting/typechecking/testing. |
-| `setup-ts-deep-modules` | Wire dependency-cruiser into a TypeScript repo so each package is a deep module, with implementation hidden in subfolders and reachable only through its entry-point files. User-invoked. |
-| `software-factory` | Shared language for designing a software factory: the tasks it runs and the services it plugs into. |
-| `tdd` | Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests. |
-| `teach` | Teach the user a new skill or concept, within this workspace. |
-| `to-questionnaire` | Turn a decision you can't fully answer into a questionnaire for someone else to fill in. |
-| `to-spec` | Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed. |
-| `to-tickets` | Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket locally, or native blocking links on a rea ... |
-| `triage` | Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs. |
-| `wait-what` | Stop. That last message did not land: re-pitch it. |
-| `wayfinder` | Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear. |
-| `wizard` | Generate an interactive bash wizard that walks a human through steps only they can perform. Use when provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off mi ... |
-| `writing-beats` | Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it. |
-| `writing-for-agents` | Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md. |
-| `writing-fragments` | Writing, explore: mine raw fragments, no structure yet. |
-| `writing-shape` | Writing, exploit: shape raw material into an article, paragraph by paragraph. |
+**Задачи:** сервер / API / микросервис; спроектировать API или контракт; база данных: схема, SQL, миграции; фоновые задачи, интеграции, LLM-приложения.
 
-## custom (1)
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `api-connector-builder` | ECC | Новый API-коннектор точно по паттерну интеграций целевого репо. Когда нужно добавить ещё одну интеграцию без слома остальных. |
+| `api-design` | ECC | Паттерны REST API: именование ресурсов, статус-коды, пагинация, фильтрация, ошибки, версионирование, rate limiting для прода. |
+| `backend-patterns` | ECC | Бэкенд-архитектура, дизайн API, оптимизация БД и серверные практики для Node.js, Express и Next.js API-роутов. |
+| `clickhouse-io` | ECC | ClickHouse: паттерны, оптимизация запросов, аналитика и data engineering для высоконагруженных аналитических нагрузок. |
+| `content-hash-cache-pattern` | ECC | Кэш дорогой обработки файлов по SHA-256 хэшу содержимого: не зависит от пути, самоинвалидация, отдельный сервис-слой. |
+| `contract-first` | ECC | Фронт и бэк (или сервисы между собой) координируются через один машинно-проверяемый контракт: OpenAPI, AsyncAPI, protobuf, JSON Schema. |
+| `cost-aware-llm-pipeline` | ECC | Снижение расходов на LLM API: маршрутизация моделей по сложности задачи, бюджеты, ретраи, кэширование промптов. |
+| `database-migrations` | ECC | Безопасные обратимые миграции БД: forward-only в проде, expand-contract без даунтайма, конкурентные индексы, батчевый бэкфилл. |
+| `django-celery` | ECC | Django + Celery: конфигурация, дизайн задач, beat-расписание, ретраи, canvas-воркфлоу, мониторинг, тесты. |
+| `django-patterns` | ECC | Архитектура Django: REST на DRF, практики ORM, кэширование, сигналы, middleware, прод-приложения. |
+| `django-security` | ECC | Безопасность Django: аутентификация, авторизация, CSRF, SQL-инъекции, XSS, защищённые конфигурации деплоя. |
+| `dotnet-patterns` | ECC | Идиоматичный C#/.NET: конвенции, внедрение зависимостей, async/await и практики надёжных поддерживаемых приложений. |
+| `fastapi-patterns` | ECC | FastAPI: структура проекта, схемы Pydantic v2, DI, async-хендлеры, аутентификация, транзакции. |
+| `hermes-imports` | ECC | Конвертация локальных workflow оператора Hermes в санитизированные скиллы ECC и release-pack артефакты. |
+| `hexagonal-architecture` | ECC | Ports и Adapters: чистые границы домена, инверсия зависимостей, тестируемая оркестрация use-case. |
+| `i18n-sync` | ECC | Перевод и синхронизация JSON-локалей по использованию ключей и терминологии проекта, с точечной валидацией. |
+| `jpa-patterns` | ECC | JPA/Hibernate: дизайн сущностей, связи, оптимизация запросов, транзакции, аудит, индексы, пагинация, пулы. |
+| `kotlin-exposed-patterns` | ECC | ORM Exposed от JetBrains: DSL-запросы, паттерн DAO, транзакции, пул HikariCP, миграции Flyway, репозитории. |
+| `kotlin-ktor-patterns` | ECC | Сервер Ktor: DSL роутинга, плагины, аутентификация, Koin DI, kotlinx.serialization, WebSockets, testApplication. |
+| `laravel-patterns` | ECC | Архитектура Laravel: роутинг и контроллеры, Eloquent ORM, сервисные слои, очереди, события, кэш, API-ресурсы. |
+| `laravel-security` | ECC | Безопасность Laravel: аутентификация, авторизация, безопасность Eloquent, CSRF, XSS, API, защищённый деплой. |
+| `latency-critical-systems` | ECC | Латентно-чувствительные системы: живые дашборды, маркет-дата, стриминговые агенты, execution-шлюзы, очереди, кэши. |
+| `mailtrap-email-integration` | ECC | Интеграция транзакционной почты через Mailtrap Email API: песочница, верификация домена, аутентификация API. |
+| `mcp-server-patterns` | ECC | Серверы MCP на Node/TypeScript SDK: инструменты, ресурсы, промпты, валидация Zod, stdio против Streamable HTTP. |
+| `module-governance` | ECC | Локальные инструкции агентов модуля, связи доменного контекста и владение интерфейсами при создании или изменении модуля. |
+| `mybatis-patterns` | ECC | MyBatis и MyBatis-Spring: дизайн мапперов, XML и аннотационный SQL, безопасный динамический SQL, транзакции, батчи. |
+| `mysql-patterns` | ECC | MySQL и MariaDB: схема, запросы, индексы, транзакции, репликация, пулы соединений для прод-бэкендов. |
+| `nestjs-patterns` | ECC | NestJS: модули, контроллеры, провайдеры, валидация DTO, гарды, интерсепторы, конфигурация, прод-ready TypeScript. |
+| `postgres-patterns` | ECC | PostgreSQL: оптимизация запросов, схема, индексы, безопасность. По практикам Supabase. Для проектирования Postgres. |
+| `prisma-patterns` | ECC | Prisma ORM для TypeScript: схема, оптимизация запросов, транзакции, пагинация, ловушки вроде возврата updateMany. |
+| `prompt-caching-strategy` | ECC | Поднимает hit rate кэша промптов LLM: анализ структуры, отделение кэшируемого от некэшируемого, экономия денег и латентности. |
+| `prompt-optimizer` | ECC | Разбор черновика промпта: интент и недостающий контекст, подбор команд, скиллов и агентов ECC, готовый оптимизированный промпт. |
+| `quarkus-patterns` | ECC | Quarkus 3.x LTS: Camel для сообщений, дизайн REST API, CDI-сервисы, доступ к данным через Panache, асинхронность. |
+| `quarkus-security` | ECC | Безопасность Quarkus: JWT и OIDC, RBAC через @RolesAllowed и SecurityIdentity, Bean Validation и кастомные проверки. |
+| `rails-patterns` | ECC | Паттерны Rails 7.1+ и 8.x: контракт директорий, тонкие контроллеры с сервис-объектами, form objects, запросы. |
+| `redis-patterns` | ECC | Redis: структуры данных, стратегии кэша, распределённые локи, rate limiting, pub/sub, управление соединениями. |
+| `springboot-patterns` | ECC | Spring Boot: архитектура, дизайн REST API, слоистые сервисы, доступ к данным, кэш, асинхронность, логирование. |
+| `springboot-security` | ECC | Spring Security: аутентификация и авторизация, валидация, CSRF, секреты, заголовки, rate limiting, безопасность зависимостей. |
+| `tinystruct-patterns` | ECC | Эксперт по Java-фреймворку tinystruct: работа с кодовой базой tinystruct и проектами на нём. |
+| `api-and-interface-design` | agent-skills | Стабильные API и интерфейсы: границы модулей, REST и GraphQL эндпоинты, эволюция контрактов. |
+| `codebase-design` | mattpocock/skills | Общий словарь для проектирования глубоких модулей: интерфейсы, возможности углубления, границы. |
+| `domain-modeling` | mattpocock/skills | Доменная модель проекта: глоссарий GLOSSARY.md, ADR, терминология кодовой базы. |
 
-| Скилл | Описание |
-| --- | --- |
-| `human-voice` | Detect and rewrite AI-sounding text so it reads like a specific human wrote it, without changing what it says, in English and Russian. Removes AI tells - inflated significance, "not X but Y" contrasts, forced triads, one-line closers, e ... |
+Платформенные (1, живут в самом агенте): `LLM`.
+
+## 05-languages · Языки и код-база
+
+Паттерны и стандарты языков: Python, Go, Rust, Kotlin, Java, C++, Perl, Swift, Dart/Flutter, Android; навигация по чужой код-базе, упрощение и подготовка к коммиту.
+
+**Задачи:** паттерны/идиомы конкретного языка; разобраться в чужой код-базе; почистить и упростить код; мобильные приложения (Swift, Flutter, Android).
+
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `android-clean-architecture` | ECC | Clean Architecture для Android и KMP: структура модулей, правила зависимостей, UseCase, Repository, слой данных. |
+| `bun-runtime` | ECC | Bun как рантайм, пакетный менеджер, бандлер и тест-раннер: когда Bun вместо Node, заметки по миграции, поддержка Vercel. |
+| `codebase-onboarding` | ECC | Разбор незнакомой кодовой базы и структурированный онбординг-гайд: карта архитектуры, точки входа, конвенции, стартовый CLAUDE.md. |
+| `coding-standards` | ECC | Базовые конвенции кода между проектами: именование, читаемость, иммутабельность, ревью качества. Детали в фронт/бэк скиллах. |
+| `compose-multiplatform-patterns` | ECC | Compose Multiplatform и Jetpack Compose для KMP: состояние, навигация, темы, производительность, платформенный UI. |
+| `cpp-coding-standards` | ECC | Стандарты C++ по Core Guidelines: современный, безопасный и поддерживаемый код при написании и ревью. |
+| `dart-flutter-patterns` | ECC | Боевые паттерны Dart и Flutter: null safety, иммутабельное состояние с Freezed, async-композиция, архитектура виджетов. |
+| `error-handling` | ECC | Надёжная обработка ошибок в TypeScript, Python и Go: типизированные ошибки, границы, ретраи, circuit breaker, тексты для пользователя. |
+| `foundation-models-on-device` | ECC | Apple FoundationModels: LLM на устройстве, guided generation с @Generable, вызов инструментов, стриминг в iOS 26. |
+| `generating-python-installer` | ECC | Коммерческие установщики Python для Windows: экстремальная компиляция Nuitka, утончение дистрибутива, анализ DLL, упаковка Inno Setup. |
+| `golang-patterns` | ECC | Идиоматичный Go: практики и конвенции надёжного, эффективного и поддерживаемого кода. |
+| `inherit-legacy-style` | ECC | Против стилевого дрейфа ИИ на легаси: скан неявных конвенций кодовой базы, согласование конфликтов с оператором, строгий стиль. |
+| `java-coding-standards` | ECC | Стандарты Java для Spring Boot и Quarkus: именование, иммутабельность, Optional, стримы, исключения, дженерики, CDI. |
+| `kotlin-coroutines-flows` | ECC | Корутины и Flow в Kotlin: структурная конкурентность, операторы Flow, StateFlow, обработка ошибок, тесты. Для Android и KMP. |
+| `kotlin-patterns` | ECC | Идиоматичный Kotlin: корутины, null safety, практики надёжного, эффективного и поддерживаемого кода. |
+| `perl-patterns` | ECC | Современный Perl 5.36+: идиомы, практики и конвенции надёжных и поддерживаемых приложений. |
+| `perl-security` | ECC | Безопасность Perl: taint mode, валидация входа, безопасный запуск процессов, параметризованные DBI-запросы, XSS/SQLi/CSRF. |
+| `python-patterns` | ECC | Питонический код: идиомы, PEP 8, тайп-хинты, практики надёжных, эффективных и поддерживаемых приложений. |
+| `rust-patterns` | ECC | Идиоматичный Rust: владение, ошибки, трейты, конкурентность и практики безопасного быстрого кода. |
+| `swift-actor-persistence` | ECC | Потокобезопасное хранение в Swift на акторах: кэш в памяти с файловым бэкендом, гонки данных исключены самим дизайном. |
+| `swift-concurrency-6-2` | ECC | Swift 6.2 Approachable Concurrency: однопоточность по умолчанию, @concurrent для явного фона, изолированные конформансы. |
+| `swift-protocol-di-testing` | ECC | DI на протоколах для тестируемого Swift: моки файловой системы, сети и внешних API, фреймворк Swift Testing. |
+| `code-simplification` | agent-skills | Упрощение кода без смены поведения: когда работает, но тяжело читать, поддерживать или расширять. |
+| `learn-codebase` | claude-mem | Прогрев кодовой базы полным чтением всех исходников. Перед стартом в новом или незнакомом проекте. |
+| `smart-explore` | claude-mem | Структурный поиск кода с экономией токенов на tree-sitter AST. Вместо чтения целых файлов, когда нужна структура. |
+| `improve-codebase-architecture` | mattpocock/skills | Ищет возможности углубления модулей, показывает визуальный HTML-отчёт, допрашивает по выбранному. |
+| `migrate-to-shoehorn` | mattpocock/skills | Миграция тестов с `as` на @total-typescript/shoehorn. Когда упоминается shoehorn или надо заменить `as` в тестах. |
+| `setup-pre-commit` | mattpocock/skills | Husky pre-commit с lint-staged (Prettier), проверкой типов и тестами в текущем репо. |
+| `setup-ts-deep-modules` | mattpocock/skills | dependency-cruiser в TypeScript-репо: каждый пакет как глубокий модуль со скрытой реализацией и интерфейсом. |
+
+## 06-quality · Тесты, отладка и надёжность
+
+TDD и все виды тестов (юнит/интеграционные/e2e), систематическая отладка, код-ревью, регрессия, аудиты безопасности, бенчмарки и производительность, вёрди-чеки перед сдачей.
+
+**Задачи:** написать тесты / TDD; найти и починить баг; провести код-ревью; аудит безопасности; проверить работу перед сдачей.
+
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `ai-regression-testing` | ECC | Регрессионное тестирование ИИ-разработки: API-тесты в песочнице без БД, автоматические проверки багов, защита от регрессий. |
+| `benchmark` | ECC | Базовые замеры и поиск регрессий: Core Web Vitals (LCP, INP, CLS, вес страницы), перцентили латентности API-эндпоинтов. |
+| `benchmark-methodology` | ECC | Скоринг конкурентов в сопоставимые карточки: 9 взвешенных измерений (позиционирование, голос, ремесло, оффер, доказательства). |
+| `benchmark-optimization-loop` | ECC | Запрос «сделай быстрее» превращает в замкнутый цикл: сначала базовый замер, затем по одной гипотезе с бенчмарком против базы. |
+| `change-impact` | ECC | Анализ последствий изменений кода, данных и интерфейсов по доказательствам, затем сверка ожиданий с фактом. |
+| `cpp-testing` | ECC | Только для C++-тестов: написание и правка, настройка GoogleTest/CTest, разбор падений и флака, покрытие и санитайзеры. |
+| `csharp-testing` | ECC | Тесты на C#/.NET: xUnit, FluentAssertions, моки, интеграционные тесты и организация тестового проекта. |
+| `django-tdd` | ECC | Тестовые стратегии Django: pytest-django, TDD, factory_boy, моки, покрытие, тесты API на DRF. |
+| `django-verification` | ECC | Полный цикл проверки Django: окружение, mypy/ruff/black, безопасность миграций, pytest с целями покрытия, pip-audit и bandit. |
+| `e2e-testing` | ECC | E2E на Playwright: Page Object Model, конфигурация, интеграция с CI/CD, артефакты, борьба с флаком. |
+| `eval-harness` | ECC | Eval-driven development: определяйте eval-ы способностей и регрессий до кода, оценивайте кодом и моделью-судьёй. |
+| `flutter-dart-code-review` | ECC | Чек-лист ревью Flutter/Dart без привязки к библиотеке: виджеты, паттерны состояния (BLoC, Riverpod, Provider, GetX, MobX). |
+| `fsharp-testing` | ECC | Тесты на F#: xUnit, FsUnit, Unquote, property-based через FsCheck, интеграционные тесты, организация тестов. |
+| `golang-testing` | ECC | Тесты в Go: табличные тесты, сабтесты, бенчмарки, фаззинг, покрытие; TDD с идиоматичными практиками. |
+| `issue-review` | ECC | Ревью GitHub issue как /code-review ревьюит PR: gh CLI, сверка с кодовой базой, поиск по истории. |
+| `kotlin-testing` | ECC | Тесты Kotlin: Kotest, MockK, тесты корутин, property-based, покрытие Kover; TDD с идиоматикой. |
+| `laravel-tdd` | ECC | Тесты Laravel: PHPUnit, Pest, фабрики моделей, HTTP-тесты, тесты Sanctum, моки, покрытие. |
+| `laravel-verification` | ECC | Цикл проверки Laravel: env, линтеры, статанализ, тесты с покрытием, сканы безопасности, готовность к деплою. |
+| `module-regression` | ECC | Кросс-модульные регрессии в больших репо: реестр REGRESSION.md с потребителями каждого модуля и исполняемыми критериями. |
+| `perl-testing` | ECC | Тесты Perl: Test2::V0, Test::More, раннер prove, моки, покрытие Devel::Cover, методология TDD. |
+| `python-testing` | ECC | Тесты Python: pytest, TDD, фикстуры, моки, параметризация, требования к покрытию. |
+| `quarkus-tdd` | ECC | TDD для Quarkus 3.x LTS: JUnit 5, Mockito, REST Assured, тесты Camel, JaCoCo. Для фич, багфиксов, рефакторинга. |
+| `quarkus-verification` | ECC | Цикл проверки Quarkus: сборка, статанализ (Checkstyle, PMD, SpotBugs), тесты с JaCoCo, OWASP-сканы зависимостей и контейнеров. |
+| `rust-testing` | ECC | Тесты Rust: юнит и интеграционные, async, property-based, моки, покрытие. По методологии TDD. |
+| `security-bounty-hunter` | ECC | Охота за эксплуатируемыми уязвимостями, стоящими багаунти: фокус на удалённо достижимых дырах, достойных реального отчёта. |
+| `security-review` | ECC | При добавлении аутентификации, обработке ввода, секретах, API-эндпоинтах и платёжных фичах: ревью безопасности. |
+| `springboot-tdd` | ECC | TDD для Spring Boot: JUnit 5, Mockito, MockMvc, Testcontainers. Фичи, багфиксы, рефакторинг. |
+| `springboot-verification` | ECC | Полный цикл проверки Spring Boot: Maven/Gradle, статанализ SpotBugs, PMD, Checkstyle, юнит и Testcontainers-интеграционные тесты. |
+| `tdd-workflow` | ECC | TDD-цикл: сначала падающий тест, минимальная реализация до зелёного, затем рефакторинг с покрытием 80%+. |
+| `test-collaboration` | ECC | Инвентарь и управление тестовыми активами проекта: требования, бизнес-правила, риски, баги и контракты к стабильным TEST-ID. |
+| `verification-loop` | ECC | Шестиэтапная проверка работы сессии: сборка, проверка типов, линт, тесты с покрытием, security-grep, ревью диффа, с отчётом. |
+| `windows-desktop-e2e` | ECC | E2E для нативных приложений Windows (WPF, WinForms, Win32/MFC, Qt) на pywinauto и Windows UI Automation. |
+| `code-review-and-quality` | agent-skills | Мультиосевое ревью кода перед мерджем: своё, чужое, агентское. Стандарты, корректность, качество. |
+| `debugging-and-error-recovery` | agent-skills | Систематический поиск первопричин: падают тесты, ломается сборка, вчера работало, поведение не сходится с ожиданиями. |
+| `performance-optimization` | agent-skills | Производительность: фронт, бэк, запросы, базы. Когда есть требования или подозрения на деградацию. |
+| `security-and-hardening` | agent-skills | Укрепление кода: аудит обработчиков ввода, аутентификация, хранение данных, секреты. |
+| `test-driven-development--addyosmani` | agent-skills | Drives development with tests using the red-green-refactor loop. Use when implementing any logic, fixing any bug, or changing any behavior. Use when you need to prove that code works, when a bug report arrives, or when you're… |
+| `code-review` | mattpocock/skills | Ревью изменений с фиксированной точки по двум осям: стандарты репо и корректность изменений. |
+| `diagnosing-bugs` | mattpocock/skills | Цикл диагноза трудных багов и перф-регрессий. Когда просят «диагностируй» или что-то сломалось. |
+| `tdd` | mattpocock/skills | TDD: когда фичи или баги строятся тест-первым, упоминается «красный-зелёный-рефактор» или нужны интеграционные тесты. |
+| `wait-what` | mattpocock/skills | Стоп: последнее сообщение не сработало, подать его заново. |
+| `security-audit` | security-audit-skill | Гайд по безопасности и ревью уязвимостей: код, API, сервисы, CLI-утилиты, библиотеки, демоны. |
+| `receiving-code-review` | superpowers | Получение фидбека ревью до внедрения советов, особенно если он мутный или технически сомнительный. |
+| `requesting-code-review` | superpowers | Запрос ревью: после задач, крупных фич и перед мерджем, чтобы проверить соответствие требованиям. |
+| `systematic-debugging` | superpowers | Любой баг, падение теста или неожиданное поведение: сначала систематическая диагностика, потом фиксы. |
+| `test-driven-development` | superpowers | TDD для любой фичи или багфикса, до написания кода реализации. |
+| `verification-before-completion` | superpowers | Перед заявлением «готово, починено, зелёное»: прогнать проверяющие команды и убедиться. |
+
+Платформенные (3, живут в самом агенте): `delivery-gate`, `task-review`, `security-scan`.
+
+## 07-data · Данные, ML и графики
+
+Обработка и скрейпинг данных, дашборды и графики (matplotlib и др.), ML-пайплайны (PyTorch, рекомендательные системы), структурный текст: regex против LLM.
+
+**Задачи:** обработать данные / датасет; построить график или дашборд; ML-модель или пайплайн; спарсить данные.
+
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `bengali-nlp` | ECC | Обработка бенгальского текста: нормализация Unicode, детект письма, токенизация, лигатуры, специфика NLP для Bangla. |
+| `connections-optimizer` | ECC | Наводит порядок в сети X и LinkedIn: ревью и чистка, кому добавить или на кого подписаться, тёплые касания под каждый канал. |
+| `dashboard-builder` | ECC | Дашборды, отвечающие на реальные вопросы оператора, для Grafana, SigNoz и подобных платформ. От метрик к работающему щиту. |
+| `data-scraper-agent` | ECC | Полностью автономный сборщик данных из любого публичного источника: джобы, цены, новости, GitHub, спорт. По расписанию. |
+| `data-throughput-accelerator` | ECC | Диагностика и ускорение больших перемещений данных: приёмка, бэкфилл, выгрузка, ETL, загрузка хранилища, синхронизация таблиц. |
+| `gan-style-harness` | ECC | Генератор-оценщик в духе GAN для автономной сборки качественных приложений. По хартнейсу Anthropic от марта 2026. |
+| `ml-adoption-playbook` | ECC | Как добавить ML в кодовую базу без ML-команды: фрейминг проблемы, данные, выбор модели, интеграция, оценка. |
+| `mle-workflow` | ECC | Промышленный ML-цикл: контракты данных, воспроизводимое обучение, оценка модели, деплой, мониторинг, откат. |
+| `pytorch-patterns` | ECC | PyTorch: паттерны глубокого обучения для надёжных, эффективных и воспроизводимых пайплайнов обучения, архитектур и данных. |
+| `recsys-pipeline-architect` | ECC | Композируемые пайплайны рекомендаций и лент по шести стадиям Source-Hydrator-Filter-Scorer-Selector-SideEffect. |
+| `regex-vs-llm-structured-text` | ECC | Парсинг структурированного текста (квизы, формы, счета, чеки, таблицы): гибридный пайплайн regex-first с LLM на сложных местах. |
+| `social-graph-ranker` | ECC | Взвешенный ранжинг соцграфа: тёплые знакомства, bridge-скоринг, анализ дыр в сети по X и LinkedIn. |
+
+Платформенные (2, живут в самом агенте): `charts`, `timeline-report`.
+
+## 08-research · Исследования и поиск
+
+Глубокие веб-исследования, рынок и конкуренты, OSINT и лиды, продуктовый анализ, научные базы (PubMed, USPTO, gget), предикшн-маркеты.
+
+**Задачи:** исследовать тему / рынок / конкурентов; поиск фактов и источников; OSINT / анализ компании; научная литература и патенты.
+
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `competitive-platform-analysis` | ECC | Разведка конкурентного поля: выявление, категоризация и фильтрация набора конкурентов до начала бенчмаркинга. |
+| `competitive-report-structure` | ECC | Собирает скоринговые карточки конкурентов в отчёт уровня решений: карта ландшафта, тиры, выводы. |
+| `deep-research` | ECC | Цитируемые исследовательские отчёты из веба через firecrawl и exa MCP: подвопросы, глубокое чтение источников, синтез со ссылками. |
+| `iterative-retrieval` | ECC | Пошаговое уточнение выборки контекста для сабагентов: когда контекста не хватает и повторная выдача не помогает. |
+| `lead-intelligence` | ECC | ИИ-пайплайн лид-интеллекта и аутрича: замена Apollo, Clay и ZoomInfo на скоринг сигналов и тёплые пути к людям. |
+| `market-research` | ECC | Исследование рынка, конкурентный анализ, due diligence инвестора и отраслевая разведка с указанием источников. |
+| `osint-investigation` | ECC | OSINT по скудным зацепкам: неочевидные лиды, связывание разрозненных улик, проверка объяснений по источникам. |
+| `prediction-market-oracle-research` | ECC | Предикт-маркеты как источник данных и оракульных сигналов: для продуктов, агентов, дашбордов и корпоративной разведки. |
+| `prediction-market-risk-review` | ECC | Ревью workflow предикт-маркетов, корзин, оракулов и торговых агентов на комплаенс, безопасность, качество данных, риски исполнения. |
+| `product-capability` | ECC | Замысел PRD и запросы роадмапа превращает в план фичи, готовый к реализации: ограничения, инварианты, интерфейсы. |
+| `product-lens` | ECC | Проверка «зачем» до разработки: продуктовая диагностика в стиле YC с PRODUCT-BRIEF.md и рекомендацией go/no-go. |
+| `research-ops` | ECC | Актуальные факты, сравнения, обогащение и рекомендации строго из текущих источников: research-workflow ECC. |
+| `scientific-db-pubmed-database` | ECC | Прямые запросы к PubMed и NCBI E-utilities: биомедицинская литература, MeSH-запросы, PMID, цитаты, поиск через API. |
+| `scientific-db-uspto-database` | ECC | Патенты и товарные знаки USPTO: официальный поиск, запросы PatentSearch, проверки TSDR, данные об уступках, воспроизводимое IP-исследование. |
+| `scientific-pkg-gget` | ECC | gget CLI и Python: быстрые запросы к геномным базам, поиск последовательностей, BLAST-поиски, enrichment-проверки, биоинформатика. |
+| `scientific-thinking-literature-review` | ECC | Систематический обзор литературы: план поиска, скрининг источников, синтез. Для академических, биомед и технических тем. |
+| `scientific-thinking-scholar-evaluation` | ECC | Структурированная оценка научных работ: статьи, заявки, обзоры, разделы методов, качество доказательств, поддержка цитированием. |
+| `search-first` | ECC | Сначала поиск, потом код: npm/PyPI, MCP-серверы, скиллы и GitHub на готовые инструменты, затем взять, расширить или обернуть. |
+| `research` | mattpocock/skills | Разбор вопроса по первоисточникам с фиксацией находок в Markdown-файл в репо. |
+
+Платформенные (1, живут в самом агенте): `documentation-lookup`.
+
+## 09-media · Медиа и графика
+
+Генерация и редактирование изображений, поиск картинок, видео (монтаж, Manim, Remotion), анализ изображений и видео (VLM), распознавание и синтез речи (ASR/TTS).
+
+**Задачи:** сгенерировать/отредактировать картинку; видео: монтаж, анимация, титры; текст → речь, речь → текст; что на картинке/видео.
+
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `blender-motion-state-inspection` | ECC | Осмотр Blender-персонажей, ригов, поз и ретаргетинга анимаций: контакт с землёй, направление взгляда, модель против движения. |
+| `ios-icon-gen` | ECC | Иконки iOS в PNG-сеты для каталогов Xcode из SF Symbols (5000+) или Iconify API (275k+ открытых иконок). |
+| `manim-video` | ECC | Переиспользуемые объяснялки Manim для технических тем, графов, диаграмм и продуктовых прогулок; передача в видео-стек ECC. |
+| `remotion-video-creation` | ECC | Видео на React в Remotion: 29 предметных правил про 3D, анимации, звук, титры, графики, переходы. |
+| `tasteforge-video` | ECC | Мультимодальный поиск картинок, видео и 3D-ассетов; интервью вкуса; дистилляция и применение style-паков; редактируемый EDL. |
+| `video-editing` | ECC | Монтаж с ИИ: нарезка, структура и усиление живых кадров. Полный путь от сырья через FFmpeg к финальному рендеру. |
+
+Платформенные (7, живут в самом агенте): `ASR`, `TTS`, `VLM`, `image-generation`, `image-edit`, `image-search`, `video-understand`.
+
+## 10-devops · Git, релиз и эксплуатация
+
+Git-процессы и ветки, PR и GitHub-операции, сборка и релизы, CI/CD, Docker и Kubernetes, деплой (Vercel, uncloud), сети и диагностика, наблюдаемость и прод-аудиты.
+
+**Задачи:** закоммитить / PR / релиз; CI/CD и сборка; Docker, K8s, деплой; сеть, мониторинг, прод-инциденты.
+
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `canary-watch` | ECC | Мониторинг и проверка задеплоенного URL после релизов: HTTP-эндпоинты, SSE-потоки, статика, ошибки консоли, производительность. |
+| `cisco-ios-patterns` | ECC | Паттерны ревью Cisco IOS/IOS-XE: show-команды, иерархия конфига, wildcard-маски, размещение ACL, безопасные окна изменений. |
+| `conventional-commit-review` | ECC | Ревью стейдженных изменений и черновик сообщения по Conventional Commits: верный тип, scope, длина. Перед коммитом. |
+| `deployment-patterns` | ECC | Деплой и CI/CD: паттерны пайплайнов, Docker-контейнеризация, health checks, стратегии отката, чек-листы готовности. |
+| `docker-patterns` | ECC | Docker и Compose: локальная разработка, защищённые CLI-установщики, безопасность контейнеров, сети, тома, мульти-сервисные сборки. |
+| `git-workflow` | ECC | Git-процессы: стратегии ветвления, конвенции коммитов, чистая и читаемая история, приведение локальных коммитов в порядок перед мерджем. |
+| `github-ops` | ECC | Операции GitHub: триаж issues, управление PR, CI/CD, релизы, мониторинг безопасности через gh CLI. |
+| `kubernetes-patterns` | ECC | Kubernetes: паттерны workload'ов, ресурсы, RBAC, пробы, автоскейлинг, ConfigMap/Secret, отладка kubectl. |
+| `network-bgp-diagnostics` | ECC | Только диагностика BGP: состояние соседей, обмен маршрутами, prefix-политика, осмотр AS-path, безопасный сбор фактов. |
+| `network-config-validation` | ECC | Предпродовые проверки конфигов роутеров и свичей: опасные команды, дубли адресов, пересечение подсетей, протухшие ссылки. |
+| `network-interface-health` | ECC | Диагностика интерфейсов: ошибки, дропы, CRC, несоответствие дуплекса, флаппинг, согласование скорости, тренды счётчиков. |
+| `opensource-pipeline` | ECC | Пайплайн опенсорса: форк, санитизация и упаковка приватных проектов для безопасного публичного релиза. Три агента в цепочке. |
+| `production-audit` | ECC | Аудит готовности к проду по локальным фактам: выпущенные приложения, пре-лаунч, пост-мердж, что сломается в проде. |
+| `terminal-ops` | ECC | Исполнение в репо по фактам: запустить команду, проверить репо, отладить падение CI, точечно закоммитить фикс. |
+| `uncloud` | ECC | Кластер Uncloud: деплой сервисов, настройка Caddy-ингресса, статические прокси-маршруты, публикация портов. |
+| `ci-cd-and-automation` | agent-skills | Настройка CI/CD: сборка, деплой-пайплайны, гейты качества, автоматизация рутины. |
+| `deprecation-and-migration` | agent-skills | Вывод из эксплуатации и миграции: удаление старых систем и API, перенос пользователей между реализациями. |
+| `git-workflow-and-versioning` | agent-skills | Структура git-процессов: коммиты, ветки, конфликты, разбиение незакоммиченного, версионирование. |
+| `observability-and-instrumentation` | agent-skills | Инструментирует код, чтобы прод был видим и диагностируем: логи, метрики, трейсинг, алерты. |
+| `shipping-and-launch` | agent-skills | Подготовка запуска: что должно быть на месте до деплоя в прод, чек-листы релиза. |
+| `build` | claude-mem | Полный автомат задачи по коду: make-plan, do и babysit в цепочке. |
+| `build-and-release` | claude-mem | Полный автомат сборки и релиза кодовой задачи. |
+| `oh-my-issues` | claude-mem | Кластеризация бэклога GitHub issues по первопричинам в план-мастер issues, redirect детей, бандл архитектуры. |
+| `release` | claude-mem | Полный автомат релиза: version-bump и childhood в цепочке. |
+| `version-bump` | claude-mem | Автосемвер и релизный workflow для плагинов Claude Code: package.json, marketplace.json, plugin.json синхронно. |
+| `pr` | mattpocock/skills | Когда пишете тело PR. |
+| `finishing-a-development-branch` | superpowers | Реализация готова, тесты зелёные: как интегрировать ветку. |
+| `using-git-worktrees` | superpowers | Изолированный workspace для фичи: git worktree до старта работы или исполнения плана. |
+
+Платформенные (2, живут в самом агенте): `deploy-to-vercel`, `vercel-cli-with-tokens`.
+
+## 11-agent · Агентские процессы
+
+Работа самого агента: планирование и спеки, оркестрация субагентов, автономные циклы, память и контекст, handoff, документация и ADR, ретро и стендапы, управление скиллами и бюджетом токенов.
+
+**Задачи:** спланировать сложную задачу; распределить работу по субагентам; долгий автономный прогон; ведение документов/ADR проекта; оптимизация расхода токенов.
+
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `agent-architecture-audit` | ECC | Диагностика агентных и LLM-приложений: аудит 12 слоёв стека на деградацию обёрток, загрязнение памяти и провалы дисциплины инструментов. |
+| `agent-harness-construction` | ECC | Проектирование пространств действий, описаний инструментов и формата наблюдений агента ради процента доведённых до конца задач. |
+| `agent-introspection-debugging` | ECC | Структурированный самолоклад агентов: захват состояния, диагноз, восстановление в изоляции, отчёт об интроспекции после сбоя. |
+| `agent-runtime-gateway-smoke-test` | ECC | Проверка локального API агента, временного туннеля-шлюза и колбэка удалённой песочницы задачей без инструментов, затем возврат соединения. |
+| `agent-security-hardening` | ECC | Укрепление агентных фреймворков, обрабатывающих недоверенный контент: инструменты, запись файлов, идентификаторы рантайма. |
+| `agent-self-evaluation` | ECC | После нетривиальной задачи агент сам оценивает результат по 5 осям: точность, полнота, ясность, применимость, лаконичность. |
+| `agentic-engineering` | ECC | Агентная инженерия: сначала оценки, декомпозиция и маршрутизация моделей с учётом стоимости. Для планирования и исполнения работ. |
+| `ai-first-engineering` | ECC | Операционная модель команд, где агенты пишут большую часть кода: процессы, ревью-гейты, метрики качества. |
+| `architecture-decision-records` | ECC | Архитектурные решения как нумерованные ADR в docs/adr/: контекст, рассмотренные альтернативы, последствия и индексный README. |
+| `blueprint` | ECC | Однострочная цель превращается в пошаговый план многосессионного проекта: шаги размером с PR, самодостаточные. |
+| `brownfield-retrospective` | ECC | Ретроспектива ECC по живому срезу проекта: аудит текущего состояния, реконструкция прошлых решений, четырёхосевой разбор. |
+| `code-tour` | ECC | Файлы CodeTour .tour: пошаговые экскурсии с якорями на файлы и строки, под конкретную персону. Для онбординга и обзоров. |
+| `context-and-decisions` | ECC | Стабильный доменный контекст через узкий CONTEXT.md, а необратимые решения: в архитектурные записи ECC. |
+| `continuous-agent-loop` | ECC | Паттерны непрерывных автономных циклов агента: гейты качества, оценки, восстановление после сбоев. |
+| `council` | ECC | Совет четырёх голосов для неоднозначных решений, трейдоффов и решений go/no-go. Когда валидных путей несколько. |
+| `dev-team` | ECC | Симуляция командной сессии: PM, архитектор, разработчик и QA отвечают на одну задачу вместе, в общем чате. |
+| `docs-governance` | ECC | Маршрутизация запросов по гигиене документации к скиллам ECC плюс опциональный read-only аудит ролей, ссылок и ADR-индексов. |
+| `dynamic-workflow-mode` | ECC | Локальные для задачи обвязки, eval-гейты и извлечение переиспользуемых скиллов в dynamic workflow mode Claude. |
+| `enterprise-agent-ops` | ECC | Эксплуатация долгоживущих и облачных агентных систем: жизненный цикл рантайма, наблюдаемость, лимиты, инциденты. |
+| `intent-driven-development` | ECC | Расплывчатые или дорогие изменения превращает в проверяемые критерии приёмки до или во время реализации. |
+| `living-docs-governance` | ECC | Доки долгого проекта не гниют: у каждой чёткая роль в конституции, карте, статусе и истории, плюс привязка к процессам. |
+| `loop-design-check` | ECC | Спроектировать агентный цикл под цель или найти режимы отказа: вращение на месте, гейминг верификатора, доведение неверного ответа. |
+| `nanoclaw-repl` | ECC | Работа и расширение NanoClaw, REPL ECC без зависимостей: персистентные сессии на markdown, слэш-команды смены модели. |
+| `nasiko-control-plane` | ECC | Жизненный цикл экспериментального CLI Nasiko через ECC: read-only статус, установка запиненной версии только с согласия, dry-run. |
+| `openclaw-persona-forge` | ECC | Кузница личности OpenClaw: из предпочтений или случайного выбора собирает идентичность, SOUL.md, правила характера, имя и промпт аватара. |
+| `operator-approval-loop` | ECC | Контракт согласований с оператором для исходящих сообщений агента: хэшированные черновики, эпохи решений, подтверждения доставки. |
+| `orch-add-feature` | ECC | Новая фича под ключ через оркестрацию: исследование, план, TDD-реализация, ревью и гейт на коммит; фазы уходят профильным агентам. |
+| `orch-build-mvp` | ECC | MVP из дизайн-дока или спецификации: приём SDD/PRD, тонкие вертикальные срезы, первый end-to-end скелет продукта. |
+| `orch-change-feature` | ECC | Изменение работающей фичи под новое поведение: тесты сначала обновляются под спецификацию, затем реализация, ревью, гейт. |
+| `orch-fix-defect` | ECC | Правка бага: воспроизведение падающим регресс-тестом, фикс до зелёного, ревью, гейт на коммит. |
+| `orch-pipeline` | ECC | Общий движок оркестрации семейства orch-*: gated-пайплайн Research-Plan-TDD-Review-Commit, классификатор размера, карта агентов. |
+| `orch-refine-code` | ECC | Рефакторинг без смены поведения: подтверждаем зелёные тесты, меняем структуру, держим зелёными, ревью, гейт на коммит. |
+| `parallel-execution-optimizer` | ECC | Ускорение задачи через граф параллельных дорожек: матрица дорожек, батчевые чтения и проверки, изолированные зоны записи. |
+| `plan-orchestrate` | ECC | Читает план-документ, раскладывает на шаги, классифицирует и выдаёт готовую к вставке ECC-команду для каждого шага. |
+| `project-flow-ops` | ECC | Поток исполнения через GitHub и Linear: триаж issues и PR, связывание активной работы, публичный GitHub при рабочем Linear. |
+| `ralphinho-rfc-pipeline` | ECC | RFC в DAG мультиагентного исполнения: рабочие единицы с зависимостями и критериями приёмки, исследование, план, код, тесты. |
+| `recursive-decision-ledger` | ECC | Повторные прогонки в стиле Prime Gauss с append-only реестром решений: попытки, отметки, проверки связности. |
+| `rules-distill` | ECC | Сканирует скиллы и выжимает сквозные принципы в правила: дополнить, переписать или создать файл правила. |
+| `santa-method` | ECC | Адверсариальная проверка: два независимых ревьюера по одной рубрике должны оба пропустить результат, иначе fix-and-re-review. |
+| `skill-comply` | ECC | Визуализирует, соблюдаются ли скиллы и правила: генерирует сценарии на 3 уровнях строгости, гоняет агентов, сравнивает поведение. |
+| `skill-scout` | ECC | Поиск по локальным, маркетплейс, GitHub и веб-источникам скиллов до создания нового. Когда нужен готовый, форк или аналог. |
+| `skill-stocktake` | ECC | Аудит качества скиллов и команд Claude: Quick Scan по изменённым или полный Stocktake с последовательными сабагентами. |
+| `story-lifecycle` | ECC | Эпик-история-спринт на файлах, без внешнего трекера проектов: создаёт, бьёт на части и ведёт учёт. |
+| `taste-distillation` | ECC | Сжимает набор референсов в переиспользуемый style-пак: цветокор как 3D LUT, ритм монтажа как распределение длины кадра. |
+| `team-agent-orchestration` | ECC | Командная оркестрация отрядов агентов: задачи с владельцами и охватом, Kanban-состояние, изоляция веток, панель контроля. |
+| `team-builder` | ECC | Интерактивный сборщик команды: находит персоны агентов, группирует по доменам, предлагает состав под задачу. |
+| `token-budget-advisor` | ECC | Перед ответом предлагает глубину (25/50/75/100%) с оценкой токенов и отвечает на выбранном уровне. |
+| `constraint-driven-development` | agent-skills | Планка качества проекта как письменный договор: интервью о важных осях, фиксация ограничений, стоп тихому снижению планки. |
+| `documentation-and-adrs` | agent-skills | Решения и документация: ADR, обоснование дизайн-выбора, обновление доков при изменении архитектуры. |
+| `doubt-driven-development` | agent-skills | Каждое нетривиальное решение проходит адверсариальное ревью со свежим контекстом до того, как станет стандартом. |
+| `idea-refine` | agent-skills | Сырая идея превращается в чёткий концепт через структурированную дивергенцию и конвергенцию. Когда мысль ещё туманна. |
+| `incremental-implementation` | agent-skills | Изменения тонкими проверяемыми срезами: для фич, затрагивающих несколько файлов, и выбора порядка работ. |
+| `planning-and-task-breakdown` | agent-skills | Разбивает работу на упорядоченные задачи по спеке или ясным требованиям. |
+| `source-driven-development` | agent-skills | Каждое решение сверяется с официальной документацией: проверка подхода до реализации. |
+| `spec-driven-development` | agent-skills | Спека до кода: для новых проектов, фич и значительных изменений, когда спецификации ещё нет. Черновик PRD. |
+| `using-agent-skills` | agent-skills | Находит и вызывает скиллы: старт сессии или выбор подходящего workflow под кусок работы. |
+| `babysit` | claude-mem | Присматривает за PR и циклом ревью до готовности к мерджу: комментарии, ревью, CI. |
+| `childhood` | claude-mem | Присмотр за выпущенным релизом после мерджа и деплоя: пакеты, поведение в проде, плагины, поздние CI и апдейты. |
+| `do` | claude-mem | Исполнение поэтапного плана через сабагентов. Когда просят выполнить, запустить или провести план. |
+| `handoff` | claude-mem | Сжимает текущий разговор в handoff-документ для другого агента. |
+| `make-plan` | claude-mem | Детальный поэтапный план с разведкой документации. Для фич, задач и многошаговых работ. |
+| `pathfinder` | claude-mem | Карта кодовой базы в флоучартах по фичам, дубли контекстов между фичами, предложение единой архитектуры. |
+| `standup` | claude-mem | Read-only стендап по worktree, веткам и PR: сравнение изменений и один консолидированный план. |
+| `what-the` | claude-mem | Простыми словами разбирает техническую тему: кто, что, где, почему и когда. |
+| `ask-matt` | mattpocock/skills | Какой скилл или flow под вашу ситуацию: роутер по скиллам репозитория. |
+| `chief-of-staff` | mattpocock/skills | Долгая цель в одной сессии через координацию сабагентов. |
+| `claude-handoff` | mattpocock/skills | Передаёт текущий разговор свежему фоновому агенту, который подхватывает работу сразу. |
+| `grill-me` | mattpocock/skills | Беспощадное интервью, чтобы заострить план или дизайн. |
+| `grill-with-docs` | mattpocock/skills | То же беспощадное интервью плюс создание доков (ADR и глоссарий) по ходу. |
+| `grilling` | mattpocock/skills | Допросит вас о плане, решении или идее. Когда нужно стресс-тестировать мышление или звучит «grill». |
+| `handoff--mattpocock` | mattpocock/skills | Compact the current conversation into a handoff document for another agent to pick up. |
+| `implement` | mattpocock/skills | Реализация работы по спеке или набору тикетов. |
+| `implement-spec` | mattpocock/skills | Воплощает результат /to-spec и /to-tickets в коде. |
+| `loop-me` | mattpocock/skills | Допрашивает по спецификациям workflow, которые вы хотите построить в этом workspace. |
+| `retro` | mattpocock/skills | Ретроспектива кодинговой сессии. |
+| `scaffold-exercises` | mattpocock/skills | Структуры директорий упражнений с секциями, задачами, решениями и объяснениями, проходящие линт. |
+| `setup-matt-pocock-skills` | mattpocock/skills | Настраивает репо под инженерные скиллы: трекер issues, словарь triage-меток, раскладку доменных доков. Один раз. |
+| `software-factory` | mattpocock/skills | Общий язык для проектирования софтверной фабрики: какие задачи гоняет и к каким сервисам подключается. |
+| `to-questionnaire` | mattpocock/skills | Решение, которое вы не можете принять сами, превращает в анкету для другого человека. |
+| `to-spec` | mattpocock/skills | Текущий разговор в спецификацию и в трекер проекта: без интервью, синтез уже сказанного. |
+| `to-tickets` | mattpocock/skills | План или разговор в набор tracer-bullet тикетов с указанием блокировок, публикация в трекер. |
+| `triage` | mattpocock/skills | Провожает issues и внешние PR через машину состояний триажа: категории, проверка, допрос, брифы для агентов. |
+| `wayfinder` | mattpocock/skills | Огромный объём работы как карта тикетов-решений на трекере, разрешаемых по одному. |
+| `wizard` | mattpocock/skills | Интерактивный bash-визард, проводящий человека через шаги, которые может сделать только он: инфраструктура, креденшелы. |
+| `writing-for-agents` | mattpocock/skills | Документы для агентов: создание и правка скиллов, AGENTS.md и CLAUDE.md. |
+| `brainstorming` | superpowers | Обязателен перед любой творческой работой: фичи, компоненты, функциональность, смена поведения, планирование нового. |
+| `diagnosing-superpowers` | superpowers | Когда сессия superpowers пошла не так: повторная работа, игнор планов, слабый результат. Разбирает почему. |
+| `dispatching-parallel-agents` | superpowers | Две и более независимых задач без общего состояния и последовательных зависимостей. |
+| `executing-plans` | superpowers | Исполнение плана в текущей сессии своими руками: инлайн-исполнение или работа без сабагентов. |
+| `subagent-driven-development` | superpowers | Исполнение планов с независимыми задачами через сабагентов в текущей сессии. |
+| `using-superpowers` | superpowers | В начале любого разговора: как находить и использовать скиллы, вызов скилла до любого ответа. |
+| `writing-plans` | superpowers | Есть спека или требования на многошаговую задачу, до касания кода. |
+
+Платформенные (9, живут в самом агенте): `skill-creator`, `unified-memory`, `knowledge-agent`, `knowledge-ops`, `cost-tracking`, `agent-cost-report`, `agent-eval`, `autonomous-loops`, `autonomous-agent-harness`.
+
+## 12-niches · Отраслевые ниши
+
+Доменно-специфичные процессы: логистика и таможня, производство и качество, биллинг, здравоохранение и HIPAA, энергетика, крипто/DeFi, валидация контрагентов.
+
+**Задачи:** логистика, таможня, возвраты; производство и несоответствия; биллинг и взаиморасчёты; медицина, HIPAA; крипто и DeFi.
+
+| Скилл | Источник | Описание |
+| --- | --- | --- |
+| `carrier-relationship-management` | ECC | Портфели грузоперевозчиков (FTL, LTL, интермодал): отбор и проверка FMCSA, торги по ставкам и топливным надбавкам, RFP. |
+| `counterparty-channel-discipline` | ECC | Жёсткие промпты по каналам, гейтинг упоминаний, тихое наблюдение и политика автономности для агентов в общих каналах. |
+| `customer-billing-ops` | ECC | Биллинговые процессы клиентов: подписки, возвраты, разбор оттока, восстановление доступа к порталу, анализ тарифных планов. |
+| `customs-trade-compliance` | ECC | Таможня и ВЭД: классификация HS/HTS по правилам GRI, коммерческие инвойсы и документы, Incoterms, пошлины. |
+| `defi-amm-security` | ECC | Чек-лист безопасности Solidity AMM: пулы ликвидности, свопы, реентранси, порядок CEI, атаки донатов и инфляции, оракулы. |
+| `ecc-tools-cost-audit` | ECC | Аудит расходов ECC Tools по фактам: убегающие PR, обход квот, утечка в премиум-модели, дублирующиеся джобы. |
+| `energy-procurement` | ECC | Закупка электричества и газа для промышленных объектов: тарифы, смягчение demand-charge, поставщики, контракты. |
+| `evm-token-decimals` | ECC | Ловит тихие баги десятичных разрядов в EVM: рантайм-справка decimals, кэш по цепям, дрейф точности мостовых токенов. |
+| `finance-billing-ops` | ECC | Выручка, прайсинг, возвраты и командный биллинг по фактам: снимок продаж, сверка тарифов, правда о биллинг-модели. |
+| `healthcare-cdss-patterns` | ECC | Паттерны систем клинической поддержки решений: взаимодействия лекарств, валидация доз, шкалы NEWS2 и qSOFA, серьёзность алертов. |
+| `healthcare-emr-patterns` | ECC | Разработка EMR/EHR: клиническая безопасность, сценарии визитов, генерация рецептов, интеграции поддержки решений. |
+| `healthcare-eval-harness` | ECC | Оценочный харнес безопасности пациентов: тест-сьюты точности CDSS, утечек PHI, целостности клинических процессов. |
+| `healthcare-phi-compliance` | ECC | Комплаенс PHI и PII в медприложениях: классификация данных, row-level доступ, защита от подделки. |
+| `hipaa-compliance` | ECC | Точка входа по HIPAA: работа с PHI, covered entities, соглашения BA, аудиты. Когда задача явно про HIPAA. |
+| `inventory-demand-planning` | ECC | Планирование спроса мультилокального ритейла: выбор метода прогноза, сегментация ABC/XYZ, safety stock, точки дозаказа. |
+| `ito-baskets` | ECC | Read-only данные корзин Itô и предикт-маркетов: каталог корзин, сверка с вашим исследованием, watchlist. |
+| `ito-inference` | ECC | Проверка доступности инференса на брони вычислений Itô и передача явного контракта бэкенду, когда тот поднят. |
+| `llm-trading-agent-security` | ECC | Безопасность автономных торговых агентов с доступом к кошельку: промпт-инъекции, лимиты расходов, симуляция перед отправкой. |
+| `logistics-exception-management` | ECC | Грузовые исключения: задержки, повреждения, потери, недостачи, споры с перевозчиками, протоколы эскалации и претензии. |
+| `nodejs-keccak256` | ECC | Против хэш-багов Ethereum в JS/TS: sha3-256 в Node это NIST SHA3, а не Keccak-256, и он тихо ломает селекторы и подписи. |
+| `production-scheduling` | ECC | Производственное планирование: последовательность джоб, балансировка линий, оптимизация переналадок, разбор узких мест. |
+| `quality-nonconformance` | ECC | Контроль качества и несоответствия в регулируемом производстве (FDA 820, IATF 16949, AS9100): жизненный цикл NCR, 5-почему. |
+| `returns-reverse-logistics` | ECC | Возвраты: авторизация, приёмка и осмотр, решение о судьбе товара, обработка рефандов, детекция фрода, гарантийные претензии. |
