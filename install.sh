@@ -1,27 +1,33 @@
 #!/usr/bin/env bash
-# Установщик коллекции скиллов в проект.
+# Установщик коллекции скиллов для чата z.ai.
+#
+# Обычный путь — просто написать агенту в чате:
+#   «Установи скиллы из https://github.com/Genocide12/skills-collection»
+# Этот скрипт — ручной резервный вариант, если нужно поставить самому.
 #
 # Использование:
-#   ./install.sh                 # скопировать все скиллы в ./skills/
-#   ./install.sh --claude        # в ./.claude/skills/ (формат Claude Code)
-#   ./install.sh --target DIR    # в указанный каталог
-#   ./install.sh --only ECC,superpowers   # только скиллы выбранных источников
-#   ./install.sh --list          # показать источники и количество скиллов
+#   ./install.sh                  # авто: в чате → /home/z/my-project/skills/, иначе → ./skills/
+#   ./install.sh --target DIR     # в указанный каталог
+#   ./install.sh --only A,B       # только скиллы выбранных источников (см. --list)
+#   ./install.sh --list           # показать источники и количество скиллов
 #
-# Существующие файлы перезаписываются. Перед копированием делается бэкап
-# одноимённых папок в <target>-backup-<timestamp>, если такие есть.
+# Существующие файлы перезаписываются. Одноимённые папки бэкапятся
+# в <target>-backup-<timestamp>, если такие есть.
 
 set -euo pipefail
 
-TARGET="./skills"
+# в песочнице чата скиллы живут в /home/z/my-project/skills/
+if [[ -d "/home/z/my-project" ]]; then
+  TARGET="/home/z/my-project/skills"
+else
+  TARGET="./skills"
+fi
+CALLER_DIR="$PWD"
 ONLY=""
 LIST=0
 
-CALLER_DIR="$PWD"
-
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --claude) TARGET="./.claude/skills"; shift ;;
     --target) TARGET="$2"; shift 2 ;;
     --only)   ONLY="$2"; shift 2 ;;
     --list)   LIST=1; shift ;;
@@ -50,12 +56,7 @@ PY
   exit 0
 fi
 
-FILTER=""
-if [[ -n "$ONLY" ]]; then
-  FILTER="$ONLY"
-fi
-
-python3 - "$TARGET" "$FILTER" <<'PY'
+python3 - "$TARGET" "$ONLY" <<'PY'
 import json, os, shutil, sys, time
 
 target, only = sys.argv[1], sys.argv[2]
