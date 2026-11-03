@@ -1,6 +1,6 @@
 # Полный каталог скиллов
 
-Всего: **427** скиллов из **9** репозиториев.
+Всего: **428** скиллов из **10** источников (9 репозиториев + собственные сборки).
 
 
 ## taste-skill (1)
@@ -209,6 +209,7 @@
 | `homelab-vlan-segmentation` | Segmenting home networks into VLANs for IoT, guest, trusted, and server traffic using UniFi, pfSense/OPNsense, and MikroTik — including switch trunk config, firewall rules, and wireless SSID mapping. Use when splittin... |
 | `homelab-wireguard-vpn` | WireGuard VPN server setup, peer configuration, key generation, split tunneling vs full tunnel routing, and remote access to a home network from mobile and laptop clients. Use when setting up WireGuard for remote acce... |
 | `hookify-rules` | Create and configure hookify rules — markdown files with YAML frontmatter that match bash, file, prompt, or stop events by regex or conditions and show warn/block messages to the agent. Use when creating a hookify rul... |
+| `human-voice` | Detect and rewrite AI-sounding text so it reads like a specific human wrote it: removes AI tells (not-X-but-Y, triads, em-dash overuse, AI vocabulary, chatbot residue) and fixes punctuation to match the register, EN and RU. Use when the user says text sounds AI-generated or asks to make it sound human. |
 | `i18n-sync` | Translate and synchronize application JSON locale files using source-key usage, project terminology, and focused validation. Use when adding keys or languages, updating source copy, or reviewing missing and stale tran... |
 | `inherit-legacy-style` | Prevent AI style drift on legacy projects by scanning the codebase for implicit conventions, resolving conflicts with the operator one at a time, and writing an enforceable .ai-style-rules.md (Golden Files, naming rul... |
 | `intent-driven-development` | Turn ambiguous or high-impact product and engineering changes into scoped, verifiable acceptance criteria before or alongside implementation. Use when a user asks to clarify a feature, define acceptance criteria, de-r... |
