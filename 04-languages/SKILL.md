@@ -1,61 +1,59 @@
 ---
 name: languages
-description: "Языки программирования и код-база: идиомы Python/Go/Rust/Kotlin/Java/C++/Perl/Swift/Dart, мобильная разработка, навигация по чужому коду, упрощение, legacy. Загружай, когда пишешь код на конкретном языке или разбираешь чужую код-базу."
+description: "Languages and codebases: Python / Go / Rust / Kotlin / Java / Swift idioms, reading unfamiliar code, refactoring, legacy. Load when working inside an unfamiliar codebase."
 ---
-# Языки и код-база
+# Languages and codebases
 
-> Дистиллят из 29 исходных скиллов; что откуда взято — в «Карте источников» в конце файла.
+## When to apply
+- Writing, reviewing or refactoring code in a specific language → sections 1–3 (Python, Go, Rust, Kotlin, Java, C++, Perl).
+- Coroutines and Flow in Kotlin, errors as values in Go/Rust → section 2; Swift async, Dart/Flutter → section 4.
+- Building a mobile or multiplatform app: Flutter, Android/KMP, iOS, on-device LLM → section 4.
+- A new or unfamiliar repository, a legacy project with a foreign style, simplification and module boundaries → section 5.
+- Baseline standards, typed errors, pre-commit, building a Windows installer, Bun, tests without `as` → section 6.
 
-## Когда применять
-- Пишешь, ревьюишь или рефакторишь код на конкретном языке → разделы 1–3 (Python, Go, Rust, Kotlin, Java, C++, Perl).
-- Корутины и Flow в Kotlin, ошибки как значения в Go/Rust → раздел 2; асинхронность Swift, Dart/Flutter → раздел 4.
-- Собираешь мобильное или мультиплатформенное приложение: Flutter, Android/KMP, iOS, on-device LLM → раздел 4.
-- Новый или незнакомый репозиторий, legacy-проект с чужим стилем, упрощение и границы модулей → раздел 5.
-- Базовые стандарты, типизированные ошибки, pre-commit, сборка Windows-установщика, Bun, тесты без `as` → раздел 6.
+## 1. Python (python-patterns) — rules and idioms
 
-## 1. Python (python-patterns) — правила и идиомы
-
-### Железные правила
-- Читаемость важнее остроумия; явное лучше неявного; EAFP — обрабатывай исключения вместо предварительных проверок (LBYL).
-- Аннотируй сигнатуры типов; на 3.9+ встроенные обобщения `list[str]`, `dict[str, int]`; `Protocol` — для duck typing с проверкой.
-- Лови конкретные исключения и сохраняй трейсбек цепочкой `raise ... from e`; иерархия ошибок от базового `AppError`.
-- Ресурсы — только через `with`; свои контекстные менеджеры через `@contextmanager` или `__enter__/__exit__` (commit/rollback).
-- Comprehensions — для простых преобразований; генераторы — для больших данных и ленивых вычислений; сложный comprehension разворачивай в цикл.
-- Дата-классы для контейнеров данных, валидация в `__post_init__`; декоратор всегда с `@functools.wraps(func)`.
-- Конкурентность по типу задачи: `ThreadPoolExecutor` — I/O, `ProcessPoolExecutor` — CPU, `asyncio.gather` — параллельный I/O.
-- Память: `__slots__` для массовых объектов, `"".join(...)` вместо конкатенации строк в цикле (иначе O(n²)), генератор вместо полного списка.
+### Iron rules
+- Readability over cleverness; explicit is better than implicit; EAFP — handle exceptions instead of pre-checking (LBYL).
+- Annotate type signatures; on 3.9+ built-in generics `list[str]`, `dict[str, int]`; `Protocol` for checked duck typing.
+- Catch specific exceptions and preserve the traceback by chaining with `raise ... from e`; an error hierarchy derived from a base `AppError`.
+- Resources only via `with`; custom context managers via `@contextmanager` or `__enter__/__exit__` (commit/rollback).
+- Comprehensions for simple transformations; generators for large data and lazy computation; unroll a complex comprehension into a loop.
+- Dataclasses for data containers, validation in `__post_init__`; a decorator always carries `@functools.wraps(func)`.
+- Concurrency by task type: `ThreadPoolExecutor` for I/O, `ProcessPoolExecutor` for CPU, `asyncio.gather` for concurrent I/O.
+- Memory: `__slots__` for mass-created objects, `"".join(...)` instead of string concatenation in a loop (otherwise O(n²)), a generator instead of a full list.
 
 ```python
 try:
     with open(path) as f:
         return Config.from_json(f.read())
 except FileNotFoundError as e:
-    raise ConfigError(f"config not found: {path}") from e  # трейсбек сохранён
+    raise ConfigError(f"config not found: {path}") from e  # traceback preserved
 ```
 
-### Типовые ошибки
-- Изменяемый аргумент по умолчанию `def f(x, items=[])` — только `items=None` и создание списка внутри.
-- Голый `except:` молча глотает провал; `type(obj) == list` вместо `isinstance`; `value == None` вместо `is None`.
-- `from module import *`; конструкция `sum([x*x for x in ...])` там, где хватит генератора.
-- Тулчейн: `black`/`isort`, `ruff`, `mypy` (без untyped defs), `pytest --cov`, `bandit`, `pip-audit`.
+### Typical mistakes
+- A mutable default argument `def f(x, items=[])` — only `items=None` with the list created inside.
+- A bare `except:` silently swallows failure; `type(obj) == list` instead of `isinstance`; `value == None` instead of `is None`.
+- `from module import *`; `sum([x*x for x in ...])` where a generator expression would do.
+- Toolchain: `black`/`isort`, `ruff`, `mypy` (no untyped defs), `pytest --cov`, `bandit`, `pip-audit`.
 
 ## 2. Go, Rust, Kotlin (golang-patterns, rust-patterns, kotlin-patterns, kotlin-coroutines-flows)
 
 ### Go
-#### Железные правила
-- Проще и предсказуемее — лучше: код должен быть «скучным», ясное важнее хитрого.
-- Нулевое значение полезно: тип должен работать без инициализации (`Counter` с мьютексом, `bytes.Buffer`); nil-карта паникует — создавай.
-- Принимай интерфейсы, возвращай структуры; интерфейсы — по одному методу, объявляются у потребителя, а не у провайдера.
-- Ошибки — значения: оборачивай с контекстом, проверяй через `errors.Is`/`errors.As`, сторожевые ошибки `var ErrNotFound = errors.New(...)`. Молча игнорировать `err` нельзя.
-- `ctx context.Context` — всегда первый параметр; таймауты через `context.WithTimeout` + `defer cancel()`.
-- Не утекай горутиной: буферизованный канал + `select` с `<-ctx.Done()`; для согласованных горутин — `errgroup`.
-- Предвыделяй `make([]T, 0, len(items))`; `strings.Join`/`strings.Builder` вместо конкатенации; из `sync.Pool` копируй `buf.Bytes()` (`bytes.Clone`) до возврата в пул.
-- Опции конструктора — functional options (`WithTimeout(60*time.Second)`), глобальное мутабельное состояние заменяй DI.
+#### Iron rules
+- Simpler and more predictable is better: code should be "boring"; clarity over cleverness.
+- Make the zero value useful: a type must work without initialization (`Counter` with a mutex, `bytes.Buffer`); a nil map panics — create it.
+- Accept interfaces, return structs; interfaces are one method each, declared by the consumer, not the provider.
+- Errors are values: wrap them with context, check via `errors.Is`/`errors.As`, sentinel errors `var ErrNotFound = errors.New(...)`. Silently ignoring `err` is not allowed.
+- `ctx context.Context` is always the first parameter; timeouts via `context.WithTimeout` + `defer cancel()`.
+- Do not leak a goroutine: a buffered channel + `select` with `<-ctx.Done()`; for coordinated goroutines — `errgroup`.
+- Preallocate `make([]T, 0, len(items))`; `strings.Join`/`strings.Builder` instead of concatenation; when using `sync.Pool`, copy `buf.Bytes()` (`bytes.Clone`) before returning the buffer to the pool.
+- Constructor options — functional options (`WithTimeout(60*time.Second)`); replace global mutable state with DI.
 
 ```go
-ch := make(chan []byte, 1) // буфер: горутина не зависнет без получателя
+ch := make(chan []byte, 1) // buffered: the goroutine won't hang without a receiver
 go func() {
-    data := fetch(url) // обработка err — вне примера
+    data := fetch(url) // error handling omitted from the example
     select {
     case ch <- data:
     case <-ctx.Done():
@@ -63,22 +61,22 @@ go func() {
 }()
 ```
 
-#### Типовые ошибки
-- `panic` для control flow; naked returns в длинных функциях; `ctx` внутри структуры вместо первого параметра.
-- Смешивание value- и pointer-receiver у одного типа; глобальный `var db *sql.DB` в `init()` вместо DI.
-- Тулчейн: `go vet`, `staticcheck`, `golangci-lint run`, `go test -race ./...`, формат — только `gofmt`/`goimports`.
+#### Typical mistakes
+- `panic` for control flow; naked returns in long functions; `ctx` inside a struct instead of the first parameter.
+- Mixing value and pointer receivers on one type; a global `var db *sql.DB` in `init()` instead of DI.
+- Toolchain: `go vet`, `staticcheck`, `golangci-lint run`, `go test -race ./...`, formatting — `gofmt`/`goimports` only.
 
 ### Rust
-#### Железные правила
-- Заимствуй, не клонируй: `&T`/`&str` вместо `String`/`.clone()` без причины владения; `Cow` — когда мутация редка.
-- Ошибки: `?` с `anyhow::Context` в приложении, `thiserror` со структурированными enum-ошибками в библиотеке; `unwrap()` в проде запрещён.
-- Энумы делают невозможные состояния непредставимыми; матчинг исчерпывающий — никакого `_` для бизнес-логики, добавленный вариант обязан быть обработан.
-- Newtype (`struct UserId(u64)`) против перепутанных аргументов; «parse, don't validate» — типизируй данные на границе.
-- Итераторы вместо ручных циклов; `collect()` с аннотацией типа; `collect` по `Result` останавливается на первой ошибке.
-- Разделяемое мутабельное состояние — `Arc<Mutex<T>>`; сообщения — ограниченный канал `mpsc::sync_channel(16)`; `drop(tx)`, чтобы приёмник завершился.
-- В async не блокируй поток: `tokio::time::sleep(...).await`, а не `thread::sleep`.
-- `unsafe` — только граница FFI или доказанная производительность, с `# Safety`-документацией и `// SAFETY:`-комментарием; никогда для обхода borrow checker.
-- Поверхность минимальна: `pub(crate)` для внутреннего, крейт по доменам (`auth/`, `orders/`), а не по типам.
+#### Iron rules
+- Borrow, do not clone: `&T`/`&str` instead of `String`/`.clone()` without an ownership reason; `Cow` when mutation is rare.
+- Errors: `?` with `anyhow::Context` in applications, `thiserror` with structured enum errors in libraries; `unwrap()` in production is forbidden.
+- Enums make invalid states unrepresentable; matching is exhaustive — no `_` for business logic; an added variant must be handled.
+- Newtype (`struct UserId(u64)`) against swapped arguments; "parse, don't validate" — type the data at the boundary.
+- Iterators over manual loops; `collect()` with a type annotation; `collect` over `Result` stops at the first error.
+- Shared mutable state — `Arc<Mutex<T>>`; messages — a bounded channel `mpsc::sync_channel(16)`; `drop(tx)` so the receiver finishes.
+- In async, do not block the thread: `tokio::time::sleep(...).await`, not `thread::sleep`.
+- `unsafe` only at an FFI boundary or for proven performance, with `# Safety` documentation and a `// SAFETY:` comment; never to bypass the borrow checker.
+- Minimal surface: `pub(crate)` for internals; organize the crate by domains (`auth/`, `orders/`), not by types.
 
 ```rust
 fn load_config(path: &str) -> anyhow::Result<Config> {
@@ -90,24 +88,24 @@ fn load_config(path: &str) -> anyhow::Result<Config> {
 }
 ```
 
-#### Типовые ошибки
-- `.clone()` чтобы утихомирить borrow checker, не понимая почему; `String` в сигнатуре там, где хватает `&str`.
-- `Box<dyn Error>` в библиотеке вместо `thiserror`; игнорирование `#[must_use]`; транмутация типов в `unsafe`.
-- Тулчейн: `cargo check` (быстрая проверка), `cargo clippy`, `cargo fmt`, `cargo test`, `cargo audit`.
+#### Typical mistakes
+- `.clone()` to appease the borrow checker without understanding why; `String` in a signature where `&str` suffices.
+- `Box<dyn Error>` in a library instead of `thiserror`; ignoring `#[must_use]`; type transmutation in `unsafe`.
+- Toolchain: `cargo check` (fast check), `cargo clippy`, `cargo fmt`, `cargo test`, `cargo audit`.
 
 ### Kotlin
-#### Железные правила
-- `val` по умолчанию; data class + `copy()` для иммутабельных обновлений; `@JvmInline value class` для типобезопасных обёрток с проверками в `init`.
-- Нулевая безопасность: `?.` и `?:` (Elvis); `!!` не использовать; null из Java (platform types) обрабатывай явно.
-- `sealed class`/`interface` для исчерпывающего `when` (Result, ApiError); однострочные expression-функции вместо лишнего блока.
-- Scope-функции по назначению: `let` — трансформация nullable, `apply` — настройка объекта, `also` — побочный эффект, `run`/`with` — блок с результатом; друг в друга не вкладывать.
-- Расширения добавляют поведение без наследования; приватные расширения объявляй внутри класса, не глобально.
-- `require`/`check` для предусловий; для доменных операций — `Result`/`runCatching`, а не исключения для ожидаемых случаев.
-- Корутины: только structured concurrency — `coroutineScope` + `async`, `supervisorScope` для независимых детей; никогда `GlobalScope` (Android — `viewModelScope`/`LaunchedEffect`).
-- Диспетчеры: `Dispatchers.Default` — CPU, `Dispatchers.IO` — I/O; в KMP `Dispatchers.IO` недоступен (только JVM/Android) — используй `Default` или DI.
-- Отмена кооперативная: `ensureActive()` в длинных циклах; очистка в `finally` + `withContext(NonCancellable)`.
-- Flow: UI-состояние — `stateIn(scope, SharingStarted.WhileSubscribed(5_000), initial)` (переживает смену конфигурации); одноразовые события — `SharedFlow`; поиск — `debounce(300).distinctUntilChanged().flatMapLatest(...).catch`; ретрай — `retryWhen` с экспоненциальной задержкой.
-- Тесты: `runTest` + `advanceUntilIdle`, Turbine для StateFlow, fake-репозиторий на `MutableStateFlow`.
+#### Iron rules
+- `val` by default; data class + `copy()` for immutable updates; `@JvmInline value class` for type-safe wrappers with checks in `init`.
+- Null safety: `?.` and `?:` (Elvis); do not use `!!`; handle null coming from Java (platform types) explicitly.
+- `sealed class`/`interface` for an exhaustive `when` (Result, ApiError); single-line expression functions instead of an extra block.
+- Scope functions by purpose: `let` — nullable transformation, `apply` — object configuration, `also` — side effect, `run`/`with` — a block with a result; do not nest them inside each other.
+- Extensions add behavior without inheritance; declare private extensions inside the class, not globally.
+- `require`/`check` for preconditions; for domain operations — `Result`/`runCatching`, not exceptions for expected cases.
+- Coroutines: structured concurrency only — `coroutineScope` + `async`, `supervisorScope` for independent children; never `GlobalScope` (Android — `viewModelScope`/`LaunchedEffect`).
+- Dispatchers: `Dispatchers.Default` for CPU, `Dispatchers.IO` for I/O; in KMP `Dispatchers.IO` is unavailable (JVM/Android only) — use `Default` or DI.
+- Cancellation is cooperative: `ensureActive()` in long loops; cleanup in `finally` + `withContext(NonCancellable)`.
+- Flow: UI state — `stateIn(scope, SharingStarted.WhileSubscribed(5_000), initial)` (survives configuration changes); one-off events — `SharedFlow`; search — `debounce(300).distinctUntilChanged().flatMapLatest(...).catch`; retry — `retryWhen` with an exponential delay.
+- Tests: `runTest` + `advanceUntilIdle`, Turbine for StateFlow, a fake repository on `MutableStateFlow`.
 
 ```kotlin
 val progress: StateFlow<UserProgress> = observeProgress()
@@ -118,27 +116,27 @@ val progress: StateFlow<UserProgress> = observeProgress()
     )
 ```
 
-#### Типовые ошибки
-- `user!!.name`; вложенные `let`-цепочки вместо `user?.address?.city`; `GlobalScope.launch`.
-- Исключения для ожидаемых случаев вместо nullable/`Result`; `data class` с `var`-полями.
-- `MutableStateFlow` с мутабельными коллекциями вместо `_state.update { it.copy(list = it.list + x) }`; ловля `CancellationException` (должна пробрасываться); `flowOn(Dispatchers.Main)`; создание Flow в `@Composable` без `remember`.
+#### Typical mistakes
+- `user!!.name`; nested `let` chains instead of `user?.address?.city`; `GlobalScope.launch`.
+- Exceptions for expected cases instead of nullable/`Result`; a `data class` with `var` fields.
+- `MutableStateFlow` with mutable collections instead of `_state.update { it.copy(list = it.list + x) }`; catching `CancellationException` (it must be rethrown); `flowOn(Dispatchers.Main)`; creating a Flow in a `@Composable` without `remember`.
 
 ## 3. Java, C++, Perl (java-coding-standards, cpp-coding-standards, perl-patterns, perl-security)
 
 ### Java (Spring Boot / Quarkus)
-#### Железные правила
-- Сначала определи фреймворк по build-файлу: `spring-boot` → конвенции [SPRING], `quarkus` → [QUARKUS].
-- Иммутабельность: `record` для DTO, final-поля без сеттеров; Panache-сущности (Quarkus) — публичные поля, это идиоматично (accessors генерируются на этапе сборки).
-- `Optional` из find*-методов: `map(...).orElseThrow(() -> new EntityNotFoundException(...))`; `get()` не вызывать.
-- Внедрение через конструктор; в Quarkus `@ApplicationScoped`, а не `@Singleton` (иначе ломаются проксирование и перехват); package-private field injection в Quarkus допустима.
-- Реактивность [QUARKUS]: возвращай `Uni`/`Multi`, не блокируй event loop синхронным вызовом внутри пайплайна; общую `Uni` мемоизируй (`Uni.memoize()`), а не подписывайся дважды.
-- Доменные unchecked-исключения (`MarketNotFoundException`) + централизованный обработчик: `@RestControllerAdvice` [SPRING] или `ExceptionMapper`/`@ServerExceptionMapper` [QUARKUS].
-- Нейминг: PascalCase/camelCase/UPPER_SNAKE_CASE; REST-классы `*Controller` [SPRING] vs `*Resource` [QUARKUS]; стримы короткие, сложные — в цикл.
-- Логи с плейсхолдерами: SLF4J `log.info("fetch_market slug={}", slug)` [SPRING], JBoss Logging `log.infof(...)` [QUARKUS].
-- Тесты: срезы `@WebMvcTest`/`@DataJpaTest` [SPRING]; в Quarkus юнит-тесты на чистом JUnit 5 + Mockito (без CDI), `@QuarkusTest` — только для CDI-интеграции, Dev Services вместо ручных Testcontainers.
+#### Iron rules
+- First identify the framework from the build file: `spring-boot` → [SPRING] conventions, `quarkus` → [QUARKUS].
+- Immutability: `record` for DTOs, final fields without setters; Panache entities (Quarkus) use public fields — that is idiomatic (accessors are generated at build time).
+- `Optional` from find* methods: `map(...).orElseThrow(() -> new EntityNotFoundException(...))`; do not call `get()`.
+- Constructor injection; in Quarkus `@ApplicationScoped`, not `@Singleton` (otherwise proxying and interception break); package-private field injection is acceptable in Quarkus.
+- Reactivity [QUARKUS]: return `Uni`/`Multi`, do not block the event loop with a synchronous call inside a pipeline; memoize a shared `Uni` (`Uni.memoize()`), do not subscribe twice.
+- Domain unchecked exceptions (`MarketNotFoundException`) + a centralized handler: `@RestControllerAdvice` [SPRING] or `ExceptionMapper`/`@ServerExceptionMapper` [QUARKUS].
+- Naming: PascalCase/camelCase/UPPER_SNAKE_CASE; REST classes `*Controller` [SPRING] vs `*Resource` [QUARKUS]; keep streams short, move complex ones into a loop.
+- Logs with placeholders: SLF4J `log.info("fetch_market slug={}", slug)` [SPRING], JBoss Logging `log.infof(...)` [QUARKUS].
+- Tests: slices `@WebMvcTest`/`@DataJpaTest` [SPRING]; in Quarkus, unit tests on plain JUnit 5 + Mockito (no CDI), `@QuarkusTest` only for CDI integration, Dev Services instead of manual Testcontainers.
 
 ```java
-// [SPRING] constructor injection; [QUARKUS] то же самое с @ApplicationScoped
+// [SPRING] constructor injection; [QUARKUS] the same with @ApplicationScoped
 @Service
 public class MarketService {
   private final MarketRepository marketRepository;
@@ -149,29 +147,29 @@ public class MarketService {
 }
 ```
 
-#### Типовые ошибки
-- `@Autowired` на поле [SPRING]; `@Singleton` там, где нужна интерцепция [QUARKUS]; смешивание `quarkus-resteasy-reactive` и classic.
-- Блокирующий вызов внутри `Uni`-пайплайна; double subscribe без `memoize()`; Panache active-record и repository в одном ограниченном контексте.
-- `catch (Exception ex)` без ретрова/логирования; raw types; длинные списки параметров вместо DTO/builder.
+#### Typical mistakes
+- `@Autowired` on a field [SPRING]; `@Singleton` where interception is needed [QUARKUS]; mixing `quarkus-resteasy-reactive` and classic.
+- A blocking call inside a `Uni` pipeline; double subscribe without `memoize()`; Panache active-record and repository in one bounded context.
+- `catch (Exception ex)` without rethrow/logging; raw types; long parameter lists instead of DTO/builder.
 
 ### C++ (C++ Core Guidelines)
-#### Железные правила
-- RAII повсюду: время жизни ресурса = время жизни объекта; никаких голых `new`/`delete`/`malloc` — `make_unique`/`make_shared`; `unique_ptr` по умолчанию, `shared_ptr` — только для разделяемого владения.
-- Raw-указатель — не владеющий наблюдатель (`void render(const Widget*)`).
-- Rule of Zero; если управляешь ресурсом — Rule of Five (все пять спец-функций).
-- Константность по умолчанию: `const`/`constexpr`, const-методы, передача по `const&`; всегда инициализируй объекты, предпочитай `{}`-синтаксис; сложную инициализацию const — через лямбду (ES.28).
-- Параметры (F.16): дешёвое — по значению, дорогое — по `const&`, sink — по значению; возвращай значения или структуру, а не out-параметры.
-- `enum class` вместо `enum` и без ALL_CAPS у перечислителей; `nullptr` вместо `0`/`NULL`; никаких C-style cast и сужающих преобразований; одноаргументный конструктор — `explicit`.
-- Иерархии: публичный виртуальный деструктор (или protected невиртуальный); `override`/`final` у переопределений; не вызывай виртуальные функции в конструкторах.
-- Исключения: свои типы от `std::runtime_error`, бросай по значению, лови по ссылке; деструкторы не бросают; `noexcept` где уместно; не лови всё подряд в каждой функции.
-- Блокировки: `std::scoped_lock` для нескольких мьютексов; lock-переменные именовать (`std::lock_guard<std::mutex> lock(m);`); `cv.wait(lock, pred)` — ждать с условием; не вызывай неизвестный код под локом; `volatile` — не для синхронизации.
-- Шаблоны ограничивай concepts (`std::integral`, свой `concept Serializable`); заголовки самодостаточны с include guards, без `using namespace` на глобальном уровне; `'\n'` вместо `endl`; `string_view` для наблюдения, `string` для владения; оптимизация — только после измерений.
+#### Iron rules
+- RAII everywhere: a resource's lifetime = the object's lifetime; no bare `new`/`delete`/`malloc` — `make_unique`/`make_shared`; `unique_ptr` by default, `shared_ptr` only for shared ownership.
+- A raw pointer is a non-owning observer (`void render(const Widget*)`).
+- Rule of Zero; if you manage a resource — Rule of Five (all five special member functions).
+- Const by default: `const`/`constexpr`, const methods, pass by `const&`; always initialize objects, prefer `{}` syntax; complex const initialization via a lambda (ES.28).
+- Parameters (F.16): cheap by value, expensive by `const&`, sink by value; return values or a struct, not out-parameters.
+- `enum class` instead of `enum`, no ALL_CAPS enumerators; `nullptr` instead of `0`/`NULL`; no C-style casts or narrowing conversions; a single-argument constructor is `explicit`.
+- Hierarchies: a public virtual destructor (or a protected non-virtual one); `override`/`final` on overrides; do not call virtual functions in constructors.
+- Exceptions: custom types derived from `std::runtime_error`, throw by value, catch by reference; destructors do not throw; `noexcept` where appropriate; do not catch everything in every function.
+- Locks: `std::scoped_lock` for several mutexes; name lock variables (`std::lock_guard<std::mutex> lock(m);`); `cv.wait(lock, pred)` — wait with a condition; do not call unknown code under a lock; `volatile` is not for synchronization.
+- Constrain templates with concepts (`std::integral`, a custom `concept Serializable`); headers are self-sufficient with include guards, no `using namespace` at global level; `'\n'` instead of `endl`; `string_view` for observation, `string` for ownership; optimize only after measuring.
 
 ```cpp
-auto widget = std::make_unique<Widget>("config"); // владение
-void render(const Widget* w) { if (w) w->draw(); } // наблюдатель, НЕ владеет
+auto widget = std::make_unique<Widget>("config"); // ownership
+void render(const Widget* w) { if (w) w->draw(); } // observer, does NOT own
 
-// CP.21: несколько мьютексов без дедлока
+// CP.21: several mutexes without deadlock
 void transfer(Account& from, Account& to, double amount) {
     std::scoped_lock lock(from.mutex_, to.mutex_);
     from.balance_ -= amount;
@@ -179,78 +177,78 @@ void transfer(Account& from, Account& to, double amount) {
 }
 ```
 
-#### Типовые ошибки
-- Неинициализированные переменные и магические числа; `memset`/`memcpy` на нетривиальных типах.
-- Безымянный `lock_guard` (`std::lock_guard<std::mutex>(m);` уничтожается немедленно); дотачивание потоков; lock-free код без глубокой экспертизы.
-- Catch по значению (срезка); бросание встроенных типов; Hungarian notation и ALL_CAPS не-макросов.
+#### Typical mistakes
+- Uninitialized variables and magic numbers; `memset`/`memcpy` on non-trivial types.
+- An unnamed `lock_guard` (`std::lock_guard<std::mutex>(m);` is destroyed immediately); detaching threads; lock-free code without deep expertise.
+- Catch by value (slicing); throwing built-in types; Hungarian notation and ALL_CAPS for non-macros.
 
 ### Perl (5.36+)
-#### Железные правила
-- `use v5.36` вместо боилерплейта strict/warnings (включает сигнатуры); сигнатуры с дефолтами `sub f($host, $port = 5432)`; postfix-разыменование `$ref->@*`; оператор `$obj isa 'X'`.
-- Ошибки: `Try::Tiny` или нативный `try/catch` (5.40+) — не `eval {}` + `$@`.
-- ООП: Moo с `is => 'ro'`, типами `Types::Standard` и `namespace::autoclean`; роли через `Moo::Role`; blessed hashref — плохой стиль; native `class` (5.38+) — эксперимент.
-- Регулярки: именованные захваты `(?<name>...)` с флагом `/x` вместо `$1, $2`; прекомпиляция `qr//`.
-- Файлы: трёхарговый `open my $fh, '<:encoding(UTF-8)', $path`, лексический файлхендл, `autodie`; операции с путями — `Path::Tiny`.
-- Безопасность: taint-режим `-T` для web-скриптов; санитизируй `$ENV{PATH}` и удаляй `IFS/CDPATH/ENV/BASH_ENV`; untaint только конкретной регуляркой — `^(.*)$/s` бессмыслен.
-- Валидация входа — allowlist (`qw(name email created_at)`), не blocklist; ограничивай длину входа.
-- ReDoS: не допускай вложенных квантификаторов (`(a+)+`); possessive `++` и атомарные группы `(?>...)`; на недоверенные паттерны — `alarm`-таймаут.
-- Процессы: list-form `system(@cmd)` и `IPC::Run3`/`Capture::Tiny`; строковая форма и бэктики с пользовательскими данными — shell-инъекция.
-- SQL: только плейсхолдеры `?`; имена колонок/направление ORDER BY — по allowlist; `DBIx::Class` даёт параметризованные запросы из коробки.
-- Web: кодируй вывод по контексту — `encode_entities` (HTML), `uri_escape_utf8` (URL), `encode_json` (JSON); CSRF-токен из `Crypt::URandom`; заголовки CSP, X-Frame-Options, HSTS; сессии secure/samesite.
-- Файлы и гонки: `sysopen` с `O_CREAT|O_EXCL` (атомарное создание), проверка `realpath` на выход за базовый каталог, `File::Temp`, `flock`.
+#### Iron rules
+- `use v5.36` instead of strict/warnings boilerplate (it enables signatures); signatures with defaults `sub f($host, $port = 5432)`; postfix dereferencing `$ref->@*`; the `$obj isa 'X'` operator.
+- Errors: `Try::Tiny` or native `try/catch` (5.40+) — not `eval {}` + `$@`.
+- OOP: Moo with `is => 'ro'`, `Types::Standard` types and `namespace::autoclean`; roles via `Moo::Role`; a blessed hashref is poor style; native `class` (5.38+) is an experiment.
+- Regexes: named captures `(?<name>...)` with the `/x` flag instead of `$1, $2`; precompile with `qr//`.
+- Files: three-argument `open my $fh, '<:encoding(UTF-8)', $path`, a lexical filehandle, `autodie`; path operations — `Path::Tiny`.
+- Security: taint mode `-T` for web scripts; sanitize `$ENV{PATH}` and delete `IFS/CDPATH/ENV/BASH_ENV`; untaint only with a specific regex — `^(.*)$/s` is meaningless.
+- Input validation — an allowlist (`qw(name email created_at)`), not a blocklist; limit input length.
+- ReDoS: no nested quantifiers (`(a+)+`); possessive `++` and atomic groups `(?>...)`; an `alarm` timeout on untrusted patterns.
+- Processes: list-form `system(@cmd)` and `IPC::Run3`/`Capture::Tiny`; the string form and backticks with user data — shell injection.
+- SQL: placeholders `?` only; column names/ORDER BY direction via an allowlist; `DBIx::Class` gives parameterized queries out of the box.
+- Web: encode output by context — `encode_entities` (HTML), `uri_escape_utf8` (URL), `encode_json` (JSON); a CSRF token from `Crypt::URandom`; CSP, X-Frame-Options, HSTS headers; secure/samesite sessions.
+- Files and races: `sysopen` with `O_CREAT|O_EXCL` (atomic creation), a `realpath` check against escaping the base directory, `File::Temp`, `flock`.
 
 ```perl
 sub find_user($dbh, $email) {
     my $sth = $dbh->prepare('SELECT * FROM users WHERE email = ?');
     $sth->execute($email);
-    return $sth->fetchrow_hashref;   # всегда плейсхолдеры, не интерполяция
+    return $sth->fetchrow_hashref;   # always placeholders, no interpolation
 }
 ```
 
-#### Типовые ошибки
-- Двухарговый `open FH, $user_input` (при `|rm -rf /` выполнит команду); `system("grep '$pattern' ...")` и бэктики с интерполяцией.
-- `$dbh->do("DELETE ... WHERE id = $id")` — SQLi; `eval $user_code` — RCE; сырой вывод в HTML — XSS.
-- `no strict 'refs'`; непроверенные редиректы; глобальные переменные-конфигурация вместо констант/атрибутов Moo.
-- Тулчейн: `perltidy`, `perlcritic --theme security`, `carton install` + cpanfile с пином версий.
+#### Typical mistakes
+- Two-argument `open FH, $user_input` (with `|rm -rf /` it executes a command); `system("grep '$pattern' ...")` and backticks with interpolation.
+- `$dbh->do("DELETE ... WHERE id = $id")` — SQLi; `eval $user_code` — RCE; raw output into HTML — XSS.
+- `no strict 'refs'`; unvalidated redirects; global config variables instead of constants/Moo attributes.
+- Toolchain: `perltidy`, `perlcritic --theme security`, `carton install` + a cpanfile with pinned versions.
 
-## 4. Мобильная разработка (swift-*, dart-flutter-patterns, compose-multiplatform-patterns, android-clean-architecture, foundation-models-on-device)
+## 4. Mobile development (swift-*, dart-flutter-patterns, compose-multiplatform-patterns, android-clean-architecture, foundation-models-on-device)
 
-### Android / KMP — архитектура
-- Слои: `app / core / domain / data / presentation / design-system / feature`; зависимости: `app → presentation, domain, data, core`; `domain` — чистый Kotlin, не зависит от data, presentation и фреймворка.
-- UseCase — одна бизнес-операция через `suspend operator fun invoke`; интерфейс репозитория в domain, имплементация в data; мапперы — extension-функции рядом с DTO/Entity.
-- Ошибки — `Result<T>` или sealed `Try`/`AppError`; в ViewModel маппятся в UI-состояние (`_state.update { it.copy(...) }`).
-- Данные: Room (Android) или SQLDelight (KMP), Ktor HttpClient с ContentNegotiation; репозиторий координирует local+remote.
-- DI: Koin для KMP (`single<ItemRepository>`, `viewModelOf`), Hilt — Android-only.
-- Gradle KMP: convention plugins (`kmp-library`) убирают дублирование build-файлов.
-- Анти-паттерны: бизнес-логика в ViewModel (→ UseCase), утечка Entity/DTO в UI, `GlobalScope`, циклические зависимости модулей.
+### Android / KMP — architecture
+- Layers: `app / core / domain / data / presentation / design-system / feature`; dependencies: `app → presentation, domain, data, core`; `domain` is pure Kotlin, independent of data, presentation and frameworks.
+- A UseCase is one business operation via `suspend operator fun invoke`; the repository interface in domain, the implementation in data; mappers are extension functions next to DTOs/Entities.
+- Errors — `Result<T>` or a sealed `Try`/`AppError`; mapped to UI state in the ViewModel (`_state.update { it.copy(...) }`).
+- Data: Room (Android) or SQLDelight (KMP), Ktor HttpClient with ContentNegotiation; the repository coordinates local+remote.
+- DI: Koin for KMP (`single<ItemRepository>`, `viewModelOf`), Hilt is Android-only.
+- Gradle KMP: convention plugins (`kmp-library`) remove build-file duplication.
+- Anti-patterns: business logic in the ViewModel (→ UseCase), leaking Entity/DTO into the UI, `GlobalScope`, circular module dependencies.
 
 ### Compose (Jetpack Compose / Compose Multiplatform)
-- Один data class состояния экрана → `MutableStateFlow` → `collectAsStateWithLifecycle()`; stateless-композабл для превью и тестов.
-- События — sealed interface + один `onEvent(event)` вместо россыпи лямбд; навигацию внутрь не протаскивать — передавай лямбды.
-- Навигация типизирована: `@Serializable data object HomeRoute`, `composable<HomeRoute>`, `toRoute<DetailRoute>()`; диалоги — через `dialog()`.
-- Modifier по порядку: `padding → clip → background → clickable`; slot-based API (`header: @Composable () -> Unit = {}`).
-- Производительность: `@Immutable` модели, стабильные `key = { it.id }` в LazyColumn, `derivedStateOf` для отложенного чтения, `remember(items)` для фильтраций, `const`-пропагация, без аллокаций в recomposition.
-- Платформенное UI — `expect`/`actual` композаблы (`commonMain`/`androidMain`/`iosMain`).
-- Анти: `mutableStateOf` в ViewModel вместо StateFlow, тяжёлые вычисления в `@Composable` (→ ViewModel или `remember {}`), `LaunchedEffect(Unit)` вместо init ViewModel, новые объекты в параметрах композабла.
+- One screen-state data class → `MutableStateFlow` → `collectAsStateWithLifecycle()`; a stateless composable for previews and tests.
+- Events — a sealed interface + a single `onEvent(event)` instead of a scatter of lambdas; do not thread navigation down — pass lambdas.
+- Navigation is typed: `@Serializable data object HomeRoute`, `composable<HomeRoute>`, `toRoute<DetailRoute>()`; dialogs via `dialog()`.
+- Modifier order: `padding → clip → background → clickable`; slot-based API (`header: @Composable () -> Unit = {}`).
+- Performance: `@Immutable` models, stable `key = { it.id }` in LazyColumn, `derivedStateOf` for deferred reads, `remember(items)` for filtering, `const` propagation, no allocations in recomposition.
+- Platform UI — `expect`/`actual` composables (`commonMain`/`androidMain`/`iosMain`).
+- Anti: `mutableStateOf` in the ViewModel instead of StateFlow, heavy computation in a `@Composable` (→ ViewModel or `remember {}`), `LaunchedEffect(Unit)` instead of ViewModel init, new objects in composable parameters.
 
 ### Dart / Flutter
-#### Железные правила
-- Null safety: `?.`/`??`/Dart 3 switch-паттерны вместо `!`; `late` — только если инициализация гарантирована до первого чтения (например, в `initState`).
-- Состояние — sealed-иерархия + исчерпывающий switch (компилятор следит за полнотой); иммутабельность — freezed/`copyWith`.
-- Асинхронность: параллель через `(f1, f2).wait` (Dart 3 records), а не последовательные await; после каждого `await` проверяй `mounted` до обращения к `context`.
-- Виджеты извлекай в классы, а не методы (включает const и переиспользование элементов); `const` останавливает перерисовку; перерисовку изолируй в маленький ConsumerWidget.
-- Состояние: Cubit — для простых сценариев; Riverpod — notifiers с иммутабельными списками и derived-провайдеры (`firstWhereOrNull`, а не `firstWhere`).
-- Навигация: GoRouter + `refreshListenable` для реактивного auth-редиректа.
-- Сеть: Dio с интерцепторами; refresh токена — с флагом `_isRetry` в `requestOptions.extra`, иначе бесконечный цикл.
-- Ошибки: глобальный перехват в `main()` — `FlutterError.onError`, `PlatformDispatcher.instance.onError`, свой `ErrorWidget.builder` для прода.
-- Тесты: `blocTest` для Cubit, `ProviderScope(overrides: ...)` для виджетов, fakes вместо моков.
+#### Iron rules
+- Null safety: `?.`/`??`/Dart 3 switch patterns instead of `!`; `late` only if initialization is guaranteed before the first read (e.g. in `initState`).
+- State — a sealed hierarchy + an exhaustive switch (the compiler checks completeness); immutability — freezed/`copyWith`.
+- Async: parallel via `(f1, f2).wait` (Dart 3 records), not sequential awaits; after every `await` check `mounted` before touching `context`.
+- Extract widgets into classes, not methods (it enables const and element reuse); `const` stops repaints; isolate repaints into a small ConsumerWidget.
+- State: Cubit for simple scenarios; Riverpod — notifiers with immutable lists and derived providers (`firstWhereOrNull`, not `firstWhere`).
+- Navigation: GoRouter + `refreshListenable` for a reactive auth redirect.
+- Network: Dio with interceptors; token refresh with an `_isRetry` flag in `requestOptions.extra`, otherwise an infinite loop.
+- Errors: global handling in `main()` — `FlutterError.onError`, `PlatformDispatcher.instance.onError`, a custom `ErrorWidget.builder` for prod.
+- Tests: `blocTest` for Cubit, `ProviderScope(overrides: ...)` for widgets, fakes over mocks.
 
 ```dart
 Future<void> _handleSubmit() async {
   setState(() => _isLoading = true);
   try {
     await authService.login(_email, _password);
-    if (!mounted) return; // после await контекст может быть уже не жив
+    if (!mounted) return; // after await the context may no longer be alive
     context.go('/home');
   } finally {
     if (mounted) setState(() => _isLoading = false);
@@ -258,100 +256,67 @@ Future<void> _handleSubmit() async {
 }
 ```
 
-#### Типовые ошибки
-- `user!.name` (падение в рантайме); `late` «на всякий случай»; последовательные await для независимых запросов.
-- Приватный метод `_buildHeader()` вместо класса виджета; неконстантные поддеревья; `ref.watch` на весь экран вместо изоляции перерисовки.
+#### Typical mistakes
+- `user!.name` (a runtime crash); `late` "just in case"; sequential awaits for independent requests.
+- A private `_buildHeader()` method instead of a widget class; non-const subtrees; `ref.watch` over the whole screen instead of isolating repaints.
 
 ### Swift
-#### Железные правила
-- Swift 6.2 Approachable Concurrency: код однопоточный по умолчанию, async остаётся на акторе вызывающего — неявного оффлоада в фон больше нет и data races всплывают на компиляции.
-- Реальная параллельность — явная: `nonisolated` тип + `@concurrent` на CPU-тяжёлой функции + `await` на вызовах; оффлоад только после профилирования (Instruments).
-- @MainActor-типы имплементируют протоколы изолированно: `extension StickerModel: @MainActor Exportable`; в не-isolated контексте такая conformance не используется.
-- Глобальные/статические переменные — под `@MainActor`; для app-целей включай MainActor default inference (убирает ручные аннотации).
-- Если компилятор сообщает о data race — гонка реальна: не подавляй ошибку `nonisolated`, не воюй с компилятором.
-- Персистентность — через actor (компилятор гарантирует сериализацию доступа): in-memory кэш + атомарная запись `.atomic`, синхронная загрузка в `init`, минимальный публичный API, `Sendable`-типы через границы актора.
-- Тестируемость: маленькие протоколы по одной внешней зависимости (`FileSystemProviding`, `FileAccessorProviding`), дефолтные параметры в `init` (прод — реальные реализации, тесты — моки с настраиваемыми ошибками), Swift Testing `#expect(throws:)`. Мокай только границы, а не внутренние типы; `#if DEBUG` вместо DI — анти-паттерн.
-- FoundationModels (iOS 26, on-device LLM): сначала проверь `model.availability` (deviceNotEligible / appleIntelligenceNotEnabled / modelNotReady); структурированный вывод — `@Generable` + `@Guide` (`.range`, `.count`) вместо парсинга строк; доменные действия — tool calling через протокол `Tool`; стриминг — снапшоты `PartiallyGenerated`; лимит контекста 4 096 токенов — большие данные режь на сессии; результаты — `response.content`; одна сессия обрабатывает один запрос (проверяй `isResponding`).
+#### Iron rules
+- Swift 6.2 Approachable Concurrency: code is single-threaded by default, async stays on the caller's actor — there is no implicit offloading to the background anymore, and data races surface at compile time.
+- Real parallelism is explicit: a `nonisolated` type + `@concurrent` on the CPU-heavy function + `await` at call sites; offload only after profiling (Instruments).
+- @MainActor types implement protocols in isolation: `extension StickerModel: @MainActor Exportable`; such a conformance is not used in a non-isolated context.
+- Global/static variables are under `@MainActor`; for app targets enable MainActor default inference (it removes manual annotations).
+- If the compiler reports a data race, the race is real: do not suppress the error with `nonisolated`, do not fight the compiler.
+- Persistence — via an actor (the compiler guarantees serialized access): an in-memory cache + atomic writes with `.atomic`, synchronous loading in `init`, a minimal public API, `Sendable` types across actor boundaries.
+- Testability: small protocols per external dependency (`FileSystemProviding`, `FileAccessorProviding`), default parameters in `init` (prod — real implementations, tests — mocks with configurable errors), Swift Testing `#expect(throws:)`. Mock only boundaries, not internal types; `#if DEBUG` instead of DI is an anti-pattern.
+- FoundationModels (iOS 26, on-device LLM): check `model.availability` first (deviceNotEligible / appleIntelligenceNotEnabled / modelNotReady); structured output — `@Generable` + `@Guide` (`.range`, `.count`) instead of parsing strings; domain actions — tool calling via the `Tool` protocol; streaming — `PartiallyGenerated` snapshots; the context limit is 4,096 tokens — split large data across sessions; results — `response.content`; one session handles one request (check `isResponding`).
 
 ```swift
 nonisolated final class PhotoProcessor {
     private var cachedStickers: [String: Sticker] = [:]
 
-    // Оффлоад тяжёлой работы — явный и только после профилирования
+    // Offloading heavy work is explicit and happens only after profiling
     @concurrent
     static func extractSubject(from data: Data) async -> Sticker { /* ... */ }
 }
-// на вызовах: await PhotoProcessor.extractSubject(from: data)
+// at call sites: await PhotoProcessor.extractSubject(from: data)
 ```
 
-#### Типовые ошибки
-- `@concurrent` на каждой async-функции; `nonisolated` для подавления ошибок компилятора; legacy `DispatchQueue` там, где есть акторы.
-- `DispatchQueue`/`NSLock` вместо актора; утечка внутреннего кэша актора наружу; неатомарные записи файлов.
-- Сессия FoundationModels без проверки `availability`, параллельные запросы к одной сессии, `.output` вместо `.content`, вход больше 4 096 токенов.
+#### Typical mistakes
+- `@concurrent` on every async function; `nonisolated` to silence compiler errors; legacy `DispatchQueue` where actors exist.
+- `DispatchQueue`/`NSLock` instead of an actor; leaking the actor's internal cache; non-atomic file writes.
+- A FoundationModels session without checking `availability`, parallel requests to one session, `.output` instead of `.content`, input over 4,096 tokens.
 
-## 5. Работа с чужой код-базой (learn-codebase, codebase-onboarding, smart-explore, inherit-legacy-style, improve-codebase-architecture, code-simplification, setup-ts-deep-modules)
+## 5. Working with an unfamiliar codebase (learn-codebase, codebase-onboarding, smart-explore, inherit-legacy-style, improve-codebase-architecture, code-simplification, setup-ts-deep-modules)
 
-### Режимы знакомства с код-базой
-- **Полное чтение (learn-codebase)**: когда задача — «выучить код-базу», читай КАЖДЫЙ исходный файл полностью (большие — порциями `offset/limit`). Дорого, но фронт-лоадит понимание на весь срок проекта.
-- **Онбординг (codebase-onboarding), 4 фазы**: 1) разведка без чтения всего — манифесты (package.json, go.mod, Cargo.toml, pyproject.toml...), фингерпринт фреймворка по конфигам, входные точки, дерево на 2 уровня, конфиги линтеров/CI, тестовые директории; 2) карта архитектуры — стек, паттерн (монолит/микросервисы), ключевые директории, трассировка одного запроса от входа до ответа; 3) конвенции — нейминг файлов, стиль ошибок, async-паттерны, git-конвенции (при shallow-клоне честно пиши «история недоступна»); 4) артефакты — онбординг-гайд, читаемый за 2 минуты, и `CLAUDE.md` ≤ 100 строк. Существующий `CLAUDE.md` улучшай, а не заменяй; доверяй коду, а не конфигу; неизвестное флагуй, не угадывай.
-- **Структурный поиск (smart-explore)**: индекс прежде чтения — «сначала карта, потом детали». `smart_search` (файлы + символы одним AST-запросом) → `smart_outline` (скелет файла) → `smart_unfold` (полный исходник одного символа). Экономия 4–8× против полного Read файла и 11–18× против explore-агента. Read — для файлов <100 строк и не-кода; rg — для языков вне tree-sitter-набора.
+### Codebase familiarization modes
+- **Full reading (learn-codebase)**: when the task is "learn the codebase", read EVERY source file in full (large ones in `offset/limit` chunks). Expensive, but it front-loads understanding for the whole project.
+- **Onboarding (codebase-onboarding), 4 phases**: 1) reconnaissance without reading everything — manifests (package.json, go.mod, Cargo.toml, pyproject.toml...), the framework fingerprint from configs, entry points, a 2-level tree, linter/CI configs, test directories; 2) an architecture map — stack, pattern (monolith/microservices), key directories, tracing one request from entry to response; 3) conventions — file naming, error style, async patterns, git conventions (on a shallow clone honestly state "history unavailable"); 4) artifacts — an onboarding guide readable in 2 minutes and a `CLAUDE.md` ≤ 100 lines. Improve an existing `CLAUDE.md`, do not replace it; trust the code, not the config; flag the unknown, do not guess.
+- **Structural search (smart-explore)**: index before reading — "map first, details later". `smart_search` (files + symbols in one AST query) → `smart_outline` (the file skeleton) → `smart_unfold` (the full source of one symbol). Saves 4–8× versus a full file Read and 11–18× versus an explore agent. Read is for files <100 lines and non-code; rg for languages outside the tree-sitter set.
 
-### Legacy-стиль и архитектура
-- **inherit-legacy-style**: чтобы ИИ не дрейфовал от стиля legacy-проекта — сканируй 4 измерения (анатомия файла, состояние и control flow, инфраструктура, обработка ошибок); слабые сигналы (меньшинство <5% и <10 файлов) гасятся автоматически, сильные конфликты решаются по ОДНОМУ вопросу за раз; итог — `.ai-style-rules.md` с секциями [Golden Files], [Naming Rules], [DONTs]; инкрементальные прогоны только дополняют evolution log, старые правила не переписывать; у примеров переиспользуй структуру, но не копируй баги.
-- **improve-codebase-architecture**: ищи deepening-возможности — превращение мелких модулей в глубокие (много поведения за маленьким интерфейсом); scope по YAGNI — начинай с горячих точек из `git log --oneline`; deletion test: если при удалении модуля сложность концентрируется — он shallow; кандидаты оценивай силой Strong / Worth exploring / Speculative; противоречие с ADR помечай явно, а не замалчивай; используй словарь проекта (GLOSSARY.md), а не технический жаргон.
-- **code-simplification**: поведение сохраняется точно — все тесты проходят без правок; сначала пойми, потом меняй (Chesterton's Fence, git blame); конвенции проекта выше личных вкусов; ясно > компактно (вложенный тернарник — не упрощение); по одному изменению за раз с прогоном тестов; рефакторинг — отдельным PR от фич и фиксов; правило 500 строк: масштабнее — автоматизируй (codemod/AST), не руками; не упрощай непонятый код и перформанс-критичный код без замеров.
-- **setup-ts-deep-modules**: пакет — глубокий модуль; публичная поверхность — корневые файлы пакета (entry points), всё в подпапках (`lib/`, `tests/`) приватно; четыре правила dependency-cruiser: (1) извне импортируй только entry points, (2) внутри пакета свобода, (3) тесты — через entry points, (4) без циклов; barrel-файлы не поощряются — лучше несколько маленьких entry points; завершение доказывают «правила кусаются»: pass → намеренный fail на deep-импорте → pass.
+### Legacy style and architecture
+- **inherit-legacy-style**: to keep AI from drifting away from a legacy project's style — scan 4 dimensions (file anatomy, state and control flow, infrastructure, error handling); weak signals (a minority <5% and <10 files) are damped automatically, strong conflicts are resolved ONE question at a time; the output is `.ai-style-rules.md` with [Golden Files], [Naming Rules], [DONTs] sections; incremental runs only append to the evolution log, old rules are not rewritten; reuse the structure of examples but do not copy their bugs.
+- **improve-codebase-architecture**: look for deepening opportunities — turning shallow modules into deep ones (lots of behavior behind a small interface); scope by YAGNI — start with hot spots from `git log --oneline`; the deletion test: if deleting a module concentrates the complexity, it is shallow; rate candidates Strong / Worth exploring / Speculative; mark contradictions with an ADR explicitly, do not paper over them; use the project's vocabulary (GLOSSARY.md), not technical jargon.
+- **code-simplification**: behavior is preserved exactly — all tests pass without edits; understand first, change later (Chesterton's Fence, git blame); project conventions over personal taste; clear > compact (a nested ternary is not simplification); one change at a time with a test run; refactoring is a separate PR from features and fixes; the 500-line rule: beyond that, automate (codemod/AST), do not do it by hand; do not simplify code you do not understand or performance-critical code without measurements.
+- **setup-ts-deep-modules**: a package is a deep module; the public surface is the package's root files (entry points), everything in subfolders (`lib/`, `tests/`) is private; four dependency-cruiser rules: (1) from outside, import only entry points, (2) inside the package, freedom, (3) tests go through entry points, (4) no cycles; barrel files are discouraged — prefer several small entry points; completion is proven by "the rules biting": pass → an intentional fail on a deep import → pass.
 
-## 6. Инфраструктура кода (coding-standards, error-handling, setup-pre-commit, generating-python-installer, bun-runtime, migrate-to-shoehorn)
+## 6. Code infrastructure (coding-standards, error-handling, setup-pre-commit, generating-python-installer, bun-runtime, migrate-to-shoehorn)
 
-### Базовые стандарты и ошибки
-- **coding-standards** (общий пол для всех языков): читаемость прежде всего; KISS/DRY/YAGNI; говорящие имена (verb-noun `fetchMarketData`, `isUserAuthenticated`); иммутабельность через spread вместо прямой мутации; независимые запросы — параллельно (`Promise.all`); без `any`; комментарии объясняют «почему», а не «что»; тесты AAA с описательными именами; запахи: функция >50 строк, вложенность 5+ уровней → guard-returns, магические числа → именованные константы.
-- **error-handling**: падай быстро и громко; типизированные ошибки — базовый `AppError` с `code`/`statusCode` и иерархия (`NotFoundError`, `ValidationError`); Result-паттерн (`{ ok, value/error }`) для ожидаемых отказов; каждый `catch` обрабатывает, ретровит или логирует — никаких тихих проглатываний; сообщение пользователю ≠ сообщение разработчику: наружу дружелюбный текст, в лог — полный контекст; API-конверт `{ error: { code, message } }`; ретраи с экспоненциальной задержкой + jitter и только для ретрайбл-ошибок (не 4xx); React-компоненты под `ErrorBoundary`; ошибки — часть API-контракта.
+### Baseline standards and errors
+- **coding-standards** (common ground for all languages): readability first; KISS/DRY/YAGNI; meaningful names (verb-noun `fetchMarketData`, `isUserAuthenticated`); immutability via spread instead of direct mutation; independent requests in parallel (`Promise.all`); no `any`; comments explain "why", not "what"; AAA tests with descriptive names; smells: a function >50 lines, nesting 5+ levels → guard returns, magic numbers → named constants.
+- **error-handling**: fail fast and loud; typed errors — a base `AppError` with `code`/`statusCode` and a hierarchy (`NotFoundError`, `ValidationError`); the Result pattern (`{ ok, value/error }`) for expected failures; every `catch` handles, rethrows or logs — no silent swallowing; a user message ≠ a developer message: friendly text outward, full context into logs; an API envelope `{ error: { code, message } }`; retries with an exponential delay + jitter and only for retryable errors (not 4xx); React components under an `ErrorBoundary`; errors are part of the API contract.
 
-### Инструменты и поставка
-- **setup-pre-commit**: husky + lint-staged + prettier; пакет-менеджер определяй по lockfile (`package-lock.json`/`pnpm-lock.yaml`/`yarn.lock`/`bun.lockb`); `.husky/pre-commit`: `npx lint-staged` → `npm run typecheck` → `npm run test` (строки без скриптов в package.json — опусти и скажи об этом); Prettier с `--ignore-unknown`; проверка — сам коммит как smoke-тест.
-- **generating-python-installer** (коммерческий Windows-пакет): схема «Nuitka folder mode (dist) + Inno Setup», не single-file и без консольного окна; ВСЕ параметры (имя, версия, издатель, exe, исходный/выходной путь, иконка) подтверждаешь с пользователем — автозаполнение запрещено; компиляция: `--windows-console-mode=disable` (не устаревший `--disable-console`), `--lto=yes`, плагин anti-bloat, исключение unittest/pytest/setuptools/pip/distutils/pkg_resources; 32-битный Python даёт −20–30% объёма при памяти <2ГБ; slimming dist: удалить .pdb/.pyi/.pyc/`__pycache__`/tests/docs, из `.dist-info` — только RECORD/INSTALLER/direct_url.json (METADATA и entry_points.txt оставить: их читает importlib.metadata); DLL-анализ: OpenCV → `opencv-python-headless`, `opengl32sw.dll` обычно можно удалить; VC++ redist строго той же архитектуры, что и сборка; UPX не использовать — триггерит антивирусы.
-- **bun-runtime**: Bun 1.4 — рантайм + пакет-менеджер + бандлер + тест-раннер (`bun --version` перед опорой на флаги); предпочитай Bun для новых JS/TS-проектов и скорости установки/старта, Node — для максимальной совместимости и legacy-тулинга; lockfile `bun.lock` коммитить; встроенные API прежде зависимостей: `Bun.file`/`Bun.write`, `bun:sqlite`, `Bun.serve`, `Bun.sql`, `Bun.redis`, `Bun.S3Client`; CI: `bun install --frozen-lockfile`, для тестов `--changed`, `--isolate`, `--parallel`, `--shard`; Vercel: `bunVersion: "1.4.x"`.
-- **migrate-to-shoehorn** (только тестовый код, никогда прод): `as Type` → `fromPartial(...)` для частичных данных; `as unknown as Type` → `fromAny(...)` для намеренно неверных данных; `fromExact()` — принудительно полный объект; поиск кандидатов: `grep -r " as [A-Z]" --include="*.test.ts"`; после миграции — typecheck.
+### Tooling and delivery
+- **setup-pre-commit**: husky + lint-staged + prettier; identify the package manager by lockfile (`package-lock.json`/`pnpm-lock.yaml`/`yarn.lock`/`bun.lockb`); `.husky/pre-commit`: `npx lint-staged` → `npm run typecheck` → `npm run test` (lines without scripts in package.json — drop them and say so); Prettier with `--ignore-unknown`; the check — the commit itself as a smoke test.
+- **generating-python-installer** (a commercial Windows package): the "Nuitka folder mode (dist) + Inno Setup" scheme, not single-file and without a console window; ALL parameters (name, version, publisher, exe, source/output path, icon) are confirmed with the user — autofill is forbidden; compilation: `--windows-console-mode=disable` (not the deprecated `--disable-console`), `--lto=yes`, the anti-bloat plugin, excluding unittest/pytest/setuptools/pip/distutils/pkg_resources; 32-bit Python gives −20–30% size with <2GB of RAM; slimming dist: delete .pdb/.pyi/.pyc/`__pycache__`/tests/docs, from `.dist-info` keep only RECORD/INSTALLER/direct_url.json (keep METADATA and entry_points.txt: importlib.metadata reads them); DLL analysis: OpenCV → `opencv-python-headless`, `opengl32sw.dll` can usually be deleted; the VC++ redist must match the build architecture exactly; do not use UPX — it triggers antivirus software.
+- **bun-runtime**: Bun 1.4 — runtime + package manager + bundler + test runner (`bun --version` before relying on flags); prefer Bun for new JS/TS projects and for install/start speed, Node for maximum compatibility and legacy tooling; commit the `bun.lock` lockfile; built-in APIs before dependencies: `Bun.file`/`Bun.write`, `bun:sqlite`, `Bun.serve`, `Bun.sql`, `Bun.redis`, `Bun.S3Client`; CI: `bun install --frozen-lockfile`, for tests `--changed`, `--isolate`, `--parallel`, `--shard`; Vercel: `bunVersion: "1.4.x"`.
+- **migrate-to-shoehorn** (test code only, never production): `as Type` → `fromPartial(...)` for partial data; `as unknown as Type` → `fromAny(...)` for deliberately wrong data; `fromExact()` — a forced complete object; finding candidates: `grep -r " as [A-Z]" --include="*.test.ts"`; typecheck after the migration.
 
-## Чек-лист перед коммитом
-- [ ] Форматтер и линтер языка пройдены: black/isort + ruff + mypy (Python); gofmt/goimports + golangci-lint + `go test -race` (Go); cargo fmt + clippy + test + audit (Rust); detekt (Kotlin); perltidy + perlcritic (Perl); prettier + typecheck (TS/JS).
-- [ ] Нет `unwrap()` в Rust-проде, голых `except:` в Python, молча проигнорированных `err` в Go, `!!` в Kotlin, `user!` в Dart, голых `new`/`delete` в C++, строковых `system`/SQL-интерполяций/`eval` в Perl, блокирующих вызовов внутри Uni-пайплайна.
-- [ ] Каждый `catch`/`except` обрабатывает, ретровит или логирует; наружные сообщения без стектрейсов и внутренних деталей.
-- [ ] Типы включены и проходят: без untyped defs в Python, без `any` в TS, шаблоны ограничены (concepts в C++, bounded generics в Java).
-- [ ] После упрощения тесты проходят без правок; рефакторинг — отдельным коммитом от фичи; diff чистый, без несвязанных изменений.
-- [ ] Границы модулей: domain не тянет фреймворк; пакеты импортируются только через entry points; циклов нет; Entity/DTO не утекают в UI.
-- [ ] Инфраструктура: pre-commit стоит и отрабатывает на самом коммите; lockfile закоммичен; для установщика — VC++ redist той же архитектуры, slimming не тронул METADATA/entry_points.txt, UPX не применялся.
-
-## Карта источников
-| Тема | Скиллы |
-|---|---|
-| Python-идиомы и типы | python-patterns |
-| Windows-установщик Python (Nuitka + Inno Setup) | generating-python-installer |
-| Go | golang-patterns |
-| Rust | rust-patterns |
-| Kotlin-идиомы | kotlin-patterns |
-| Корутины и Flow | kotlin-coroutines-flows |
-| Java (Spring Boot / Quarkus) | java-coding-standards |
-| C++ (Core Guidelines) | cpp-coding-standards |
-| Современный Perl 5.36+ | perl-patterns |
-| Безопасность Perl | perl-security |
-| Dart / Flutter | dart-flutter-patterns |
-| Swift 6.2 конкурентность | swift-concurrency-6-2 |
-| Swift-акторы и персистентность | swift-actor-persistence |
-| Swift DI и тестирование | swift-protocol-di-testing |
-| On-device LLM (iOS 26) | foundation-models-on-device |
-| Android / KMP архитектура | android-clean-architecture |
-| Compose UI | compose-multiplatform-patterns |
-| Полное чтение код-базы | learn-codebase |
-| Онбординг и CLAUDE.md | codebase-onboarding |
-| Структурный AST-поиск | smart-explore |
-| Стиль legacy-проектов | inherit-legacy-style |
-| Архитектурные улучшения | improve-codebase-architecture |
-| Упрощение кода | code-simplification |
-| Глубокие модули TS | setup-ts-deep-modules |
-| Базовые стандарты кода | coding-standards |
-| Обработка ошибок | error-handling |
-| Pre-commit хуки (Husky) | setup-pre-commit |
-| Bun-рантайм | bun-runtime |
-| Тесты без `as`-приведений (TS) | migrate-to-shoehorn |
+## Pre-commit checklist
+- [ ] The language's formatter and linter pass: black/isort + ruff + mypy (Python); gofmt/goimports + golangci-lint + `go test -race` (Go); cargo fmt + clippy + test + audit (Rust); detekt (Kotlin); perltidy + perlcritic (Perl); prettier + typecheck (TS/JS).
+- [ ] No `unwrap()` in Rust production, bare `except:` in Python, silently ignored `err` in Go, `!!` in Kotlin, `user!` in Dart, bare `new`/`delete` in C++, string-form `system`/SQL interpolation/`eval` in Perl, blocking calls inside a Uni pipeline.
+- [ ] Every `catch`/`except` handles, rethrows or logs; outward-facing messages without stack traces or internal details.
+- [ ] Types enabled and passing: no untyped defs in Python, no `any` in TS, templates constrained (concepts in C++, bounded generics in Java).
+- [ ] After simplification, tests pass without edits; refactoring is a separate commit from the feature; the diff is clean, no unrelated changes.
+- [ ] Module boundaries: domain does not pull in frameworks; packages are imported only through entry points; no cycles; Entity/DTO do not leak into the UI.
+- [ ] Infrastructure: pre-commit installed and exercised by the commit itself; the lockfile committed; for the installer — a VC++ redist of the same architecture, slimming left METADATA/entry_points.txt untouched, no UPX.

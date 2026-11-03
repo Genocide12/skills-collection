@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
-# Установка 10 скиллов-дистиллятов в каталог скиллов агента.
+# Install the ten skills into the agent's skills directory.
 #
-# Обычный путь — просто написать агенту в чате:
-#   «Установи скиллы из https://github.com/Genocide12/skills-collection»
-# Этот скрипт — ручной резервный вариант, если нужно поставить самому.
+# The usual way is to simply tell your agent in the chat:
+#   "Install the skills from https://github.com/Genocide12/skills-collection"
+# This script is the manual fallback, if you prefer to do it yourself.
 #
-# Использование:
-#   ./install.sh                  # авто: в чате z.ai → /home/z/my-project/skills/, иначе → ./skills/
-#   ./install.sh --target DIR     # в указанный каталог
+# Usage:
+#   ./install.sh                  # auto: in a z.ai chat -> /home/z/my-project/skills/, otherwise -> ./skills/
+#   ./install.sh --target DIR     # into a directory of your choice
 #
-# Одноимённые папки в целевом каталоге переносятся в бэкап <target>-backup-<timestamp>.
+# Folders with the same name in the target directory are moved to a backup
+# at <target>-backup-<timestamp>.
 
 set -euo pipefail
 
@@ -23,7 +24,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --target) TARGET="$2"; shift 2 ;;
     -h|--help) grep '^#' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
-    *) echo "Неизвестный аргумент: $1 (доступен только --target DIR)" >&2; exit 1 ;;
+    *) echo "Unknown argument: $1 (only --target DIR is supported)" >&2; exit 1 ;;
   esac
 done
 
@@ -52,6 +53,6 @@ for d in [0-9][0-9]-*/; do
 done
 
 if [[ $MOVED -gt 0 ]]; then
-  echo "Бэкап перезаписанных папок ($MOVED): $BACKUP"
+  echo "Backed up $MOVED replaced folder(s): $BACKUP"
 fi
-echo "Установлено 10 скиллов в $TARGET"
+echo "Installed 10 skills into $TARGET"

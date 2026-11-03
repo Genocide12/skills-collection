@@ -1,71 +1,53 @@
-# 🧰 skills-collection
+# skills-collection
 
-> **10 скиллов под все задачи агента** — дистилляты 393 исходных скиллов, сведённые в 10 файлов `SKILL.md`.
+**Ten skills that cover everything an AI agent does** — one `SKILL.md` per area, from web UI to production incidents.
 
-Скилл — это файл `SKILL.md` с инструкцией для агента. Вместо сотен отдельных скиллов с пересекающимися описаниями агент читает один файл под тип задачи: только железные правила, типовые ошибки, шаблоны команд и чек-листы сдачи, собранные из всех исходников направления.
+A skill is a single `SKILL.md` file of instructions for the agent: iron rules, typical mistakes, command templates and a pre-delivery checklist. Instead of hundreds of overlapping skills, the agent loads one file per task type and finds exactly the rules it needs.
 
-## Скиллы
+## The skills
 
-| # | Скилл | Для каких задач | Источников |
-| --- | --- | --- | --- |
-| 01 | [frontend](01-frontend/SKILL.md) · Сайты и интерфейсы | сайты, лендинги, React/Vue/Angular, дизайн, a11y, анимации | 40 |
-| 02 | [content](02-content/SKILL.md) · Документы, презентации и тексты | Word, PDF, PPTX, Excel + статьи, бренд-войс, SEO, письма | 30 |
-| 03 | [backend](03-backend/SKILL.md) · Бэкенд, API и базы данных | серверы, API, SQL, Redis, миграции, LLM-интеграции | 43 |
-| 04 | [languages](04-languages/SKILL.md) · Языки и код-база | Python/Go/Rust/Kotlin/Java/C++/Swift/Dart, чужой код | 29 |
-| 05 | [quality](05-quality/SKILL.md) · Тесты, отладка, надёжность | TDD, тесты, баги, код-ревью, безопасность, бенчмарки | 50 |
-| 06 | [data](06-data/SKILL.md) · Данные, графики и медиа | анализ данных, дашборды, ML, картинки, видео, речь | 27 |
-| 07 | [research](07-research/SKILL.md) · Исследования и поиск | веб-исследования, рынок, OSINT, научные базы | 20 |
-| 08 | [devops](08-devops/SKILL.md) · Git, релиз, эксплуатация | Git, PR, CI/CD, Docker/K8s, деплой, сети, мониторинг | 30 |
-| 09 | [agent](09-agent/SKILL.md) · Агентские процессы | планирование, субагенты, автономные циклы, память | 101 |
-| 10 | [niches](10-niches/SKILL.md) · Отраслевые ниши | логистика, производство, медицина/HIPAA, крипто | 23 |
+| # | Skill | For |
+| --- | --- | --- |
+| 01 | [frontend](01-frontend/SKILL.md) | websites, landing pages, React/Vue/Angular, design, accessibility, animations |
+| 02 | [content](02-content/SKILL.md) | Word, PDF, PPTX, Excel, articles, brand voice, SEO, letters |
+| 03 | [backend](03-backend/SKILL.md) | servers, APIs, SQL, Redis, migrations, LLM integrations |
+| 04 | [languages](04-languages/SKILL.md) | Python/Go/Rust/Kotlin/Java/Swift, unfamiliar codebases, refactoring, legacy |
+| 05 | [quality](05-quality/SKILL.md) | TDD, unit/e2e tests, debugging, code review, security, benchmarks |
+| 06 | [data](06-data/SKILL.md) | charts and dashboards, scraping, ML, images, speech, video |
+| 07 | [research](07-research/SKILL.md) | web research, market and competitors, OSINT, scientific databases |
+| 08 | [devops](08-devops/SKILL.md) | Git, PRs, CI/CD, Docker/K8s, deployment, networks, monitoring, incidents |
+| 09 | [agent](09-agent/SKILL.md) | planning, subagents, autonomous loops, memory, token economy |
+| 10 | [niches](10-niches/SKILL.md) | logistics, manufacturing, billing, healthcare/HIPAA, energy, crypto |
 
-В счёт источников входят и платформенные скиллы самого агента (docx, pdf, pptx, xlsx, charts, VLM, ASR/TTS и др.) — их правила продистиллированы наравне с коллекционными.
+Every file has the same shape: **when to apply** (routing to subsections) → **rules by topic** → **typical mistakes** → **command templates** → **pre-delivery checklist**.
 
-Каждый файл устроен одинаково: **«Когда применять»** (маршрутизация по подразделам) → **правила по темам** → **типовые ошибки** → **шаблоны команд** → **чек-лист перед сдачей** → **карта источников** (что и откуда взято).
+## Install — one phrase in the chat
 
-## Подключить — одна фраза в чате
+> **Install the skills from https://github.com/Genocide12/skills-collection**
 
-> **Установи скиллы из https://github.com/Genocide12/skills-collection**
+The agent clones the repository and copies the ten folders into its skills directory — from that moment they are available in every chat.
 
-Агент склонирует репозиторий и скопирует 10 папок в `/home/z/my-project/skills/` — с этого момента они доступны во всех чатах. Файлы в рабочей области сохраняются между сообщениями.
-
-## Ручная установка
+Manual install:
 
 ```bash
 git clone https://github.com/Genocide12/skills-collection.git
 cd skills-collection
-./install.sh                 # в /home/z/my-project/skills (чат z.ai) или ./skills
-./install.sh --target DIR    # в свой каталог
+./install.sh                 # auto-detects the agent's skills directory, or ./skills
+./install.sh --target DIR    # a directory of your choice
 ```
 
-## Сайт
+## Site
 
-**https://genocide12.github.io/skills-collection/** — каталог с навигатором «задача → скилл», карточками всех 10 скиллов и составом каждого. Сама страница собрана по правилам скилла 01-frontend и проверена по чек-листу 05-quality.
+**https://genocide12.github.io/skills-collection/** — a catalog with cards for all ten skills, in Russian and English.
 
-## Структура репозитория
+## Repository structure
 
 ```
-01-frontend … 10-niches/SKILL.md   # 10 скиллов-дистиллятов — всё содержимое
-docs/index.html                    # сайт-каталог (GitHub Pages)
-install.sh                         # установщик
+01-frontend … 10-niches/SKILL.md   # the ten skills — all the content
+docs/index.html                    # the site (GitHub Pages)
+install.sh                         # installer
 ```
 
-## Источники
+## License
 
-| Источник | Скиллов | Что это |
-| --- | ---: | --- |
-| [ECC](https://github.com/affaan-m/ECC) | 257 | «Enterprise Control Center» — библиотека процессов: бэкенд/БД, DevOps, безопасность, операционные регламенты |
-| [mattpocock/skills](https://github.com/mattpocock/skills) | 38 | код-ревью, спецификации, отладка, архитектура TS-проектов |
-| [agent-skills](https://github.com/addyosmani/agent-skills) | 23 | процесс разработки: от идеи и спеки до запуска, ревью, перфоманса |
-| [claude-mem](https://github.com/thedotmack/claude-mem) | 16 | рабочие процессы разработки: планы, сабагенты, релизы, дежурство по PR |
-| [superpowers](https://github.com/obra/superpowers) | 15 | мозговой штурм, планы, TDD, системная отладка, верификация |
-| [taste-skill](https://github.com/Leonxlnx/taste-skill) | 1 | «антислоп»-дизайн фронтенда по исследованию 247 сайтов |
-| [security-audit-skill](https://github.com/cloudflare/security-audit-skill) | 1 | аудит безопасности от Cloudflare |
-| [hallmark](https://github.com/Nutlope/hallmark) | 1 | дизайн страниц «сделано, а не сгенерировано» |
-| [impeccable](https://github.com/pbakaus/impeccable) | 1 | полировка UI, микро-взаимодействия |
-| собственные сборки | 1 | `human-voice` — убирает из текста ИИ-маркеры |
-| платформа z.ai | 39 | docx/pdf/pptx/xlsx, charts, VLM, ASR/TTS, image-*, knowledge, memory и др. |
-
-## Лицензии и авторы
-
-Все правила принадлежат авторам исходных репозиториев (таблица выше) и распространяются по MIT или Apache-2.0. Этот репозиторий — удобная упаковка с указанием источников; при использовании соблюдайте лицензии оригиналов.
+MIT
